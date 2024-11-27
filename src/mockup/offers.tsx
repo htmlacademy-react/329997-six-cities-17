@@ -1,4 +1,28 @@
-const mockOffers = [
+type Offer = {
+  id: string;
+  title: string;
+  type: string;
+  price: number;
+  city: {
+    name: string;
+    location: {
+      latitude: number;
+      longitude: number;
+      zoom: number;
+    };
+  };
+  location: {
+    latitude: number;
+    longitude: number;
+    zoom: number;
+  };
+  isFavorite: boolean;
+  isPremium: boolean;
+  rating: number;
+  previewImage: string;
+};
+
+const mockOffers: Offer[] = [
   {
     id: '1af6f711-c28d-4121-82cd-e0b462a27f00',
     title: 'Beautiful & luxurious apartment at great location',
@@ -117,3 +141,4 @@ const mockOffers = [
 ];
 
 export { mockOffers };
+export type { Offer };

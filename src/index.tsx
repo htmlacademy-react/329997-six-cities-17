@@ -10,6 +10,8 @@ root.render(
   <React.StrictMode>
     <App
       placesToStay={312}
+      emailAddress='Oliver.conner@gmail.com'
+      favoriteCount={3}
     />
   </React.StrictMode>,
 );

@@ -1,36 +1,27 @@
 import { getStarsRating } from '../../utils/utils';
+import type { Offer } from '../../mockup/offers';
 
-type OfferPreviewProps = {
-  title: string;
-  type: string;
-  price: number;
-  isFavorite: boolean;
-  isPremium: boolean;
-  rating: number;
-  previewImage: string;
-}
-
-function OfferPreview(props: OfferPreviewProps): JSX.Element {
-  const starsRating = getStarsRating(props.rating);
+function OfferItem(offer: Offer): JSX.Element {
+  const starsRating = getStarsRating(offer.rating);
   return (
     <article className="cities__card place-card">
-      {props.isPremium ?
+      {offer.isPremium ?
         <div className="place-card__mark">
           <span>Premium</span>
         </div> : ''}
       <div className="cities__image-wrapper place-card__image-wrapper">
         <a href="#">
-          <img className="place-card__image" src={props.previewImage} width="260" height="200" alt="Place image" />
+          <img className="place-card__image" src={offer.previewImage} width={260} height={200} alt="Place image" />
         </a>
       </div>
       <div className="place-card__info">
         <div className="place-card__price-wrapper">
           <div className="place-card__price">
-            <b className="place-card__price-value">&euro;{props.price}</b>
+            <b className="place-card__price-value">&euro;{offer.price}</b>
             <span className="place-card__price-text">&#47;&nbsp;night</span>
           </div>
-          <button className={`place-card__bookmark-button ${props.isFavorite ? 'place-card__bookmark-button--active' : '' } button type="button"`}>
-            <svg className="place-card__bookmark-icon" width="18" height="19">
+          <button className={`place-card__bookmark-button ${offer.isFavorite ? 'place-card__bookmark-button--active' : ''} button type="button"`}>
+            <svg className="place-card__bookmark-icon" width={18} height={19}>
               <use xlinkHref="#icon-bookmark"></use>
             </svg>
             <span className="visually-hidden">To bookmarks</span>
@@ -38,18 +29,18 @@ function OfferPreview(props: OfferPreviewProps): JSX.Element {
         </div>
         <div className="place-card__rating rating">
           <div className="place-card__stars rating__stars">
-            <span style={{width: starsRating}}></span>
+            <span style={{ width: starsRating }}></span>
             <span className="visually-hidden">Rating</span>
           </div>
         </div>
         <h2 className="place-card__name">
-          <a href="#">{props.title}</a>
+          <a href="#">{offer.title}</a>
         </h2>
-        <p className="place-card__type">{props.type}</p>
+        <p className="place-card__type">{offer.type}</p>
       </div>
     </article>
 
   );
 }
 
-export default OfferPreview;
+export default OfferItem;
