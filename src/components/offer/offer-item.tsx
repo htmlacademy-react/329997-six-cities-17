@@ -1,4 +1,4 @@
-import { getStarsRating } from '../../utils/utils';
+import { getStarsRating } from '../../utils';
 import type { Offer } from '../../mockup/offers';
 
 function OfferItem(offer: Offer): JSX.Element {
