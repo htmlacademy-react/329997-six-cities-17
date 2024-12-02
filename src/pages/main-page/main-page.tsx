@@ -3,13 +3,13 @@ import Header from '../../components/header/header';
 import LocationList from '../../components/location/location-list';
 import Sorting from '../../components/sorting/sorting';
 
-type MainScreenProps = {
+type MainPageProps = {
   placesToStay: number;
   emailAddress: string;
   favoriteCount: number;
 }
 
-function MainScreen({ placesToStay, emailAddress, favoriteCount }: MainScreenProps): JSX.Element {
+function MainPage({ placesToStay, emailAddress, favoriteCount }: MainPageProps): JSX.Element {
   return (
     <div className="page page--gray page--main">
       <Header
@@ -36,4 +36,4 @@ function MainScreen({ placesToStay, emailAddress, favoriteCount }: MainScreenPro
   );
 }
 
-export default MainScreen;
+export default MainPage;

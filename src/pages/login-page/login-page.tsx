@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 
-function LoginScreen(): JSX.Element {
+function LoginPage(): JSX.Element {
   return (
     <div className="page page--gray page--login">
       <header className="header">
@@ -44,4 +44,4 @@ function LoginScreen(): JSX.Element {
   );
 }
 
-export default LoginScreen;
+export default LoginPage;

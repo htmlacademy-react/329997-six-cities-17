@@ -1,12 +1,12 @@
 import Header from '../../components/header/header';
 import Footer from '../../components/footer/footer';
 
-type FavoriteScreenProps = {
+type FavoritePageProps = {
   emailAddress: string;
   favoriteCount: number;
 }
 
-function FavoritesScreen({ emailAddress, favoriteCount }: FavoriteScreenProps): JSX.Element {
+function FavoritePage({ emailAddress, favoriteCount }: FavoritePageProps): JSX.Element {
   return (
     <div className="page">
 
@@ -151,4 +151,4 @@ function FavoritesScreen({ emailAddress, favoriteCount }: FavoriteScreenProps): 
   );
 }
 
-export default FavoritesScreen;
+export default FavoritePage;

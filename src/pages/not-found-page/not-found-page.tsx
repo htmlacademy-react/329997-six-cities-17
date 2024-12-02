@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 
-function NotFoundScreen(): JSX.Element {
+function NotFoundPage(): JSX.Element {
   return (
     <div className="page page--gray page--login">
       <header className="header">
@@ -38,4 +38,4 @@ function NotFoundScreen(): JSX.Element {
   );
 }
 
-export default NotFoundScreen;
+export default NotFoundPage;

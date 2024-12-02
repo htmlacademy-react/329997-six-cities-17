@@ -1,11 +1,11 @@
 import Header from '../../components/header/header';
 
-type OfferScreenProps = {
+type OfferPageProps = {
   emailAddress: string;
   favoriteCount: number;
 }
 
-function OfferScreen({ emailAddress, favoriteCount }: OfferScreenProps): JSX.Element {
+function OfferPage({ emailAddress, favoriteCount }: OfferPageProps): JSX.Element {
   return (
     <div className="page">
 
@@ -320,4 +320,4 @@ function OfferScreen({ emailAddress, favoriteCount }: OfferScreenProps): JSX.Ele
   );
 }
 
-export default OfferScreen;
+export default OfferPage;

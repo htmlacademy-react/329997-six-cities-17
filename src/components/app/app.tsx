@@ -1,25 +1,25 @@
 import { Route, BrowserRouter, Routes } from 'react-router-dom';
 import { AppRoute, AuthorizationStatus } from '../../const';
-import MainScreen from '../../pages/main-screen/main-screen';
-import FavoritesScreen from '../../pages/favorite-screen/favorite-screen';
-import LoginScreen from '../../pages/login-screen/login-screen';
-import OfferScreen from '../../pages/offer-screen/offer-screen';
-import NotFoundScreen from '../../pages/not-found-screen/not-found-screen';
+import MainPage from '../../pages/main-page/main-page';
+import FavoritesPage from '../../pages/favorite-page/favorite-page';
+import LoginPage from '../../pages/login-page/login-page';
+import OfferPage from '../../pages/offer-page/offer-page';
+import NotFoundPage from '../../pages/not-found-page/not-found-page';
 import PrivateRoute from '../private-route/private-route';
 
-type AppScreenProps = {
+type AppPageProps = {
   placesToStay: number;
   emailAddress: string;
   favoriteCount: number;
 }
 
-function App({ placesToStay, emailAddress, favoriteCount }: AppScreenProps): JSX.Element {
+function App({ placesToStay, emailAddress, favoriteCount }: AppPageProps): JSX.Element {
   return (
     <BrowserRouter>
       <Routes>
         <Route
           path={AppRoute.Main}
-          element={<MainScreen placesToStay={placesToStay} emailAddress={emailAddress} favoriteCount={favoriteCount} />}
+          element={<MainPage placesToStay={placesToStay} emailAddress={emailAddress} favoriteCount={favoriteCount} />}
         />
         <Route
           path={AppRoute.Favorites}
@@ -27,21 +27,21 @@ function App({ placesToStay, emailAddress, favoriteCount }: AppScreenProps): JSX
             <PrivateRoute
               authorizationStatus={AuthorizationStatus.NoAuth}
             >
-              <FavoritesScreen emailAddress={emailAddress} favoriteCount={favoriteCount} />
+              <FavoritesPage emailAddress={emailAddress} favoriteCount={favoriteCount} />
             </PrivateRoute>
           }
         />
         <Route
           path={AppRoute.Login}
-          element={<LoginScreen />}
+          element={<LoginPage />}
         />
         <Route
           path={AppRoute.Offer}
-          element={<OfferScreen emailAddress={emailAddress} favoriteCount={favoriteCount} />}
+          element={<OfferPage emailAddress={emailAddress} favoriteCount={favoriteCount} />}
         />
         <Route
           path="*"
-          element={<NotFoundScreen />}
+          element={<NotFoundPage />}
         />
       </Routes>
     </BrowserRouter>
