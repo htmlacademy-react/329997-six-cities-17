@@ -1,5 +1,5 @@
 import LocationItem from './location-item';
-import { mockLocations } from '../../mockup/locations';
+import { LOCATIONS } from '../../const';
 
 function LocationList(): JSX.Element {
   return (
@@ -8,7 +8,8 @@ function LocationList(): JSX.Element {
       <div className="tabs">
         <section className="locations container">
           <ul className="locations__list tabs__list">
-            {mockLocations.map((element) => <LocationItem key={element.id} {...element} />)}
+            {LOCATIONS.map((element) =>
+              (<LocationItem key={element} title={element} isSelected={false} />))}
           </ul>
         </section>
       </div>

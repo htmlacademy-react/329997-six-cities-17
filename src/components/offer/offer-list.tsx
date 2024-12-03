@@ -1,14 +1,19 @@
 import OfferItem from './offer-item';
-import { mockOffers } from '../../mockup/offers';
+import { Offer } from '../../mockup/offers';
 
-function OfferList(): JSX.Element {
+type OfferListProps = {
+  offers: Offer[];
+}
+
+function OfferList(props: OfferListProps): JSX.Element {
+  const { offers } = props;
   return (
     <div className="cities__places-list places__list tabs__content">
-      {mockOffers.map((element) =>
+      {offers.map((element) =>
         (
           <OfferItem
             key={element.id}
-            {...element}
+            offer={element}
           />
         ))}
     </div>

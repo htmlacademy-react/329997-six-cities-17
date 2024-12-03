@@ -1,3 +1,13 @@
+export const LOCATIONS: string[] = [
+  'Paris',
+  'Cologne',
+  'Brussels',
+  'Amsterdam',
+  'Hamburg',
+  'Dusseldorf',
+];
+
+
 export enum AppRoute {
   Main = '/',
   Login = '/login',
@@ -10,3 +20,4 @@ export enum AuthorizationStatus {
   NoAuth = 'NO_AUTH',
   Unknown = 'UNKNOWN',
 }
+
