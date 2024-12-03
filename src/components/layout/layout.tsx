@@ -28,9 +28,9 @@ function Layout(props: UserInfo): JSX.Element {
             <div className="header__left">
               <HeaderLogo />
             </div>
-            {isPageLogin ?
-              '' :
-              <HeaderNav emailAddress={emailAddress} favoriteCount={favoriteCount} />}
+            {isPageLogin
+              ? ''
+              : <HeaderNav emailAddress={emailAddress} favoriteCount={favoriteCount} />}
           </div>
         </div>
       </header>
