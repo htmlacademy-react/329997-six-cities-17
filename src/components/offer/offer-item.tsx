@@ -1,4 +1,5 @@
 import classNames from 'classnames';
+import { useState } from 'react';
 import { getStarsRating } from '../../utils';
 import { Offer } from '../../types/offer-type';
 
@@ -7,26 +8,34 @@ type OfferItemProps = {
 }
 
 function OfferItem(props: OfferItemProps): JSX.Element {
-  const { offer: {rating, isPremium, previewImage, price, isFavorite, title, type} } = props;
-  const starsRating = getStarsRating(rating);
+  const { offer } = props;
+  const starsRating = getStarsRating(offer.rating);
+  const [place, setPlace] = useState(offer);
+
   return (
-    <article className="cities__card place-card">
-      {isPremium ?
+    <article className="cities__card place-card"
+      onMouseEnter={() => {
+        setPlace({
+          ...place
+        });
+      }}
+    >
+      {place.isPremium ?
         <div className="place-card__mark">
           <span>Premium</span>
         </div> : ''}
       <div className="cities__image-wrapper place-card__image-wrapper">
         <a href="#">
-          <img className="place-card__image" src={previewImage} width={260} height={200} alt="Place image" />
+          <img className="place-card__image" src={offer.previewImage} width={260} height={200} alt="Place image" />
         </a>
       </div>
       <div className="place-card__info">
         <div className="place-card__price-wrapper">
           <div className="place-card__price">
-            <b className="place-card__price-value">&euro;{price}</b>
+            <b className="place-card__price-value">&euro;{offer.price}</b>
             <span className="place-card__price-text">&#47;&nbsp;night</span>
           </div>
-          <button className={classNames('place-card__bookmark-button', {'place-card__bookmark-button--active':isFavorite}, 'button', 'type="button"')}>
+          <button className={classNames('place-card__bookmark-button', { 'place-card__bookmark-button--active': offer.isFavorite }, 'button', 'type="button"')}>
             <svg className="place-card__bookmark-icon" width={18} height={19}>
               <use xlinkHref="#icon-bookmark"></use>
             </svg>
@@ -40,9 +49,9 @@ function OfferItem(props: OfferItemProps): JSX.Element {
           </div>
         </div>
         <h2 className="place-card__name">
-          <a href="#">{title}</a>
+          <a href="#">{offer.title}</a>
         </h2>
-        <p className="place-card__type">{type}</p>
+        <p className="place-card__type">{offer.type}</p>
       </div>
     </article>
 

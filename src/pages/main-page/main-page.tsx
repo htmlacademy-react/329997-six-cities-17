@@ -6,16 +6,17 @@ import { Offer } from '../../types/offer-type';
 
 type MainPageProps = {
   offers: Offer[];
+  locations: string[];
 }
 
 function MainPage(props: MainPageProps): JSX.Element {
-  const { offers } = props;
+  const { offers, locations } = props;
   return (
     <main className="page__main page__main--index">
       <Helmet>
         <title>6 cities. Главная страница</title>
       </Helmet>
-      <LocationList />
+      <LocationList locations={locations}/>
       <div className="cities">
         <div className="cities__places-container container">
           <section className="cities__places places">
