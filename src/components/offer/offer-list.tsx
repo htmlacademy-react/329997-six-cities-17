@@ -1,5 +1,5 @@
 import OfferItem from './offer-item';
-import { Offer } from '../../mockup/offers';
+import { Offer } from '../../mocks/offers';
 
 type OfferListProps = {
   offers: Offer[];

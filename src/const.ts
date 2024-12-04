@@ -7,7 +7,6 @@ export const LOCATIONS: string[] = [
   'Dusseldorf',
 ];
 
-
 export enum AppRoute {
   Main = '/',
   Login = '/login',

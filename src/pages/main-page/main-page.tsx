@@ -1,3 +1,4 @@
+import { Helmet } from 'react-helmet-async';
 import OfferList from '../../components/offer/offer-list';
 import LocationList from '../../components/location/location-list';
 import Sorting from '../../components/sorting/sorting';
@@ -11,6 +12,9 @@ function MainPage(props: MainPageProps): JSX.Element {
   const { offers } = props;
   return (
     <main className="page__main page__main--index">
+      <Helmet>
+        <title>6 cities. Главная страница</title>
+      </Helmet>
       <LocationList />
       <div className="cities">
         <div className="cities__places-container container">

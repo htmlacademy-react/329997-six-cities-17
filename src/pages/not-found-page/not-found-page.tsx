@@ -1,9 +1,13 @@
 import { Link } from 'react-router-dom';
+import { Helmet } from 'react-helmet-async';
 import HeaderLogo from '../../components/header/header-logo';
 
 function NotFoundPage(): JSX.Element {
   return (
     <div className="page page--gray page--login">
+      <Helmet>
+        <title>6 cities. 404. Page not found</title>
+      </Helmet>
       <HeaderLogo />
       <main className="page__main page__main--login">
         <div className="page__login-container container">

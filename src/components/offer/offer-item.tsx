@@ -1,6 +1,6 @@
+import classNames from 'classnames';
 import { getStarsRating } from '../../utils';
 import { Offer } from '../../types/offer-type';
-import classNames from 'classnames';
 
 type OfferItemProps = {
   offer: Offer;
