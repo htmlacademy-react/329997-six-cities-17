@@ -9,7 +9,7 @@ type OfferListProps = {
 function OfferList(props: OfferListProps): JSX.Element {
   const { offers } = props;
 
-  const [selectedPlace, setSelectedPlace] = useState<Offer | null>(null);
+  const [, setSelectedPlace] = useState<Offer | null>(null);
 
   const selectedPlaceMouseEnterHandler = (offer: Offer) => setSelectedPlace(offer);
   const selectedPlaceMouseLeaveHandler = () => setSelectedPlace(null);
