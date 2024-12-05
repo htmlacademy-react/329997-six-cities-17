@@ -1,26 +1,4 @@
-type Offer = {
-  id: string;
-  title: string;
-  type: string;
-  price: number;
-  city: {
-    name: string;
-    location: {
-      latitude: number;
-      longitude: number;
-      zoom: number;
-    };
-  };
-  location: {
-    latitude: number;
-    longitude: number;
-    zoom: number;
-  };
-  isFavorite: boolean;
-  isPremium: boolean;
-  rating: number;
-  previewImage: string;
-};
+import { Offer } from '../types/offer-type';
 
 const mockOffers: Offer[] = [
   {
@@ -64,7 +42,7 @@ const mockOffers: Offer[] = [
       longitude: 4.673877537499948,
       zoom: 8,
     },
-    isFavorite: true,
+    isFavorite: false,
     isPremium: false,
     rating: 4,
     previewImage: 'img/room.jpg',
@@ -110,7 +88,7 @@ const mockOffers: Offer[] = [
       longitude: 4.673877537499948,
       zoom: 8,
     },
-    isFavorite: false,
+    isFavorite: true,
     isPremium: true,
     rating: 5,
     previewImage: 'img/apartment-03.jpg',
@@ -138,7 +116,29 @@ const mockOffers: Offer[] = [
     rating: 4,
     previewImage: 'img/room.jpg',
   },
+  {
+    id: '6af6f711-c28d-4121-82cd-e0b462a27f00',
+    title: 'Wood and stone place',
+    type: 'Apartment',
+    price: 180,
+    city: {
+      name: 'Cologne',
+      location: {
+        latitude: 52.35514938496378,
+        longitude: 4.673877537499948,
+        zoom: 8,
+      },
+    },
+    location: {
+      latitude: 52.35514938496378,
+      longitude: 4.673877537499948,
+      zoom: 8,
+    },
+    isFavorite: true,
+    isPremium: false,
+    rating: 5,
+    previewImage: 'img/apartment-03.jpg',
+  },
 ];
 
 export { mockOffers };
-export type { Offer };

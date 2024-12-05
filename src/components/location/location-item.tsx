@@ -1,12 +1,25 @@
-import { Location } from '../../mockup/locations';
+import classNames from 'classnames';
 
-function LocationItem(location: Location): JSX.Element {
+type LocationItemProps = {
+  title: string;
+  isSelected: boolean;
+}
+
+function LocationItem(props: LocationItemProps): JSX.Element {
+  const { title, isSelected } = props;
   return (
     <li className="locations__item">
-      <a className={`locations__item-link tabs__item ${location.isSelected ? 'tabs__item--active' : ''}`} href="#">
-        <span>{location.title}</span>
+      <a className={
+        classNames(
+          'locations__item-link',
+          'tabs__item',
+          { 'tabs__item--active': isSelected })
+      }
+      href="#"
+      >
+        <span>{title}</span>
       </a>
-    </li>
+    </li >
   );
 }
 export default LocationItem;

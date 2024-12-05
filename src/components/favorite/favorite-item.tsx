@@ -1,45 +1,36 @@
-import classNames from 'classnames';
-import { Link } from 'react-router-dom';
-import { AppRoute } from '../../const';
-import { getStarsRating } from '../../utils';
 import { Offer } from '../../types/offer-type';
+import { getStarsRating } from '../../utils';
 
-type OfferItemProps = {
+type FaviroteItemProps = {
   offer: Offer;
-  onPlaceMouseEnter: () => void;
-  onPlaceMouseLeave: () => void;
-}
+};
 
-function OfferItem(props: OfferItemProps): JSX.Element {
-  const { offer, onPlaceMouseEnter, onPlaceMouseLeave } = props;
-  const { isPremium, previewImage, price, isFavorite, rating, title, type } = offer;
+function FaviroteItem(props: FaviroteItemProps): JSX.Element {
+  const { offer } = props;
+  const { rating, isPremium, previewImage, price, title, type } = offer;
   const starsRating = getStarsRating(rating);
-
   return (
-    <article className="cities__card place-card"
-      onMouseEnter={onPlaceMouseEnter}
-      onMouseLeave={onPlaceMouseLeave}
-    >
+    <article className="favorites__card place-card">
       {isPremium ?
         <div className="place-card__mark">
           <span>Premium</span>
         </div> : ''}
-      <div className="cities__image-wrapper place-card__image-wrapper">
-        <Link to={AppRoute.Offer}>
-          <img className="place-card__image" src={previewImage} width={260} height={200} alt="Place image" />
-        </Link>
+      <div className="favorites__image-wrapper place-card__image-wrapper">
+        <a href="#">
+          <img className="place-card__image" src={previewImage} width={150} height={110} alt="Place image" />
+        </a>
       </div>
-      <div className="place-card__info">
+      <div className="favorites__card-info place-card__info">
         <div className="place-card__price-wrapper">
           <div className="place-card__price">
             <b className="place-card__price-value">&euro;{price}</b>
             <span className="place-card__price-text">&#47;&nbsp;night</span>
           </div>
-          <button className={classNames('place-card__bookmark-button', { 'place-card__bookmark-button--active': isFavorite }, 'button', 'type="button"')}>
+          <button className="place-card__bookmark-button place-card__bookmark-button--active button" type="button">
             <svg className="place-card__bookmark-icon" width={18} height={19}>
               <use xlinkHref="#icon-bookmark"></use>
             </svg>
-            <span className="visually-hidden">To bookmarks</span>
+            <span className="visually-hidden">In bookmarks</span>
           </button>
         </div>
         <div className="place-card__rating rating">
@@ -54,8 +45,7 @@ function OfferItem(props: OfferItemProps): JSX.Element {
         <p className="place-card__type">{type}</p>
       </div>
     </article>
-
   );
 }
 
-export default OfferItem;
+export default FaviroteItem;

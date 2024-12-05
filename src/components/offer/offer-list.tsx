@@ -1,16 +1,29 @@
 import OfferItem from './offer-item';
-import { mockOffers } from '../../mockup/offers';
+import { Offer } from '../../types/offer-type';
+import { useState } from 'react';
 
-function OfferList(): JSX.Element {
+type OfferListProps = {
+  offers: Offer[];
+}
+
+function OfferList(props: OfferListProps): JSX.Element {
+  const { offers } = props;
+
+  const [, setSelectedPlace] = useState<Offer | null>(null);
+
+  const selectedPlaceMouseEnterHandler = (offer: Offer) => setSelectedPlace(offer);
+  const selectedPlaceMouseLeaveHandler = () => setSelectedPlace(null);
+
   return (
     <div className="cities__places-list places__list tabs__content">
-      {mockOffers.map((element) =>
-        (
-          <OfferItem
-            key={element.id}
-            {...element}
-          />
-        ))}
+      {offers.map((element) => (
+        <OfferItem
+          key={element.id}
+          offer={element}
+          onPlaceMouseEnter={() => selectedPlaceMouseEnterHandler(element)}
+          onPlaceMouseLeave={() => selectedPlaceMouseLeaveHandler}
+        />
+      ))}
     </div>
   );
 }
