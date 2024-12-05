@@ -2,7 +2,7 @@ import { Route, BrowserRouter, Routes } from 'react-router-dom';
 import { HelmetProvider } from 'react-helmet-async';
 import { AppRoute, AuthorizationStatus } from '../../const';
 import { UserInfo } from '../../types/user-info-type';
-import { Offer } from '../../mocks/offers';
+import { Offer } from '../../types/offer-type';
 import MainPage from '../../pages/main-page/main-page';
 import FavoritesPage from '../../pages/favorite-page/favorite-page';
 import LoginPage from '../../pages/login-page/login-page';
@@ -34,7 +34,7 @@ function App(props: AppProps): JSX.Element {
               path={AppRoute.Favorites}
               element={
                 <PrivateRoute authorizationStatus={AuthorizationStatus.Auth}>
-                  <FavoritesPage offers={offers} locations={locations}/>
+                  <FavoritesPage offers={offers}/>
                 </PrivateRoute>
               }
             />

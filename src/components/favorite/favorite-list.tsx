@@ -1,28 +1,16 @@
 import { Offer } from '../../types/offer-type';
-import FaviroteItem from './favorite-item';
-import { getFavoriteOffers } from '../../utils';
+import FaviroteLocationGroup from './favorite-location-group';
 
 type FaviroteListProps = {
   offers: Offer[];
-  locations: string[];
 };
 
 function FavoriteList(props: FaviroteListProps): JSX.Element {
-  const { offers, locations } = props;
-  const favoriteOffers = getFavoriteOffers(offers);
+  const { offers } = props;
   return (
-    <li className="favorites__locations-items">
-      <div className="favorites__locations locations locations--current">
-        <div className="locations__item">
-          <a className="locations__item-link" href="#">
-            <span>Amsterdam</span>
-          </a>
-        </div>
-      </div>
-      <div className="favorites__places">
-
-      </div>
-    </li>
+    <ul className="favorites__list">
+      <FaviroteLocationGroup offers={offers} />
+    </ul>
   );
 }
 

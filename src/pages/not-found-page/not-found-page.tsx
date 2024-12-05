@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom';
 import { Helmet } from 'react-helmet-async';
 import HeaderLogo from '../../components/header/header-logo';
+import { AppRoute } from '../../const';
 
 function NotFoundPage(): JSX.Element {
   return (
@@ -15,7 +16,7 @@ function NotFoundPage(): JSX.Element {
             <h1 className="login__title">Something`s gone wrong...</h1>
             <img className="login__title" src="img/thinking-emoji.png" alt="thinking-emoji" width={64} height={64} />
             <div className="locations__item">
-              <Link className="locations__item-link" to='/'>
+              <Link className="locations__item-link" to={AppRoute.Main}>
                 <span>Go to main page</span>
               </Link>
             </div>

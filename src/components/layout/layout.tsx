@@ -12,7 +12,7 @@ function Layout(props: UserInfo): JSX.Element {
   const isPageMain = (appPath === AppRoute.Main);
   const isPageLogin = (appPath === AppRoute.Login);
   const isPageFavorites = (appPath === AppRoute.Favorites);
-  const isFavoritesEmpty: boolean = true; //заготовка
+  const isFavoritesEmpty: boolean = false; //заготовка
   return (
     <div className={classNames(
       'page',

@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom';
 import { UserInfo } from '../../types/user-info-type';
+import { AppRoute } from '../../const';
 
 function HeaderNav(props: UserInfo): JSX.Element {
   const { emailAddress, favoriteCount } = props;
@@ -15,7 +16,7 @@ function HeaderNav(props: UserInfo): JSX.Element {
           </a>
         </li>
         <li className="header__nav-item">
-          <Link className="header__nav-link" to='/'>
+          <Link className="header__nav-link" to={AppRoute.Main}>
             <span className="header__signout">Sign out</span>
           </Link>
         </li>

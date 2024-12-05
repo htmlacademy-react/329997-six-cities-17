@@ -5,29 +5,24 @@ import FavoriteList from '../../components/favorite/favorite-list';
 
 type FavoritePageProp = {
   offers: Offer[];
-  locations: string[];
 }
 
 function FavoritePage(props: FavoritePageProp): JSX.Element {
-  const { offers, locations } = props;
+  const { offers } = props;
 
   return (
-    <div className="page">
+    <main className="page__main page__main--favorites">
       <Helmet>
         <title>6 cities. Избранное</title>
       </Helmet>
-      <main className="page__main page__main--favorites">
-        <div className="page__favorites-container container">
-          <section className="favorites">
-            <h1 className="favorites__title">Saved listing</h1>
-            <ul className="favorites__list">
-              <FavoriteList offers={offers} locations={locations}/>
-            </ul>
-          </section>
-        </div>
-      </main>
+      <div className="page__favorites-container container">
+        <section className="favorites">
+          <h1 className="favorites__title">Saved listing</h1>
+          <FavoriteList offers={offers} />
+        </section>
+      </div>
       <Footer />
-    </div>
+    </main>
   );
 }
 
