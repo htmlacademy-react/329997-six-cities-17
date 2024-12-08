@@ -1,14 +1,19 @@
 import LocationItem from './location-item';
-import { mockLocations } from '../../mockup/locations';
 
-function LocationList(): JSX.Element {
+type LocationListProps = {
+  locations: string[];
+}
+
+function LocationList(props: LocationListProps): JSX.Element {
+  const { locations } = props;
   return (
     <div>
       <h1 className="visually-hidden">Cities</h1>
       <div className="tabs">
         <section className="locations container">
           <ul className="locations__list tabs__list">
-            {mockLocations.map((element) => <LocationItem key={element.id} {...element} />)}
+            {locations.map((element) =>
+              (<LocationItem key={element} title={element} isSelected={false} />))}
           </ul>
         </section>
       </div>
