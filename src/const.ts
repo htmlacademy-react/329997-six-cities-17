@@ -1,4 +1,4 @@
-export const LOCATIONS: string[] = [
+export const LOCATIONS = [
   'Paris',
   'Cologne',
   'Brussels',
@@ -35,6 +35,7 @@ export enum AppRoute {
   Login = '/login',
   Favorites = '/favorites',
   Offer = '/offer',
+  NotFound = '*',
 }
 
 export enum AuthorizationStatus {
@@ -43,3 +44,12 @@ export enum AuthorizationStatus {
   Unknown = 'UNKNOWN',
 }
 
+export enum CommentOption {
+  minLength = 50,
+  maxLength = 300,
+}
+
+export enum offerPageType {
+  CITIES = 'cities',
+  FAVORITES = 'favorites',
+}

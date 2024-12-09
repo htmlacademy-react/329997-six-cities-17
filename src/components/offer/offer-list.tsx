@@ -1,6 +1,7 @@
 import OfferItem from './offer-item';
 import { Offer } from '../../types/offer-type';
 import { useState } from 'react';
+import { offerPageType } from '../../const';
 
 type OfferListProps = {
   offers: Offer[];
@@ -20,6 +21,7 @@ function OfferList(props: OfferListProps): JSX.Element {
         <OfferItem
           key={element.id}
           offer={element}
+          pageType={offerPageType.CITIES}
           onPlaceMouseEnter={() => selectedPlaceMouseEnterHandler(element)}
           onPlaceMouseLeave={() => selectedPlaceMouseLeaveHandler}
         />
