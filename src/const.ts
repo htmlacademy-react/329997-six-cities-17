@@ -53,3 +53,7 @@ export enum offerPageType {
   CITIES = 'cities',
   FAVORITES = 'favorites',
 }
+
+export const MAP_MARKER_DEFAULT = '../public/img/pin.svg';
+
+export const MAP_MARKER_CURRENT = '../public/img/pin-active.svg';

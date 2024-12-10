@@ -3,11 +3,12 @@ import { Link, generatePath } from 'react-router-dom';
 import { AppRoute, offerPageType } from '../../const';
 import { getStarsRating, capitalizeFirstLetter } from '../../utils';
 import { Offer } from '../../types/offer-type';
+import { MouseEvent } from 'react';
 
 type OfferItemProps = {
   offer: Offer;
   pageType: offerPageType;
-  onPlaceMouseEnter: () => void;
+  onPlaceMouseEnter: (evt: MouseEvent<HTMLLIElement>) => void;
   onPlaceMouseLeave: () => void;
 }
 

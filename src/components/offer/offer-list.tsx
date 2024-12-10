@@ -2,17 +2,24 @@ import OfferItem from './offer-item';
 import { Offer } from '../../types/offer-type';
 import { useState } from 'react';
 import { offerPageType } from '../../const';
+import { MouseEvent } from 'react';
 
 type OfferListProps = {
   offers: Offer[];
+  onOfferHover: (offer: Offer) => void;
 }
 
 function OfferList(props: OfferListProps): JSX.Element {
-  const { offers } = props;
+  const { offers, onOfferHover } = props;
 
-  const [, setSelectedPlace] = useState<Offer | null>(null);
+  const [selectedPlace, setSelectedPlace] = useState<Offer | null>(null);
 
-  const selectedPlaceMouseEnterHandler = (offer: Offer) => setSelectedPlace(offer);
+  const handleOfferHover = (evt: MouseEvent<HTMLLIElement>) => {
+    evt.preventDefault();
+    onOfferHover(evt.currentTarget.id);
+  };
+
+
   const selectedPlaceMouseLeaveHandler = () => setSelectedPlace(null);
 
   return (
@@ -22,7 +29,7 @@ function OfferList(props: OfferListProps): JSX.Element {
           key={element.id}
           offer={element}
           pageType={offerPageType.CITIES}
-          onPlaceMouseEnter={() => selectedPlaceMouseEnterHandler(element)}
+          onPlaceMouseEnter={handleOfferHover}
           onPlaceMouseLeave={() => selectedPlaceMouseLeaveHandler}
         />
       ))}
