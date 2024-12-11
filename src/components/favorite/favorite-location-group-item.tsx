@@ -1,7 +1,6 @@
 import { Offer } from '../../types/offer-type';
 import OfferItem from '../offer/offer-item';
 import { offerPageType } from '../../const';
-import { useState } from 'react';
 
 type FaviroteLocationGroupItemProps = {
   offers: Offer[];
@@ -10,11 +9,6 @@ type FaviroteLocationGroupItemProps = {
 
 function FaviroteLocationGroupItem(props: FaviroteLocationGroupItemProps): JSX.Element {
   const { offers, location } = props;
-
-  const [, setSelectedPlace] = useState<Offer | null>(null);
-
-  const selectedPlaceMouseEnterHandler = (offer: Offer) => setSelectedPlace(offer);
-  const selectedPlaceMouseLeaveHandler = () => setSelectedPlace(null);
 
   return (
     <li className="favorites__locations-items" >
@@ -31,8 +25,6 @@ function FaviroteLocationGroupItem(props: FaviroteLocationGroupItemProps): JSX.E
             key={element.id}
             offer={element}
             pageType={offerPageType.FAVORITES}
-            onPlaceMouseEnter={() => selectedPlaceMouseEnterHandler(element)}
-            onPlaceMouseLeave={() => selectedPlaceMouseLeaveHandler}
           />))}
       </div>
     </li>

@@ -8,8 +8,8 @@ import { MouseEvent } from 'react';
 type OfferItemProps = {
   offer: Offer;
   pageType: offerPageType;
-  onPlaceMouseEnter: (evt: MouseEvent<HTMLLIElement>) => void;
-  onPlaceMouseLeave: () => void;
+  onPlaceMouseEnter?: (evt: MouseEvent<HTMLLIElement>) => void;
+  onPlaceMouseLeave?: () => void;
 }
 
 function OfferItem(props: OfferItemProps): JSX.Element {

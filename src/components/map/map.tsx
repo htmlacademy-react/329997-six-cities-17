@@ -41,7 +41,7 @@ function Map(props: MapProps): JSX.Element {
         });
 
         marker.setIcon(
-          selectedOffer !== null && offer.id === selectedOffer.id
+          selectedOffer && offer.id === selectedOffer.id
             ? currentMapPin
             : defaultMapPin
         ).addTo(markerLayer);
