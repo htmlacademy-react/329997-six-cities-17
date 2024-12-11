@@ -1,13 +1,18 @@
+import { CityLocation } from './types/city_types/city-location-type';
+import { City } from './types/city_types/city-type';
 import { Offer } from './types/offer-type';
 
+const capitalizeFirstLetter = (inputString: string): string => inputString.charAt(0).toUpperCase() + inputString.slice(1);
 
 const getStarsRating = (rating: number) => `${20 * rating}%`;
+
+const checkCommentInRange = (min: number, max: number, value: string) => (value.length >= min) && (value.length <= max);
 
 const getFavoriteOffers = (offers: Offer[]) => {
   const favoriteOffers = offers.filter((element) => element.isFavorite);
 
   if (favoriteOffers.length === 0) {
-    return;
+    return [];
   }
   const favoritesOffersByLocation = new Map<string, Offer[]>();
 
@@ -24,7 +29,15 @@ const getFavoriteOffers = (offers: Offer[]) => {
     });
   }
   );
-  return Array.from(favoritesOffersByLocation).map(([name, places]) => ({name, places}));
+  return Array.from(favoritesOffersByLocation).map(([name, places]) => ({ name, places }));
 };
 
-export { getStarsRating, getFavoriteOffers };
+const getOffersCities = (offers: Offer[]) => {
+  const cities = new Map<string, CityLocation>();
+  offers.forEach((offer) => {
+    cities.set(offer.city.name, offer.city.location);
+  });
+  return Array.from(cities).map(([name, location]): City => ({ name, location }));
+};
+
+export { getStarsRating, getFavoriteOffers, capitalizeFirstLetter, checkCommentInRange, getOffersCities };

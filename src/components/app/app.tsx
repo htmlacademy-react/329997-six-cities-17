@@ -48,7 +48,7 @@ function App(props: AppProps): JSX.Element {
             />
           </Route>
           <Route
-            path="*"
+            path={AppRoute.NotFound}
             element={<NotFoundPage />}
           />
         </Routes>

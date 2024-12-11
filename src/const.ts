@@ -1,4 +1,4 @@
-export const LOCATIONS: string[] = [
+export const LOCATIONS = [
   'Paris',
   'Cologne',
   'Brussels',
@@ -34,7 +34,8 @@ export enum AppRoute {
   Main = '/',
   Login = '/login',
   Favorites = '/favorites',
-  Offer = '/offer',
+  Offer = '/offer/:id',
+  NotFound = '*',
 }
 
 export enum AuthorizationStatus {
@@ -43,3 +44,16 @@ export enum AuthorizationStatus {
   Unknown = 'UNKNOWN',
 }
 
+export enum CommentOption {
+  minLength = 50,
+  maxLength = 300,
+}
+
+export enum offerPageType {
+  CITIES = 'cities',
+  FAVORITES = 'favorites',
+}
+
+export const MAP_MARKER_DEFAULT = '../img/pin.svg';
+
+export const MAP_MARKER_CURRENT = '../img/pin-active.svg';

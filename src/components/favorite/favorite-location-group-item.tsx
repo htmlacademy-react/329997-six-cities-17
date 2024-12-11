@@ -1,13 +1,15 @@
 import { Offer } from '../../types/offer-type';
-import FaviroteItem from './favorite-item';
+import OfferItem from '../offer/offer-item';
+import { offerPageType } from '../../const';
 
 type FaviroteLocationGroupItemProps = {
   offers: Offer[];
   location: string;
 };
 
-function FaviroteLocationItemGroup(props: FaviroteLocationGroupItemProps): JSX.Element {
+function FaviroteLocationGroupItem(props: FaviroteLocationGroupItemProps): JSX.Element {
   const { offers, location } = props;
+
   return (
     <li className="favorites__locations-items" >
       <div className="favorites__locations locations locations--current">
@@ -18,10 +20,15 @@ function FaviroteLocationItemGroup(props: FaviroteLocationGroupItemProps): JSX.E
         </div>
       </div>
       <div className="favorites__places">
-        {offers.map((offer) => <FaviroteItem key={offer.id} offer={offer} />)}
+        {offers.map((element) => (
+          <OfferItem
+            key={element.id}
+            offer={element}
+            pageType={offerPageType.FAVORITES}
+          />))}
       </div>
     </li>
   );
 }
 
-export default FaviroteLocationItemGroup;
+export default FaviroteLocationGroupItem;

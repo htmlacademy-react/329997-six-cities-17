@@ -1,7 +1,7 @@
 import { Offer } from '../../types/offer-type';
 import { getFavoriteOffers } from '../../utils';
 import FavoriteEmpty from './favorite-empty';
-import FaviroteLocationItemGroup from './favorite-location-group-item';
+import FaviroteLocationGroupItem from './favorite-location-group-item';
 
 type FaviroteLocationGroupProps = {
   offers: Offer[];
@@ -10,7 +10,7 @@ type FaviroteLocationGroupProps = {
 function FaviroteLocationGroup(props: FaviroteLocationGroupProps): JSX.Element {
   const { offers } = props;
   const favoriteOffers = getFavoriteOffers(offers);
-  if (favoriteOffers === undefined) {
+  if (!favoriteOffers.length) {
     return (
       <FavoriteEmpty />
     );
@@ -18,7 +18,7 @@ function FaviroteLocationGroup(props: FaviroteLocationGroupProps): JSX.Element {
   return (
     <>{
       favoriteOffers.map((element) =>
-        <FaviroteLocationItemGroup key={element.name} offers={element.places} location={element.name} />
+        <FaviroteLocationGroupItem key={element.name} offers={element.places} location={element.name} />
       )
     }
     </>

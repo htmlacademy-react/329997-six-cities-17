@@ -1,7 +1,7 @@
 type CommentRatingButtonProps = {
   value: number;
   title: string;
-  onCommentRatingButtonChange: (name: string, value: number) => void;
+  onCommentRatingButtonChange: (value: number) => void;
   checked: boolean;
 };
 
@@ -15,7 +15,7 @@ function CommentRatingButton(props: CommentRatingButtonProps): JSX.Element {
         id={`${value}-stars`}
         type="radio"
         checked={checked}
-        onChange={(evt) => onCommentRatingButtonChange(evt.target.name, Number(evt.target.value))}
+        onChange={(evt) => onCommentRatingButtonChange(Number(evt.target.value))}
       />
       <label htmlFor={`${value}-stars`}
         className="reviews__rating-label form__rating-label"

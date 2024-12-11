@@ -1,18 +1,28 @@
 import OfferItem from './offer-item';
 import { Offer } from '../../types/offer-type';
-import { useState } from 'react';
+import { offerPageType } from '../../const';
+import { MouseEvent } from 'react';
 
 type OfferListProps = {
   offers: Offer[];
+  onOfferMouseEnter: (offer: Offer) => void;
+  onOfferMouseLeave: () => void;
 }
 
 function OfferList(props: OfferListProps): JSX.Element {
-  const { offers } = props;
+  const { offers, onOfferMouseEnter, onOfferMouseLeave } = props;
 
-  const [, setSelectedPlace] = useState<Offer | null>(null);
+  const handleOfferItemMouseEnter = (evt: MouseEvent<HTMLLIElement>) => {
+    const currentOffer = offers.find((element) => element.id === evt.currentTarget.dataset.id);
+    if (!currentOffer) {
+      return;
+    }
+    onOfferMouseEnter(currentOffer);
+  };
 
-  const selectedPlaceMouseEnterHandler = (offer: Offer) => setSelectedPlace(offer);
-  const selectedPlaceMouseLeaveHandler = () => setSelectedPlace(null);
+  const handleOfferItemMouseLeave = () => {
+    onOfferMouseLeave();
+  };
 
   return (
     <div className="cities__places-list places__list tabs__content">
@@ -20,8 +30,9 @@ function OfferList(props: OfferListProps): JSX.Element {
         <OfferItem
           key={element.id}
           offer={element}
-          onPlaceMouseEnter={() => selectedPlaceMouseEnterHandler(element)}
-          onPlaceMouseLeave={() => selectedPlaceMouseLeaveHandler}
+          pageType={offerPageType.CITIES}
+          onPlaceMouseEnter={handleOfferItemMouseEnter}
+          onPlaceMouseLeave={handleOfferItemMouseLeave}
         />
       ))}
     </div>
