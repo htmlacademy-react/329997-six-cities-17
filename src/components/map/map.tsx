@@ -15,14 +15,14 @@ type MapProps = {
 
 const defaultMapPin = new Icon({
   iconUrl: MAP_MARKER_DEFAULT,
-  iconSize: [40, 40],
-  iconAnchor: [20, 40]
+  iconSize: [30, 40],
+  iconAnchor: [30, 40]
 });
 
 const currentMapPin = new Icon({
   iconUrl: MAP_MARKER_CURRENT,
-  iconSize: [40, 40],
-  iconAnchor: [20, 40]
+  iconSize: [30, 40],
+  iconAnchor: [30, 40]
 });
 
 function Map(props: MapProps): JSX.Element {
