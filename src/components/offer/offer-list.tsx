@@ -14,7 +14,7 @@ function OfferList(props: OfferListProps): JSX.Element {
 
   const handleOfferItemMouseEnter = (evt: MouseEvent<HTMLLIElement>) => {
     const currentOffer = offers.find((element) => element.id === evt.currentTarget.dataset.id);
-    if (currentOffer === undefined) {
+    if (!currentOffer) {
       return;
     }
     onOfferMouseEnter(currentOffer);

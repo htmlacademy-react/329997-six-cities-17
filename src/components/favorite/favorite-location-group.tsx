@@ -10,7 +10,7 @@ type FaviroteLocationGroupProps = {
 function FaviroteLocationGroup(props: FaviroteLocationGroupProps): JSX.Element {
   const { offers } = props;
   const favoriteOffers = getFavoriteOffers(offers);
-  if (favoriteOffers.length === 0) {
+  if (!favoriteOffers.length) {
     return (
       <FavoriteEmpty />
     );

@@ -40,9 +40,7 @@ function MainPage(props: MainPageProps): JSX.Element {
             <OfferList offers={offers} onOfferMouseEnter={handleOfferMouseEnter} onOfferMouseLeave={handleOfferMouseLeave} />
           </section>
           <div className="cities__right-section">
-            <section className="cities__map map">
-              <Map city={offersCities[0]} offers={offers} selectedOffer={selectedOffer} />
-            </section>
+            <Map city={offersCities[0]} offers={offers} selectedOffer={selectedOffer} />
           </div>
         </div>
       </div>
