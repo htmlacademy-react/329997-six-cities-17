@@ -10,7 +10,7 @@ import { Offer } from '../../types/offer-type';
 type MapProps = {
   city: City;
   offers: Offer[];
-  selectedOffer: Offer | undefined;
+  selectedOffer: Offer | null;
 };
 
 const defaultMapPin = new Icon({
@@ -40,13 +40,11 @@ function Map(props: MapProps): JSX.Element {
           lng: offer.location.longitude
         });
 
-        marker
-          .setIcon(
-            selectedOffer !== undefined && offer.id === selectedOffer.id
-              ? currentMapPin
-              : defaultMapPin
-          )
-          .addTo(markerLayer);
+        marker.setIcon(
+          selectedOffer !== null && offer.id === selectedOffer.id
+            ? currentMapPin
+            : defaultMapPin
+        ).addTo(markerLayer);
       });
 
       return () => {
@@ -55,7 +53,7 @@ function Map(props: MapProps): JSX.Element {
     }
   }, [map, offers, selectedOffer]);
 
-  return <div style={{ height: '500px' }} ref={mapRef}></div>;
+  return <div style={{ height: '794px' }} ref={mapRef}></div>;
 }
 
 export default Map;

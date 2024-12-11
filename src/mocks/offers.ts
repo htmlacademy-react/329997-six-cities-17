@@ -11,11 +11,11 @@ const mockOffers: Offer[] = [
       location: {
         latitude: 52.3909553943508,
         longitude: 4.85309666406198,
-        zoom: 8,
+        zoom: 11,
       },
     },
     location: {
-      latitude: 52.3609553943508,
+      latitude: 52.3909553943508,
       longitude: 4.85309666406198,
       zoom: 8,
     },
@@ -34,7 +34,7 @@ const mockOffers: Offer[] = [
       location: {
         latitude: 52.3609553943508,
         longitude: 4.85309666406198,
-        zoom: 8,
+        zoom: 11,
       },
     },
     location: {
@@ -57,7 +57,7 @@ const mockOffers: Offer[] = [
       location: {
         latitude: 52.3909553943508,
         longitude: 4.929309666406198,
-        zoom: 8,
+        zoom: 11,
       },
     },
     location: {
@@ -80,7 +80,7 @@ const mockOffers: Offer[] = [
       location: {
         latitude: 52.3809553943508,
         longitude: 4.939309666406198,
-        zoom: 8,
+        zoom: 11,
       },
     },
     location: {

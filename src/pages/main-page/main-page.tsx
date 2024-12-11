@@ -16,12 +16,13 @@ function MainPage(props: MainPageProps): JSX.Element {
   const { offers, locations } = props;
   const offersCities = getOffersCities(offers);
 
-  const [selectedOffer, setSelectedOffer] = useState<Offer | undefined>(undefined);
+  const [selectedOffer, setSelectedOffer] = useState<Offer | null>(null);
 
-  const handleOfferHover = (offer: Offer) => {
-    const currentOffer = offers.find((element) => element.id === offer.id);
-    setSelectedOffer(currentOffer);
-    console.log(currentOffer);
+  const handleOfferMouseEnter = (offer: Offer) => {
+    setSelectedOffer(offer);
+  };
+  const handleOfferMouseLeave = () => {
+    setSelectedOffer(null);
   };
 
   return (
@@ -36,10 +37,12 @@ function MainPage(props: MainPageProps): JSX.Element {
             <h2 className="visually-hidden">Places</h2>
             <b className="places__found">{offers.length} places to stay in Amsterdam</b>
             <Sorting />
-            <OfferList offers={offers} onOfferHover={handleOfferHover}/>
+            <OfferList offers={offers} onOfferMouseEnter={handleOfferMouseEnter} onOfferMouseLeave={handleOfferMouseLeave} />
           </section>
           <div className="cities__right-section">
-            <Map city={offersCities[0]} offers={offers} selectedOffer={selectedOffer} />
+            <section className="cities__map map">
+              <Map city={offersCities[0]} offers={offers} selectedOffer={selectedOffer} />
+            </section>
           </div>
         </div>
       </div>

@@ -20,6 +20,7 @@ function OfferItem(props: OfferItemProps): JSX.Element {
   return (
     <article
       className={`${pageType}__card place-card`}
+      data-id={offer.id}
       onMouseEnter={onPlaceMouseEnter}
       onMouseLeave={onPlaceMouseLeave}
     >
