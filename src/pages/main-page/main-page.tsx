@@ -1,11 +1,11 @@
 import { Helmet } from 'react-helmet-async';
+import { useState } from 'react';
 import OfferList from '../../components/offer/offer-list';
 import LocationList from '../../components/location/location-list';
 import Sorting from '../../components/sorting/sorting';
 import { Offer } from '../../types/offer-type';
 import Map from '../../components/map/map';
 import { getOffersCities } from '../../utils';
-import { useState } from 'react';
 
 type MainPageProps = {
   offers: Offer[];

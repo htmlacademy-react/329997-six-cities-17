@@ -2,8 +2,21 @@ import { Helmet } from 'react-helmet-async';
 import CommentForm from '../../components/comment/comment-form';
 import ReviewList from '../../components/review/review-list';
 import { mockReviews } from '../../mocks/reviews';
+import { Offer } from '../../types/offer-type';
+import Map from '../../components/map/map';
+import { City } from '../../types/city_types/city-type';
+import { offerPageType } from '../../const';
+import { mockOffers } from '../../mocks/offers';
+import { mockNearestOffers } from '../../mocks/nearestOffers';
 
-function OfferPage(): JSX.Element {
+type OfferPageProps = {
+  offer: Offer;
+  nearestOffers: Offer[];
+}
+
+function OfferPage(props: OfferPageProps): JSX.Element {
+  const { offer = mockOffers[0], nearestOffers = mockNearestOffers } = props;
+  const offerCity: City = offer.city;
   return (
     <main className="page__main page__main--offer">
       <Helmet>
@@ -133,7 +146,7 @@ function OfferPage(): JSX.Element {
             </section>
           </div>
         </div>
-        <section className="offer__map map"></section>
+        <Map city={offerCity} offers={nearestOffers} mapType={offerPageType.OFFER}/>
       </section>
       <div className="container">
         <section className="near-places places">
