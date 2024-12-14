@@ -5,7 +5,7 @@ const mockNearestOffers: Offer[] = [
     id: '2af6f711-c28d-4121-82cd-e0b462a27f00',
     title: 'Wood and stone place',
     type: 'Room',
-    price: 80,
+    price: 111,
     city: {
       name: 'Amsterdam',
       location: {
@@ -28,7 +28,7 @@ const mockNearestOffers: Offer[] = [
     id: '3af6f711-c28d-4121-82cd-e0b462a27f00',
     title: 'Canal View Prinsengracht',
     type: 'Apartment',
-    price: 132,
+    price: 222,
     city: {
       name: 'Amsterdam',
       location: {
@@ -51,7 +51,7 @@ const mockNearestOffers: Offer[] = [
     id: '4af6f711-c28d-4121-82cd-e0b462a27f00',
     title: 'Nice, cozy, warm big bed apartment',
     type: 'Apartment',
-    price: 180,
+    price: 333,
     city: {
       name: 'Amsterdam',
       location: {

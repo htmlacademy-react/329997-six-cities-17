@@ -33,13 +33,13 @@ function OfferItem(props: OfferItemProps): JSX.Element {
           <img
             className="place-card__image"
             src={previewImage}
-            width={pageType === offerPageType.CITIES ? 260 : 150}
-            height={pageType === offerPageType.CITIES ? 200 : 110}
+            width={pageType === offerPageType.CITIES || offerPageType.NEAR_PLACES ? 260 : 150}
+            height={pageType === offerPageType.CITIES || offerPageType.NEAR_PLACES ? 200 : 110}
             alt="Place image"
           />
         </Link>
       </div>
-      <div className={classNames('place-card__info', {'favorites__card-info' : pageType === offerPageType.FAVORITES})}>
+      <div className={classNames('place-card__info', { 'favorites__card-info': pageType === offerPageType.FAVORITES })}>
         <div className="place-card__price-wrapper">
           <div className="place-card__price">
             <b className="place-card__price-value">&euro;{price}</b>

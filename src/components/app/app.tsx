@@ -14,11 +14,12 @@ import Layout from '../layout/layout';
 type AppProps = {
   userInfo: UserInfo;
   offers: Offer[];
+  nearestOffers: Offer[];
   locations: string[];
 }
 
 function App(props: AppProps): JSX.Element {
-  const { userInfo: { emailAddress, favoriteCount }, offers, locations } = props;
+  const { userInfo: { emailAddress, favoriteCount }, offers, nearestOffers, locations } = props;
   return (
     <HelmetProvider>
       <BrowserRouter>
@@ -28,19 +29,19 @@ function App(props: AppProps): JSX.Element {
             element={<Layout emailAddress={emailAddress} favoriteCount={favoriteCount} />}
           >
             <Route
-              index element={<MainPage offers={offers} locations={locations}/>}
+              index element={<MainPage offers={offers} locations={locations} />}
             />
             <Route
               path={AppRoute.Favorites}
               element={
                 <PrivateRoute authorizationStatus={AuthorizationStatus.Auth}>
-                  <FavoritesPage offers={offers}/>
+                  <FavoritesPage offers={offers} />
                 </PrivateRoute>
               }
             />
             <Route
               path={AppRoute.Offer}
-              element={<OfferPage />}
+              element={<OfferPage offer={offers[0]} nearestOffers={nearestOffers}/>}
             />
             <Route
               path={AppRoute.Login}

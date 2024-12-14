@@ -59,7 +59,7 @@ function Map(props: MapProps): JSX.Element {
     <section className={classNames(
       'map',
       { 'cities__map': mapType === offerPageType.CITIES },
-      { 'offer__map': mapType === offerPageType.OFFER })}
+      { 'offer__map': mapType === offerPageType.NEAR_PLACES })}
     ref={mapRef}
     >
     </section >
