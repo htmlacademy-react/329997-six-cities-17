@@ -1,11 +1,12 @@
 import { Helmet } from 'react-helmet-async';
+import { useState } from 'react';
 import OfferList from '../../components/offer/offer-list';
 import LocationList from '../../components/location/location-list';
 import Sorting from '../../components/sorting/sorting';
 import { Offer } from '../../types/offer-type';
 import Map from '../../components/map/map';
 import { getOffersCities } from '../../utils';
-import { useState } from 'react';
+import { offerPageType } from '../../const';
 
 type MainPageProps = {
   offers: Offer[];
@@ -18,8 +19,8 @@ function MainPage(props: MainPageProps): JSX.Element {
 
   const [selectedOffer, setSelectedOffer] = useState<Offer | null>(null);
 
-  const handleOfferMouseEnter = (offer: Offer) => {
-    setSelectedOffer(offer);
+  const handleOfferMouseEnter = (targetedOffer: Offer) => {
+    setSelectedOffer(targetedOffer);
   };
   const handleOfferMouseLeave = () => {
     setSelectedOffer(null);
@@ -37,7 +38,7 @@ function MainPage(props: MainPageProps): JSX.Element {
             <h2 className="visually-hidden">Places</h2>
             <b className="places__found">{offers.length} places to stay in Amsterdam</b>
             <Sorting />
-            <OfferList offers={offers} onOfferMouseEnter={handleOfferMouseEnter} onOfferMouseLeave={handleOfferMouseLeave} />
+            <OfferList offers={offers} onOfferMouseEnter={handleOfferMouseEnter} onOfferMouseLeave={handleOfferMouseLeave} pageType={offerPageType.CITIES}/>
           </section>
           <div className="cities__right-section">
             <Map city={offersCities[0]} offers={offers} selectedOffer={selectedOffer} />

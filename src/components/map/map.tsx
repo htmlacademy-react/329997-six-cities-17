@@ -5,12 +5,14 @@ import useMap from '../hooks/use-map';
 import { MAP_MARKER_CURRENT, MAP_MARKER_DEFAULT } from '../../const';
 import { City } from '../../types/city_types/city-type';
 import { Offer } from '../../types/offer-type';
-
+import classNames from 'classnames';
+import { offerPageType } from '../../const';
 
 type MapProps = {
   city: City;
   offers: Offer[];
-  selectedOffer: Offer | null;
+  selectedOffer?: Offer | null;
+  mapType?: offerPageType;
 };
 
 const defaultMapPin = new Icon({
@@ -26,7 +28,7 @@ const currentMapPin = new Icon({
 });
 
 function Map(props: MapProps): JSX.Element {
-  const { city, offers, selectedOffer } = props;
+  const { city, offers, selectedOffer, mapType = 'cities' } = props;
 
   const mapRef = useRef(null);
   const map = useMap(mapRef, city);
@@ -54,7 +56,13 @@ function Map(props: MapProps): JSX.Element {
   }, [map, offers, selectedOffer]);
 
   return (
-    <section className="cities__map map" ref={mapRef}></section>
+    <section className={classNames(
+      'map',
+      { 'cities__map': mapType === offerPageType.CITIES },
+      { 'offer__map': mapType === offerPageType.NEAR_PLACES })}
+    ref={mapRef}
+    >
+    </section >
   );
 }
 

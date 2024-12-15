@@ -52,6 +52,7 @@ export enum CommentOption {
 export enum offerPageType {
   CITIES = 'cities',
   FAVORITES = 'favorites',
+  NEAR_PLACES = 'near-places',
 }
 
 export const MAP_MARKER_DEFAULT = '../img/pin.svg';
