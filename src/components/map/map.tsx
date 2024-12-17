@@ -11,7 +11,7 @@ import { offerPageType } from '../../const';
 type MapProps = {
   city: City;
   offers: Offer[];
-  selectedOffer?: Offer | null;
+  selectedOffer?: Offer;
   mapType?: offerPageType;
 };
 

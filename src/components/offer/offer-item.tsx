@@ -33,8 +33,8 @@ function OfferItem(props: OfferItemProps): JSX.Element {
           <img
             className="place-card__image"
             src={previewImage}
-            width={pageType === offerPageType.CITIES || offerPageType.NEAR_PLACES ? 260 : 150}
-            height={pageType === offerPageType.CITIES || offerPageType.NEAR_PLACES ? 200 : 110}
+            width={pageType === offerPageType.FAVORITES ? 150 : 260 }
+            height={pageType === offerPageType.FAVORITES ? 110 : 200}
             alt="Place image"
           />
         </Link>
