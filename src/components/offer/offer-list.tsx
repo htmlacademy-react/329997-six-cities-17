@@ -14,7 +14,7 @@ type OfferListProps = {
 function OfferList(props: OfferListProps): JSX.Element {
   const { offers, pageType, onOfferMouseEnter, onOfferMouseLeave } = props;
 
-  const handleOfferItemMouseEnter = (evt: MouseEvent<HTMLLIElement>) => {
+  const handleOfferItemMouseEnter = (evt: MouseEvent<HTMLElement>) => {
     const currentOffer = offers.find((element) => element.id === evt.currentTarget.dataset.id);
     if (!currentOffer) {
       return;

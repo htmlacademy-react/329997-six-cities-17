@@ -5,7 +5,7 @@ import LocationList from '../../components/location/location-list';
 import Sorting from '../../components/sorting/sorting';
 import { Offer } from '../../types/offer-type';
 import Map from '../../components/map/map';
-import { getOffersCities } from '../../utils';
+import { getOffersLocations } from '../../utils';
 import { offerPageType } from '../../const';
 
 type MainPageProps = {
@@ -15,7 +15,7 @@ type MainPageProps = {
 
 function MainPage(props: MainPageProps): JSX.Element {
   const { offers, locations } = props;
-  const offersCities = getOffersCities(offers);
+  const offersLocations = getOffersLocations(offers);
 
   const [selectedOffer, setSelectedOffer] = useState<Offer | null>(null);
 
@@ -41,7 +41,7 @@ function MainPage(props: MainPageProps): JSX.Element {
             <OfferList offers={offers} onOfferMouseEnter={handleOfferMouseEnter} onOfferMouseLeave={handleOfferMouseLeave} pageType={offerPageType.CITIES}/>
           </section>
           <div className="cities__right-section">
-            <Map city={offersCities[0]} offers={offers} selectedOffer={selectedOffer} />
+            <Map city={offersLocations[0]} offers={offers} selectedOffer={selectedOffer} />
           </div>
         </div>
       </div>

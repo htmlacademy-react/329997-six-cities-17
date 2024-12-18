@@ -1,4 +1,7 @@
 import LocationItem from './location-item';
+import { useAppSelector, useAppDispatch } from '../hooks';
+import { MouseEvent } from 'react';
+import { changeCity, loadOffers } from '../../store/action';
 
 type LocationListProps = {
   locations: string[];
@@ -6,6 +9,13 @@ type LocationListProps = {
 
 function LocationList(props: LocationListProps): JSX.Element {
   const { locations } = props;
+  const currentCity = useAppSelector((state) => state.city);
+  const dispatch = useAppDispatch();
+
+  const handleCityChange = (evt: MouseEvent<HTMLAnchorElement>) => {
+    dispatch(changeCity({city: evt.currentTarget.text}));
+    dispatch(loadOffers());
+  };
   return (
     <div>
       <h1 className="visually-hidden">Cities</h1>
@@ -13,7 +23,7 @@ function LocationList(props: LocationListProps): JSX.Element {
         <section className="locations container">
           <ul className="locations__list tabs__list">
             {locations.map((element) =>
-              (<LocationItem key={element} title={element} isSelected={false} />))}
+              (<LocationItem key={element} title={element} selectedCity={currentCity} onCityChange={handleCityChange}/>))}
           </ul>
         </section>
       </div>
