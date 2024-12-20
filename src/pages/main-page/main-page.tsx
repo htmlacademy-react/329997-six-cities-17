@@ -5,17 +5,15 @@ import LocationList from '../../components/location/location-list';
 import Sorting from '../../components/sorting/sorting';
 import { Offer } from '../../types/offer-type';
 import Map from '../../components/map/map';
-import { getOffersLocations } from '../../utils';
+import { useAppSelector } from '../../components/hooks';
+import { LOCATIONS } from '../../const';
 import { offerPageType } from '../../const';
+import { City } from '../../types/city_types/city-type';
 
-type MainPageProps = {
-  offers: Offer[];
-  locations: string[];
-}
-
-function MainPage(props: MainPageProps): JSX.Element {
-  const { offers, locations } = props;
-  const offersLocations = getOffersLocations(offers);
+function MainPage(): JSX.Element {
+  const currentOffers = useAppSelector((state) => state.currentOffers);
+  const currentCityTitle = useAppSelector((state) => state.city);
+  const currentCity: City = currentOffers[0].city; //Стоит ли делать отдельную функцию для определея города? В созданном массиве офферов город 100% одинаковый будет
 
   const [selectedOffer, setSelectedOffer] = useState<Offer | null>(null);
 
@@ -31,17 +29,17 @@ function MainPage(props: MainPageProps): JSX.Element {
       <Helmet>
         <title>6 cities. Главная страница</title>
       </Helmet>
-      <LocationList locations={locations} />
+      <LocationList locations={LOCATIONS} />
       <div className="cities">
         <div className="cities__places-container container">
           <section className="cities__places places">
             <h2 className="visually-hidden">Places</h2>
-            <b className="places__found">{offers.length} places to stay in Amsterdam</b>
+            <b className="places__found">{currentOffers.length} places to stay {currentCityTitle}</b>
             <Sorting />
-            <OfferList offers={offers} onOfferMouseEnter={handleOfferMouseEnter} onOfferMouseLeave={handleOfferMouseLeave} pageType={offerPageType.CITIES}/>
+            <OfferList offers={currentOffers} onOfferMouseEnter={handleOfferMouseEnter} onOfferMouseLeave={handleOfferMouseLeave} pageType={offerPageType.CITIES}/>
           </section>
           <div className="cities__right-section">
-            <Map city={offersLocations[0]} offers={offers} selectedOffer={selectedOffer} />
+            <Map city={currentCity} offers={currentOffers} selectedOffer={selectedOffer} />
           </div>
         </div>
       </div>

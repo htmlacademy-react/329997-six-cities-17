@@ -14,10 +14,10 @@ const initialState: {
 {
   city: 'Paris',
   offers: mockOffers,
-  currentOffers: [],
+  currentOffers: getCurrentLocationOffers(mockOffers, 'Paris'),
 };
 
-//для загрузки офферов для парижа при старте приложения я так понимаю нужно будет дернуть хранилище при инициализации?
+//для загрузки офферов для парижа при старте приложения я так понимаю нужно будет дернуть хранилище при инициализации? Или текущий вариант использовать можно
 
 const reducer = createReducer(initialState, (builder) => {
   builder
