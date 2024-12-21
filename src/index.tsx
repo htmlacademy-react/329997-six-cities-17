@@ -3,7 +3,6 @@ import ReactDOM from 'react-dom/client';
 import App from './components/app/app';
 import { mockOffers } from './mocks/offers';
 import { mockUser } from './mocks/user';
-import { LOCATIONS } from './const';
 import { mockNearestOffers } from './mocks/nearestOffers';
 import { Provider } from 'react-redux';
 import { store } from './store';
@@ -19,7 +18,6 @@ root.render(
         userInfo={mockUser}
         offers={mockOffers}
         nearestOffers={mockNearestOffers}
-        locations={LOCATIONS}
       />
     </Provider>
   </React.StrictMode>,
