@@ -1,7 +1,8 @@
 import LocationItem from './location-item';
 import { useAppSelector, useAppDispatch } from '../hooks';
 import { MouseEvent } from 'react';
-import { changeCity, loadOffers } from '../../store/action';
+import { changeCity, changeSortingType, loadOffers } from '../../store/action';
+import { SORT_TYPE } from '../../const';
 
 type LocationListProps = {
   locations: string[];
@@ -15,6 +16,7 @@ function LocationList(props: LocationListProps): JSX.Element {
   const handleCityChange = (evt: MouseEvent<HTMLAnchorElement>) => {
     dispatch(changeCity({city: evt.currentTarget.text}));
     dispatch(loadOffers());
+    dispatch(changeSortingType({sortingType: SORT_TYPE.POPULAR}));
   };
   return (
     <div>

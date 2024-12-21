@@ -1,6 +1,6 @@
 import { Offer } from '../../types/offer-type';
 import OfferItem from '../offer/offer-item';
-import { offerPageType } from '../../const';
+import { OfferPageType } from '../../const';
 
 type FaviroteLocationGroupItemProps = {
   offers: Offer[];
@@ -24,7 +24,7 @@ function FaviroteLocationGroupItem(props: FaviroteLocationGroupItemProps): JSX.E
           <OfferItem
             key={element.id}
             offer={element}
-            pageType={offerPageType.FAVORITES}
+            pageType={OfferPageType.FAVORITES}
           />))}
       </div>
     </li>

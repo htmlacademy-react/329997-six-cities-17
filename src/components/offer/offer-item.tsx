@@ -1,13 +1,13 @@
 import classNames from 'classnames';
 import { Link, generatePath } from 'react-router-dom';
-import { AppRoute, offerPageType } from '../../const';
+import { AppRoute, OfferPageType } from '../../const';
 import { getStarsRating, capitalizeFirstLetter } from '../../utils';
 import { Offer } from '../../types/offer-type';
 import { MouseEvent } from 'react';
 
 type OfferItemProps = {
   offer: Offer;
-  pageType: offerPageType;
+  pageType: OfferPageType;
   onPlaceMouseEnter?: (evt: MouseEvent<HTMLElement>) => void;
   onPlaceMouseLeave?: () => void;
 }
@@ -33,13 +33,13 @@ function OfferItem(props: OfferItemProps): JSX.Element {
           <img
             className="place-card__image"
             src={previewImage}
-            width={pageType === offerPageType.FAVORITES ? 150 : 260 }
-            height={pageType === offerPageType.FAVORITES ? 110 : 200}
+            width={pageType === OfferPageType.FAVORITES ? 150 : 260 }
+            height={pageType === OfferPageType.FAVORITES ? 110 : 200}
             alt="Place image"
           />
         </Link>
       </div>
-      <div className={classNames('place-card__info', { 'favorites__card-info': pageType === offerPageType.FAVORITES })}>
+      <div className={classNames('place-card__info', { 'favorites__card-info': pageType === OfferPageType.FAVORITES })}>
         <div className="place-card__price-wrapper">
           <div className="place-card__price">
             <b className="place-card__price-value">&euro;{price}</b>

@@ -2,12 +2,12 @@ import { Helmet } from 'react-helmet-async';
 import { useState } from 'react';
 import OfferList from '../../components/offer/offer-list';
 import LocationList from '../../components/location/location-list';
-import Sorting from '../../components/sorting/sorting';
+import SortingList from '../../components/sorting/sorting-list';
 import { Offer } from '../../types/offer-type';
 import Map from '../../components/map/map';
 import { useAppSelector } from '../../components/hooks';
 import { LOCATIONS } from '../../const';
-import { offerPageType } from '../../const';
+import { OfferPageType } from '../../const';
 import { City } from '../../types/city_types/city-type';
 
 function MainPage(): JSX.Element {
@@ -35,8 +35,8 @@ function MainPage(): JSX.Element {
           <section className="cities__places places">
             <h2 className="visually-hidden">Places</h2>
             <b className="places__found">{currentOffers.length} places to stay {currentCityTitle}</b>
-            <Sorting />
-            <OfferList offers={currentOffers} onOfferMouseEnter={handleOfferMouseEnter} onOfferMouseLeave={handleOfferMouseLeave} pageType={offerPageType.CITIES}/>
+            <SortingList />
+            <OfferList offers={currentOffers} onOfferMouseEnter={handleOfferMouseEnter} onOfferMouseLeave={handleOfferMouseLeave} pageType={OfferPageType.CITIES} />
           </section>
           <div className="cities__right-section">
             <Map city={currentCity} offers={currentOffers} selectedOffer={selectedOffer} />

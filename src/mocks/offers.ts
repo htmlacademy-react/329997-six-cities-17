@@ -68,7 +68,7 @@ const mockOffers: Offer[] = [
     },
     isFavorite: false,
     isPremium: false,
-    rating: 4,
+    rating: 5,
     previewImage: 'img/apartment-02.jpg',
   },
   //Cologne
@@ -138,7 +138,7 @@ const mockOffers: Offer[] = [
     },
     isFavorite: false,
     isPremium: false,
-    rating: 4,
+    rating: 5,
     previewImage: 'img/apartment-02.jpg',
   },
   //Brussels
@@ -208,7 +208,7 @@ const mockOffers: Offer[] = [
     },
     isFavorite: false,
     isPremium: false,
-    rating: 4,
+    rating: 5,
     previewImage: 'img/apartment-02.jpg',
   },
   //Amsterdam
@@ -278,7 +278,7 @@ const mockOffers: Offer[] = [
     },
     isFavorite: false,
     isPremium: false,
-    rating: 4,
+    rating: 5,
     previewImage: 'img/apartment-02.jpg',
   },
   //Hamburg
@@ -348,7 +348,7 @@ const mockOffers: Offer[] = [
     },
     isFavorite: false,
     isPremium: false,
-    rating: 4,
+    rating: 5,
     previewImage: 'img/apartment-02.jpg',
   },
   //Dusseldorf
@@ -418,7 +418,7 @@ const mockOffers: Offer[] = [
     },
     isFavorite: false,
     isPremium: false,
-    rating: 4,
+    rating: 5,
     previewImage: 'img/apartment-02.jpg',
   },
 ];
