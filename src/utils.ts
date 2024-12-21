@@ -9,6 +9,10 @@ const getStarsRating = (rating: number) => `${20 * rating}%`;
 
 const checkCommentInRange = (min: number, max: number, value: string) => (value.length >= min) && (value.length <= max);
 
+const convertDateToProperty = (dateString: string) => dayjs(dateString).format('YYYY-MM-DD');
+
+const convertDateToHumanized = (dateString: string) => dayjs(dateString).format('MMMM D');
+
 const getFavoriteOffers = (offers: Offer[]) => {
   const favoriteOffers = offers.filter((element) => element.isFavorite);
 
@@ -33,7 +37,7 @@ const getFavoriteOffers = (offers: Offer[]) => {
   return Array.from(favoritesOffersByLocation).map(([name, places]) => ({ name, places }));
 };
 
-const getOffersCities = (offers: Offer[]) => {
+const getOffersLocations = (offers: Offer[]) => {
   const cities = new Map<string, CityLocation>();
   offers.forEach((offer) => {
     cities.set(offer.city.name, offer.city.location);
@@ -41,8 +45,42 @@ const getOffersCities = (offers: Offer[]) => {
   return Array.from(cities).map(([name, location]): City => ({ name, location }));
 };
 
-const convertDateToProperty = (dateString: string) => dayjs(dateString).format('YYYY-MM-DD');
+const getCurrentLocationOffers = (offers: Offer[], location: string) => offers.filter((offer) => offer.city.name === location);
 
-const convertDateToHumanized = (dateString: string) => dayjs(dateString).format('MMMM D');
+const getPriceCompareFunctionLowToHigh = (parameterA: Offer, parameterB: Offer) => {
+  if (parameterA.price > parameterB.price) {
+    return 1;
+  } else if (parameterB.price > parameterA.price) {
+    return -1;
+  } else {
+    return 0;
+  }
+};
 
-export { getStarsRating, getFavoriteOffers, capitalizeFirstLetter, checkCommentInRange, getOffersCities, convertDateToProperty, convertDateToHumanized };
+const getPriceCompareFunctionHighToLow = (parameterA: Offer, parameterB: Offer) => {
+  if (parameterA.price > parameterB.price) {
+    return -1;
+  } else if (parameterB.price > parameterA.price) {
+    return 1;
+  } else {
+    return 0;
+  }
+};
+
+const getRatingCompareFunctionHighToLow = (parameterA: Offer, parameterB: Offer) => {
+  if (parameterA.rating > parameterB.rating) {
+    return -1;
+  } else if (parameterB.rating > parameterA.rating) {
+    return 1;
+  } else {
+    return 0;
+  }
+};
+
+const sortByPriceLowToHigh = (offers: Offer[]) => [...offers].sort(getPriceCompareFunctionLowToHigh);
+
+const sortByPriceHighToLow = (offers: Offer[]) => [...offers].sort(getPriceCompareFunctionHighToLow);
+
+const sortByRatingHighToLow = (offers: Offer[]) => [...offers].sort(getRatingCompareFunctionHighToLow);
+
+export { getStarsRating, getFavoriteOffers, capitalizeFirstLetter, checkCommentInRange, getOffersLocations, convertDateToProperty, convertDateToHumanized, getCurrentLocationOffers, sortByPriceHighToLow, sortByPriceLowToHigh, sortByRatingHighToLow };

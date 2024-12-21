@@ -1,11 +1,222 @@
 import { Offer } from '../types/offer-type';
 
 const mockOffers: Offer[] = [
+  //Paris
   {
-    id: '1af6f711-c28d-4121-82cd-e0b462a27f00',
-    title: 'Beautiful & luxurious apartment at great location',
+    id: 'Paris-1',
+    title: 'Paris-1 location',
     type: 'Apartment',
     price: 111,
+    city: {
+      name: 'Paris',
+      location: {
+        latitude: 52.3909553943508,
+        longitude: 4.85309666406198,
+        zoom: 11,
+      },
+    },
+    location: {
+      latitude: 52.3909553943508,
+      longitude: 4.85309666406198,
+      zoom: 8,
+    },
+    isFavorite: false,
+    isPremium: true,
+    rating: 4,
+    previewImage: '../img/apartment-01.jpg',
+  },
+  {
+    id: 'Paris-2',
+    title: 'Paris-2 location',
+    type: 'Room',
+    price: 222,
+    city: {
+      name: 'Paris',
+      location: {
+        latitude: 52.3609553943508,
+        longitude: 4.85309666406198,
+        zoom: 11,
+      },
+    },
+    location: {
+      latitude: 52.3609553943508,
+      longitude: 4.85309666406198,
+      zoom: 8,
+    },
+    isFavorite: false,
+    isPremium: false,
+    rating: 4,
+    previewImage: 'img/room.jpg',
+  },
+  {
+    id: 'Paris-3',
+    title: 'Paris-3 location',
+    type: 'Paris',
+    price: 333,
+    city: {
+      name: 'Paris',
+      location: {
+        latitude: 52.3909553943508,
+        longitude: 4.929309666406198,
+        zoom: 11,
+      },
+    },
+    location: {
+      latitude: 52.3909553943508,
+      longitude: 4.929309666406198,
+      zoom: 8,
+    },
+    isFavorite: false,
+    isPremium: false,
+    rating: 5,
+    previewImage: 'img/apartment-02.jpg',
+  },
+  //Cologne
+  {
+    id: 'Cologne-1',
+    title: 'Cologne-1 location',
+    type: 'Apartment',
+    price: 444,
+    city: {
+      name: 'Cologne',
+      location: {
+        latitude: 52.3909553943508,
+        longitude: 4.85309666406198,
+        zoom: 11,
+      },
+    },
+    location: {
+      latitude: 52.3909553943508,
+      longitude: 4.85309666406198,
+      zoom: 8,
+    },
+    isFavorite: false,
+    isPremium: true,
+    rating: 4,
+    previewImage: '../img/apartment-01.jpg',
+  },
+  {
+    id: 'Cologne-2',
+    title: 'Cologne-2 location',
+    type: 'Room',
+    price: 555,
+    city: {
+      name: 'Cologne',
+      location: {
+        latitude: 52.3609553943508,
+        longitude: 4.85309666406198,
+        zoom: 11,
+      },
+    },
+    location: {
+      latitude: 52.3609553943508,
+      longitude: 4.85309666406198,
+      zoom: 8,
+    },
+    isFavorite: false,
+    isPremium: false,
+    rating: 4,
+    previewImage: 'img/room.jpg',
+  },
+  {
+    id: 'Cologne-3',
+    title: 'Cologne-3 location',
+    type: 'Apartment',
+    price: 666,
+    city: {
+      name: 'Cologne',
+      location: {
+        latitude: 52.3909553943508,
+        longitude: 4.929309666406198,
+        zoom: 11,
+      },
+    },
+    location: {
+      latitude: 52.3909553943508,
+      longitude: 4.929309666406198,
+      zoom: 8,
+    },
+    isFavorite: false,
+    isPremium: false,
+    rating: 5,
+    previewImage: 'img/apartment-02.jpg',
+  },
+  //Brussels
+  {
+    id: 'Brussels-1',
+    title: 'Brussels-1 location',
+    type: 'Apartment',
+    price: 777,
+    city: {
+      name: 'Brussels',
+      location: {
+        latitude: 52.3909553943508,
+        longitude: 4.85309666406198,
+        zoom: 11,
+      },
+    },
+    location: {
+      latitude: 52.3909553943508,
+      longitude: 4.85309666406198,
+      zoom: 8,
+    },
+    isFavorite: false,
+    isPremium: true,
+    rating: 4,
+    previewImage: '../img/apartment-01.jpg',
+  },
+  {
+    id: 'Brussels-2',
+    title: 'Brussels-2 location',
+    type: 'Room',
+    price: 888,
+    city: {
+      name: 'Brussels',
+      location: {
+        latitude: 52.3609553943508,
+        longitude: 4.85309666406198,
+        zoom: 11,
+      },
+    },
+    location: {
+      latitude: 52.3609553943508,
+      longitude: 4.85309666406198,
+      zoom: 8,
+    },
+    isFavorite: false,
+    isPremium: false,
+    rating: 4,
+    previewImage: 'img/room.jpg',
+  },
+  {
+    id: 'Brussels-3',
+    title: 'Brussels-3 location',
+    type: 'Apartment',
+    price: 999,
+    city: {
+      name: 'Brussels',
+      location: {
+        latitude: 52.3909553943508,
+        longitude: 4.929309666406198,
+        zoom: 11,
+      },
+    },
+    location: {
+      latitude: 52.3909553943508,
+      longitude: 4.929309666406198,
+      zoom: 8,
+    },
+    isFavorite: false,
+    isPremium: false,
+    rating: 5,
+    previewImage: 'img/apartment-02.jpg',
+  },
+  //Amsterdam
+  {
+    id: 'Amsterdam-1',
+    title: 'Amsterdam-1 location',
+    type: 'Apartment',
+    price: 1111,
     city: {
       name: 'Amsterdam',
       location: {
@@ -25,10 +236,10 @@ const mockOffers: Offer[] = [
     previewImage: '../img/apartment-01.jpg',
   },
   {
-    id: '2af6f711-c28d-4121-82cd-e0b462a27f00',
-    title: 'Wood and stone place',
+    id: 'Amsterdam-2',
+    title: 'Amsterdam-2 location',
     type: 'Room',
-    price: 222,
+    price: 2222,
     city: {
       name: 'Amsterdam',
       location: {
@@ -48,10 +259,10 @@ const mockOffers: Offer[] = [
     previewImage: 'img/room.jpg',
   },
   {
-    id: '3af6f711-c28d-4121-82cd-e0b462a27f00',
-    title: 'Canal View Prinsengracht',
+    id: 'Amsterdam-3',
+    title: 'Amsterdam-3 location',
     type: 'Apartment',
-    price: 333,
+    price: 3333,
     city: {
       name: 'Amsterdam',
       location: {
@@ -67,78 +278,149 @@ const mockOffers: Offer[] = [
     },
     isFavorite: false,
     isPremium: false,
-    rating: 4,
+    rating: 5,
     previewImage: 'img/apartment-02.jpg',
   },
+  //Hamburg
   {
-    id: '4af6f711-c28d-4121-82cd-e0b462a27f00',
-    title: 'Nice, cozy, warm big bed apartment',
+    id: 'Hamburg-1',
+    title: 'Hamburg-1 location',
     type: 'Apartment',
-    price: 444,
+    price: 4444,
     city: {
-      name: 'Amsterdam',
+      name: 'Hamburg',
       location: {
-        latitude: 52.3809553943508,
-        longitude: 4.939309666406198,
+        latitude: 52.3909553943508,
+        longitude: 4.85309666406198,
         zoom: 11,
       },
     },
     location: {
-      latitude: 52.3809553943508,
-      longitude: 4.939309666406198,
+      latitude: 52.3909553943508,
+      longitude: 4.85309666406198,
       zoom: 8,
     },
-    isFavorite: true,
+    isFavorite: false,
     isPremium: true,
-    rating: 5,
-    previewImage: 'img/apartment-03.jpg',
+    rating: 4,
+    previewImage: '../img/apartment-01.jpg',
   },
-  /*   {
-      id: '5af6f711-c28d-4121-82cd-e0b462a27f00',
-      title: 'Wood and stone place',
-      type: 'Room',
-      price: 80,
-      city: {
-        name: 'Amsterdam',
-        location: {
-          latitude: 52.35514938496378,
-          longitude: 4.673877537499948,
-          zoom: 8,
-        },
-      },
+  {
+    id: 'Hamburg-2',
+    title: 'Hamburg-2 location',
+    type: 'Room',
+    price: 5555,
+    city: {
+      name: 'Hamburg',
       location: {
-        latitude: 52.35514938496378,
-        longitude: 4.673877537499948,
-        zoom: 8,
+        latitude: 52.3609553943508,
+        longitude: 4.85309666406198,
+        zoom: 11,
       },
-      isFavorite: true,
-      isPremium: false,
-      rating: 4,
-      previewImage: 'img/room.jpg',
-    }, */
-  /*   {
-      id: '6af6f711-c28d-4121-82cd-e0b462a27f00',
-      title: 'Wood and stone place',
-      type: 'Apartment',
-      price: 180,
-      city: {
-        name: 'Cologne',
-        location: {
-          latitude: 52.35514938496378,
-          longitude: 4.673877537499948,
-          zoom: 8,
-        },
-      },
+    },
+    location: {
+      latitude: 52.3609553943508,
+      longitude: 4.85309666406198,
+      zoom: 8,
+    },
+    isFavorite: false,
+    isPremium: false,
+    rating: 4,
+    previewImage: 'img/room.jpg',
+  },
+  {
+    id: 'Hamburg-3',
+    title: 'Hamburg-3 location',
+    type: 'Apartment',
+    price: 6666,
+    city: {
+      name: 'Hamburg',
       location: {
-        latitude: 52.35514938496378,
-        longitude: 4.673877537499948,
-        zoom: 8,
+        latitude: 52.3909553943508,
+        longitude: 4.929309666406198,
+        zoom: 11,
       },
-      isFavorite: true,
-      isPremium: false,
-      rating: 5,
-      previewImage: 'img/apartment-03.jpg',
-    }, */
+    },
+    location: {
+      latitude: 52.3909553943508,
+      longitude: 4.929309666406198,
+      zoom: 8,
+    },
+    isFavorite: false,
+    isPremium: false,
+    rating: 5,
+    previewImage: 'img/apartment-02.jpg',
+  },
+  //Dusseldorf
+  {
+    id: 'Dusseldorf-1',
+    title: 'Dusseldorf-1 location',
+    type: 'Apartment',
+    price: 7777,
+    city: {
+      name: 'Dusseldorf',
+      location: {
+        latitude: 52.3909553943508,
+        longitude: 4.85309666406198,
+        zoom: 11,
+      },
+    },
+    location: {
+      latitude: 52.3909553943508,
+      longitude: 4.85309666406198,
+      zoom: 8,
+    },
+    isFavorite: false,
+    isPremium: true,
+    rating: 4,
+    previewImage: '../img/apartment-01.jpg',
+  },
+  {
+    id: 'Dusseldorf-2',
+    title: 'Dusseldorf-2 location',
+    type: 'Room',
+    price: 8888,
+    city: {
+      name: 'Dusseldorf',
+      location: {
+        latitude: 52.3609553943508,
+        longitude: 4.85309666406198,
+        zoom: 11,
+      },
+    },
+    location: {
+      latitude: 52.3609553943508,
+      longitude: 4.85309666406198,
+      zoom: 8,
+    },
+    isFavorite: false,
+    isPremium: false,
+    rating: 4,
+    previewImage: 'img/room.jpg',
+  },
+  {
+    id: 'Dusseldorf-3',
+    title: 'Dusseldorf-3 location',
+    type: 'Apartment',
+    price: 9999,
+    city: {
+      name: 'Dusseldorf',
+      location: {
+        latitude: 52.3909553943508,
+        longitude: 4.929309666406198,
+        zoom: 11,
+      },
+    },
+    location: {
+      latitude: 52.3909553943508,
+      longitude: 4.929309666406198,
+      zoom: 8,
+    },
+    isFavorite: false,
+    isPremium: false,
+    rating: 5,
+    previewImage: 'img/apartment-02.jpg',
+  },
 ];
 
 export { mockOffers };

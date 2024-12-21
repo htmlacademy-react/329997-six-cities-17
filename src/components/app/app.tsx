@@ -15,11 +15,10 @@ type AppProps = {
   userInfo: UserInfo;
   offers: Offer[];
   nearestOffers: Offer[];
-  locations: string[];
 }
 
 function App(props: AppProps): JSX.Element {
-  const { userInfo: { emailAddress, favoriteCount }, offers, nearestOffers, locations } = props;
+  const { userInfo: { emailAddress, favoriteCount }, offers, nearestOffers } = props;
   return (
     <HelmetProvider>
       <BrowserRouter>
@@ -29,7 +28,7 @@ function App(props: AppProps): JSX.Element {
             element={<Layout emailAddress={emailAddress} favoriteCount={favoriteCount} />}
           >
             <Route
-              index element={<MainPage offers={offers} locations={locations} />}
+              index element={<MainPage />}
             />
             <Route
               path={AppRoute.Favorites}
