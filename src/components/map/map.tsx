@@ -6,13 +6,13 @@ import { MAP_MARKER_CURRENT, MAP_MARKER_DEFAULT } from '../../const';
 import { City } from '../../types/city_types/city-type';
 import { Offer } from '../../types/offer-type';
 import classNames from 'classnames';
-import { offerPageType } from '../../const';
+import { OfferPageType } from '../../const';
 
 type MapProps = {
   city: City;
   offers: Offer[];
   selectedOffer?: Offer | null;
-  mapType?: offerPageType;
+  mapType?: OfferPageType;
 };
 
 const defaultMapPin = new Icon({
@@ -58,8 +58,8 @@ function Map(props: MapProps): JSX.Element {
   return (
     <section className={classNames(
       'map',
-      { 'cities__map': mapType === offerPageType.CITIES },
-      { 'offer__map': mapType === offerPageType.NEAR_PLACES })}
+      { 'cities__map': mapType === OfferPageType.CITIES },
+      { 'offer__map': mapType === OfferPageType.NEAR_PLACES })}
     ref={mapRef}
     >
     </section >

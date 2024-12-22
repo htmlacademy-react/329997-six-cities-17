@@ -5,7 +5,7 @@ import { mockReviews } from '../../mocks/reviews';
 import { Offer } from '../../types/offer-type';
 import Map from '../../components/map/map';
 import { City } from '../../types/city_types/city-type';
-import { offerPageType } from '../../const';
+import { OfferPageType } from '../../const';
 import { mockOffers } from '../../mocks/offers';
 import { mockNearestOffers } from '../../mocks/nearestOffers';
 import OfferList from '../../components/offer/offer-list';
@@ -158,12 +158,12 @@ function OfferPage(props: OfferPageProps): JSX.Element {
             </section>
           </div>
         </div>
-        <Map city={offerCity} offers={nearestOffers} mapType={offerPageType.NEAR_PLACES} selectedOffer={selectedOffer}/>
+        <Map city={offerCity} offers={nearestOffers} mapType={OfferPageType.NEAR_PLACES} selectedOffer={selectedOffer}/>
       </section>
       <div className="container">
         <section className="near-places places">
           <h2 className="near-places__title">Other places in the neighbourhood</h2>
-          <OfferList offers={nearestOffers} onOfferMouseEnter={handleOfferMouseEnter} onOfferMouseLeave={handleOfferMouseLeave} pageType={offerPageType.NEAR_PLACES}/>
+          <OfferList offers={nearestOffers} onOfferMouseEnter={handleOfferMouseEnter} onOfferMouseLeave={handleOfferMouseLeave} pageType={OfferPageType.NEAR_PLACES}/>
         </section>
       </div >
     </main >

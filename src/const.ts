@@ -49,11 +49,18 @@ export enum CommentOption {
   maxLength = 300,
 }
 
-export enum offerPageType {
+export enum OfferPageType {
   CITIES = 'cities',
   FAVORITES = 'favorites',
   NEAR_PLACES = 'near-places',
 }
+
+export const SORT_TYPE = {
+  POPULAR: 'Popular',
+  PRICE_LOW_HIGH: 'Price: low to high',
+  PRICE_HIGH_TO_LOW: 'Price: high to low',
+  TOP_RATED: 'Top rated first',
+};
 
 export const MAP_MARKER_DEFAULT = '../img/pin.svg';
 
