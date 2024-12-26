@@ -1,3 +1,4 @@
+import { SortType } from './const';
 import { CityLocation } from './types/city_types/city-location-type';
 import { City } from './types/city_types/city-type';
 import { Offer } from './types/offer-type';
@@ -47,40 +48,26 @@ const getOffersLocations = (offers: Offer[]) => {
 
 const getCurrentLocationOffers = (offers: Offer[], location: string) => offers.filter((offer) => offer.city.name === location);
 
-const getPriceCompareFunctionLowToHigh = (parameterA: Offer, parameterB: Offer) => {
-  if (parameterA.price > parameterB.price) {
-    return 1;
-  } else if (parameterB.price > parameterA.price) {
-    return -1;
-  } else {
-    return 0;
+const getPriceCompareFunctionLowToHigh = (parameterA: Offer, parameterB: Offer) => parameterA.price > parameterB.price ? 1 : -1;
+
+const getPriceCompareFunctionHighToLow = (parameterA: Offer, parameterB: Offer) => parameterA.price > parameterB.price ? -1 : 1;
+
+const getRatingCompareFunctionHighToLow = (parameterA: Offer, parameterB: Offer) => parameterA.rating > parameterB.rating ? -1 : 1;
+
+const sortOffers = (offers: Offer[], sortingType: SortType): Offer[] => {
+  switch (sortingType) {
+    case SortType.POPULAR:
+      return offers;
+    case SortType.PRICE_LOW_HIGH:
+      return [...offers].sort(getPriceCompareFunctionLowToHigh);
+    case SortType.PRICE_HIGH_TO_LOW:
+      return [...offers].sort(getPriceCompareFunctionHighToLow);
+    case SortType.TOP_RATED:
+      return [...offers].sort(getRatingCompareFunctionHighToLow);
+
+    default:
+      return offers;
   }
 };
 
-const getPriceCompareFunctionHighToLow = (parameterA: Offer, parameterB: Offer) => {
-  if (parameterA.price > parameterB.price) {
-    return -1;
-  } else if (parameterB.price > parameterA.price) {
-    return 1;
-  } else {
-    return 0;
-  }
-};
-
-const getRatingCompareFunctionHighToLow = (parameterA: Offer, parameterB: Offer) => {
-  if (parameterA.rating > parameterB.rating) {
-    return -1;
-  } else if (parameterB.rating > parameterA.rating) {
-    return 1;
-  } else {
-    return 0;
-  }
-};
-
-const sortByPriceLowToHigh = (offers: Offer[]) => [...offers].sort(getPriceCompareFunctionLowToHigh);
-
-const sortByPriceHighToLow = (offers: Offer[]) => [...offers].sort(getPriceCompareFunctionHighToLow);
-
-const sortByRatingHighToLow = (offers: Offer[]) => [...offers].sort(getRatingCompareFunctionHighToLow);
-
-export { getStarsRating, getFavoriteOffers, capitalizeFirstLetter, checkCommentInRange, getOffersLocations, convertDateToProperty, convertDateToHumanized, getCurrentLocationOffers, sortByPriceHighToLow, sortByPriceLowToHigh, sortByRatingHighToLow };
+export { getStarsRating, getFavoriteOffers, capitalizeFirstLetter, checkCommentInRange, getOffersLocations, convertDateToProperty, convertDateToHumanized, getCurrentLocationOffers, sortOffers };

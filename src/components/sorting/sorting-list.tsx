@@ -1,23 +1,21 @@
 import classNames from 'classnames';
 import { useAppSelector, useAppDispatch } from '../hooks';
 import { changeSortingState, changeSortingType } from '../../store/action';
-import { MouseEvent } from 'react';
 import SortingItem from './sorting-item';
-import { SORT_TYPE } from '../../const';
+import { SortType } from '../../const';
 
 function SortingList(): JSX.Element {
   const currentSortingState = useAppSelector((state) => state.isSortingOpened);
   const currentSorting = useAppSelector((state) => state.currentSortingType);
   const dispatch = useAppDispatch();
-  const sortingTypes = Object.values(SORT_TYPE).map((element) => element);
+  const sortingTypes = Object.values(SortType).map((element) => element);
 
   const handleSortingOpenClick = () => {
     dispatch(changeSortingState({ sortingState: true }));
   };
 
-  const handleSortingTypeClick = (evt: MouseEvent<HTMLLIElement>) => {
-    evt.preventDefault();
-    dispatch(changeSortingType({ sortingType: evt.currentTarget.innerText }));
+  const handleSortingTypeClick = (inputSorting: SortType) => {
+    dispatch(changeSortingType({sortingType: inputSorting}));
     dispatch(changeSortingState({ sortingState: false }));
   };
 

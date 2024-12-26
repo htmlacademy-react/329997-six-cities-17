@@ -1,8 +1,9 @@
 import { createReducer } from '@reduxjs/toolkit';
 import { mockOffers } from '../mocks/offers';
 import { changeCity, loadOffers, changeSortingState, changeSortingType } from './action';
-import { getCurrentLocationOffers } from '../utils';
+import { getCurrentLocationOffers, sortOffers } from '../utils';
 import { Offer } from '../types/offer-type';
+import { LOCATIONS, SortType } from '../const';
 
 
 const initialState: {
@@ -13,20 +14,19 @@ const initialState: {
   isSortingOpened: boolean;
 } =
 {
-  city: 'Paris',
+  city: LOCATIONS[0],
   offers: mockOffers,
-  currentOffers: getCurrentLocationOffers(mockOffers, 'Paris'),
-  currentSortingType: 'Popular',
+  currentOffers: getCurrentLocationOffers(mockOffers, LOCATIONS[0]),
+  currentSortingType: SortType.POPULAR,
   isSortingOpened: false,
 };
-
-//для загрузки офферов для Парижа при старте приложения я так понимаю нужно будет дернуть хранилище при инициализации? Или текущий вариант использовать можно
 
 const reducer = createReducer(initialState, (builder) => {
   builder
     .addCase(changeCity, (state, action) => {
       const { city } = action.payload;
       state.city = city;
+      state.isSortingOpened = false;
     })
     .addCase(loadOffers, (state) => {
       state.currentOffers = getCurrentLocationOffers(state.offers, state.city);
@@ -38,7 +38,9 @@ const reducer = createReducer(initialState, (builder) => {
     .addCase(changeSortingType, (state, action) => {
       const { sortingType } = action.payload;
       state.currentSortingType = sortingType;
+      state.currentOffers = sortOffers(getCurrentLocationOffers(state.offers, state.city), sortingType);
     });
 });
 
 export { reducer };
+

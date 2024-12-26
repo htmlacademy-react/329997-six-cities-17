@@ -6,6 +6,15 @@ function useMap(mapRef: MutableRefObject<HTMLElement | null>, city: City): Map |
   const [map, setMap] = useState<Map | null>(null);
   const isRendered = useRef<boolean>(false);
 
+  useEffect(()=> {
+    if (map) {
+      map.panTo({
+        lat: city.location.latitude,
+        lng: city.location.longitude,
+      });
+    }
+  }, [city, map]);
+
   useEffect(() => {
     if (mapRef.current !== null && !isRendered.current) {
       const instance = new Map(mapRef.current, {
