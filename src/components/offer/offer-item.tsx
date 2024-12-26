@@ -1,7 +1,7 @@
 import classNames from 'classnames';
 import { Link, generatePath } from 'react-router-dom';
-import { AppRoute, OfferPageType } from '../../const';
-import { getStarsRating, capitalizeFirstLetter } from '../../utils';
+import { AppRoute, OfferPageType } from '../../const/const';
+import { getStarsRating, capitalizeFirstLetter } from '../../utils/utils';
 import { Offer } from '../../types/offer-type';
 import { MouseEvent } from 'react';
 
@@ -33,7 +33,7 @@ function OfferItem(props: OfferItemProps): JSX.Element {
           <img
             className="place-card__image"
             src={previewImage}
-            width={pageType === OfferPageType.FAVORITES ? 150 : 260 }
+            width={pageType === OfferPageType.FAVORITES ? 150 : 260}
             height={pageType === OfferPageType.FAVORITES ? 110 : 200}
             alt="Place image"
           />

@@ -1,6 +1,6 @@
 import { Offer } from '../../types/offer-type';
 import OfferItem from '../offer/offer-item';
-import { OfferPageType } from '../../const';
+import { OfferPageType } from '../../const/const';
 
 type FaviroteLocationGroupItemProps = {
   offers: Offer[];

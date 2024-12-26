@@ -1,5 +1,5 @@
 import { Offer } from '../../types/offer-type';
-import { getFavoriteOffers } from '../../utils';
+import { getFavoriteOffers } from '../../utils/utils';
 import FavoriteEmpty from './favorite-empty';
 import FaviroteLocationGroupItem from './favorite-location-group-item';
 

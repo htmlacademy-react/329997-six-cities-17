@@ -6,19 +6,24 @@ import SortingList from '../../components/sorting/sorting-list';
 import { Offer } from '../../types/offer-type';
 import Map from '../../components/map/map';
 import { useAppSelector } from '../../components/hooks';
-import { LOCATIONS } from '../../const';
-import { OfferPageType } from '../../const';
+import { LOCATIONS } from '../../const/const';
+import { OfferPageType } from '../../const/const';
 import { City } from '../../types/city_types/city-type';
+import { MouseEvent } from 'react';
 
 function MainPage(): JSX.Element {
   const currentOffers = useAppSelector((state) => state.currentOffers);
   const currentCityTitle = useAppSelector((state) => state.city);
-  const currentCity: City = currentOffers[0].city; //Стоит ли делать отдельную функцию для определея города? В созданном массиве офферов город 100% одинаковый будет
+  const currentCity: City = currentOffers[0].city;
 
   const [selectedOffer, setSelectedOffer] = useState<Offer | null>(null);
 
-  const handleOfferMouseEnter = (targetedOffer: Offer) => {
-    setSelectedOffer(targetedOffer);
+  const handleOfferMouseEnter = (evt: MouseEvent<HTMLElement>) => {
+    const currentOffer = currentOffers.find((element) => element.id === evt.currentTarget.dataset.id);
+    if (!currentOffer) {
+      return;
+    }
+    setSelectedOffer(currentOffer);
   };
   const handleOfferMouseLeave = () => {
     setSelectedOffer(null);

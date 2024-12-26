@@ -1,6 +1,6 @@
 import { Route, BrowserRouter, Routes } from 'react-router-dom';
 import { HelmetProvider } from 'react-helmet-async';
-import { AppRoute, AuthorizationStatus } from '../../const';
+import { AppRoute, AuthorizationStatus } from '../../const/const';
 import { UserInfo } from '../../types/user-info-type';
 import { Offer } from '../../types/offer-type';
 import MainPage from '../../pages/main-page/main-page';
