@@ -5,7 +5,7 @@ import { mockReviews } from '../../mocks/reviews';
 import { Offer } from '../../types/offer-type';
 import Map from '../../components/map/map';
 import { City } from '../../types/city_types/city-type';
-import { OfferPageType } from '../../const';
+import { OfferPageType } from '../../const/const';
 import { mockOffers } from '../../mocks/offers';
 import { mockNearestOffers } from '../../mocks/nearestOffers';
 import OfferList from '../../components/offer/offer-list';

@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom';
 import { Helmet } from 'react-helmet-async';
 import HeaderLogo from '../../components/header/header-logo';
-import { AppRoute } from '../../const';
+import { AppRoute } from '../../const/const';
 
 function NotFoundPage(): JSX.Element {
   return (

@@ -2,7 +2,7 @@ import LocationItem from './location-item';
 import { useAppSelector, useAppDispatch } from '../hooks';
 import { MouseEvent } from 'react';
 import { changeCity, changeSortingType, loadOffers } from '../../store/action';
-import { SortType } from '../../const';
+import { SortType } from '../../const/const';
 
 type LocationListProps = {
   locations: string[];

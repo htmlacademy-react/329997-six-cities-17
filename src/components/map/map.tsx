@@ -2,11 +2,11 @@ import { useRef, useEffect } from 'react';
 import { Icon, Marker, layerGroup } from 'leaflet';
 import 'leaflet/dist/leaflet.css';
 import useMap from '../hooks/use-map';
-import { MAP_MARKER_CURRENT, MAP_MARKER_DEFAULT } from '../../const';
+import { MAP_MARKER_CURRENT, MAP_MARKER_DEFAULT } from '../../const/const';
 import { City } from '../../types/city_types/city-type';
 import { Offer } from '../../types/offer-type';
 import classNames from 'classnames';
-import { OfferPageType } from '../../const';
+import { OfferPageType } from '../../const/const';
 
 type MapProps = {
   city: City;

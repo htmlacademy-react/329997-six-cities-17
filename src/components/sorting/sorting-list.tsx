@@ -2,7 +2,7 @@ import classNames from 'classnames';
 import { useAppSelector, useAppDispatch } from '../hooks';
 import { changeSortingState, changeSortingType } from '../../store/action';
 import SortingItem from './sorting-item';
-import { SortType } from '../../const';
+import { SortType } from '../../const/const';
 
 function SortingList(): JSX.Element {
   const currentSortingState = useAppSelector((state) => state.isSortingOpened);

@@ -6,8 +6,8 @@ import SortingList from '../../components/sorting/sorting-list';
 import { Offer } from '../../types/offer-type';
 import Map from '../../components/map/map';
 import { useAppSelector } from '../../components/hooks';
-import { LOCATIONS } from '../../const';
-import { OfferPageType } from '../../const';
+import { LOCATIONS } from '../../const/const';
+import { OfferPageType } from '../../const/const';
 import { City } from '../../types/city_types/city-type';
 import { MouseEvent } from 'react';
 

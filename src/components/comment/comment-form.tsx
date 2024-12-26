@@ -1,7 +1,7 @@
 import { useState } from 'react';
-import { RATING_OPTIONS, CommentOption } from '../../const';
+import { RATING_OPTIONS, CommentOption } from '../../const/const';
 import CommentRatingButton from './comment-rating-button';
-import { checkCommentInRange } from '../../utils';
+import { checkCommentInRange } from '../../utils/utils';
 
 function CommentForm(): JSX.Element {
   const [formRating, setFormRating] = useState(0);

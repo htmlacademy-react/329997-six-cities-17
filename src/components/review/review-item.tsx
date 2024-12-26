@@ -1,6 +1,5 @@
-import { getStarsRating } from '../../utils';
+import { getStarsRating, convertDateToProperty, convertDateToHumanized } from '../../utils/utils';
 import { Review } from '../../types/review-type';
-import { convertDateToProperty, convertDateToHumanized } from '../../utils';
 
 type ReviewItemProps = {
   review: Review;

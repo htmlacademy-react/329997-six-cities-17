@@ -1,9 +1,9 @@
 import { createReducer } from '@reduxjs/toolkit';
 import { mockOffers } from '../mocks/offers';
 import { changeCity, loadOffers, changeSortingState, changeSortingType } from './action';
-import { getCurrentLocationOffers, sortOffers } from '../utils';
+import { getCurrentLocationOffers, sortOffers } from '../utils/utils';
 import { Offer } from '../types/offer-type';
-import { LOCATIONS, SortType } from '../const';
+import { LOCATIONS, SortType } from '../const/const';
 
 
 const initialState: {

@@ -1,7 +1,7 @@
-import { SortType } from './const';
-import { CityLocation } from './types/city_types/city-location-type';
-import { City } from './types/city_types/city-type';
-import { Offer } from './types/offer-type';
+import { SortType } from '../const/const';
+import { CityLocation } from '../types/city_types/city-location-type';
+import { City } from '../types/city_types/city-type';
+import { Offer } from '../types/offer-type';
 import dayjs from 'dayjs';
 
 const capitalizeFirstLetter = (inputString: string): string => inputString.charAt(0).toUpperCase() + inputString.slice(1);

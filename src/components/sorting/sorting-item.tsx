@@ -1,6 +1,6 @@
 import classNames from 'classnames';
 import { useAppSelector } from '../hooks';
-import { SortType } from '../../const';
+import { SortType } from '../../const/const';
 
 type SortingItemProps = {
   onSortingTypeChange: (inputSorting: SortType) => void;

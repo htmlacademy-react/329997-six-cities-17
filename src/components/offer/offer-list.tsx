@@ -1,6 +1,6 @@
 import OfferItem from './offer-item';
 import { Offer } from '../../types/offer-type';
-import { OfferPageType } from '../../const';
+import { OfferPageType } from '../../const/const';
 import { MouseEvent } from 'react';
 import classNames from 'classnames';
 

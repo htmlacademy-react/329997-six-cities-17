@@ -1,7 +1,7 @@
 import classNames from 'classnames';
 import { Link, generatePath } from 'react-router-dom';
-import { AppRoute, OfferPageType } from '../../const';
-import { getStarsRating, capitalizeFirstLetter } from '../../utils';
+import { AppRoute, OfferPageType } from '../../const/const';
+import { getStarsRating, capitalizeFirstLetter } from '../../utils/utils';
 import { Offer } from '../../types/offer-type';
 import { MouseEvent } from 'react';
 
