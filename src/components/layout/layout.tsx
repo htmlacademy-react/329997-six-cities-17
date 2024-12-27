@@ -1,7 +1,7 @@
 import { Outlet, useLocation } from 'react-router-dom';
 import classNames from 'classnames';
 import { AppRoute } from '../../const/const';
-import { UserInfo } from '../../types/user-info-type';
+import { UserInfo } from '../../types/user-data-type';
 import HeaderLogo from '../header/header-logo';
 import HeaderNav from '../header/header-nav';
 

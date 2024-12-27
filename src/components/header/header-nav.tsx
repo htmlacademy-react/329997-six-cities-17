@@ -1,4 +1,4 @@
-import { UserInfo } from '../../types/user-info-type';
+import { UserInfo } from '../../types/user-data-type';
 
 function HeaderNav(props: UserInfo): JSX.Element {
   const { emailAddress, favoriteCount } = props;

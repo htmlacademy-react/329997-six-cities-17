@@ -1,9 +1,9 @@
 import { createReducer } from '@reduxjs/toolkit';
-import { mockOffers } from '../mocks/offers';
-import { changeCity, loadOffers, changeSortingState, changeSortingType } from './action';
+import { changeCity, loadOffers, changeSortingState, changeSortingType, requireAuthorization, setError } from './action';
 import { getCurrentLocationOffers, sortOffers } from '../utils/utils';
 import { Offer } from '../types/offer-type';
 import { LOCATIONS, SortType } from '../const/const';
+import { AuthorizationStatus } from '../const/const';
 
 
 const initialState: {
@@ -12,13 +12,17 @@ const initialState: {
   currentOffers: Offer[];
   currentSortingType: string;
   isSortingOpened: boolean;
+  authorizationStatus: AuthorizationStatus;
+  error: string | null;
 } =
 {
   city: LOCATIONS[0],
-  offers: mockOffers,
-  currentOffers: getCurrentLocationOffers(mockOffers, LOCATIONS[0]),
+  offers: [],
+  currentOffers: [],
   currentSortingType: SortType.POPULAR,
   isSortingOpened: false,
+  authorizationStatus: AuthorizationStatus.Unknown,
+  error: null,
 };
 
 const reducer = createReducer(initialState, (builder) => {
@@ -28,7 +32,8 @@ const reducer = createReducer(initialState, (builder) => {
       state.city = city;
       state.isSortingOpened = false;
     })
-    .addCase(loadOffers, (state) => {
+    .addCase(loadOffers, (state, action) => {
+      state.offers = action.payload;
       state.currentOffers = getCurrentLocationOffers(state.offers, state.city);
     })
     .addCase(changeSortingState, (state, action) => {
@@ -36,9 +41,14 @@ const reducer = createReducer(initialState, (builder) => {
       state.isSortingOpened = sortingState;
     })
     .addCase(changeSortingType, (state, action) => {
-      const { sortingType } = action.payload;
-      state.currentSortingType = sortingType;
-      state.currentOffers = sortOffers(getCurrentLocationOffers(state.offers, state.city), sortingType);
+      state.currentSortingType = action.payload;
+      state.currentOffers = sortOffers(getCurrentLocationOffers(state.offers, state.city), action.payload);
+    })
+    .addCase(requireAuthorization, (state, action) => {
+      state.authorizationStatus = action.payload;
+    })
+    .addCase(setError, (state, action) => {
+      state.error = action.payload;
     });
 });
 
