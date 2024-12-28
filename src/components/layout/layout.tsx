@@ -1,12 +1,10 @@
 import { Outlet, useLocation } from 'react-router-dom';
 import classNames from 'classnames';
 import { AppRoute } from '../../const/const';
-import { UserInfo } from '../../types/user-data-type';
 import HeaderLogo from '../header/header-logo';
 import HeaderNav from '../header/header-nav';
 
-function Layout(props: UserInfo): JSX.Element {
-  const { emailAddress, favoriteCount } = props;
+function Layout(): JSX.Element {
   const appPath = useLocation().pathname as AppRoute;
   const isPageGray = (appPath === AppRoute.Main || appPath === AppRoute.Login);
   const isPageMain = (appPath === AppRoute.Main);
@@ -28,7 +26,7 @@ function Layout(props: UserInfo): JSX.Element {
             <div className="header__left">
               <HeaderLogo />
             </div>
-            {isPageLogin || <HeaderNav emailAddress={emailAddress} favoriteCount={favoriteCount} />}
+            {isPageLogin || <HeaderNav />}
           </div>
         </div>
       </header>
