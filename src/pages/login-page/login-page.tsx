@@ -14,7 +14,6 @@ function LoginPage(): JSX.Element {
   const navigate = useNavigate();
 
   const handleSubmit = (evt: FormEvent<HTMLFormElement>) => {
-    console.log('submitted');
     evt.preventDefault();
 
     if (loginRef.current !== null && passwordRef.current !== null) {

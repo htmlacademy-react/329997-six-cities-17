@@ -10,3 +10,4 @@ export const changeSortingType = createAction<SortType>('common/setSortingType')
 export const requireAuthorization = createAction<AuthorizationStatus>('user/requireAuthorization');
 export const setError = createAction<string | null>('common/setError');
 export const setLoadingStatus = createAction<boolean>('common/setLoadingStatus');
+export const setUserName = createAction<string>('user/setUserName');
