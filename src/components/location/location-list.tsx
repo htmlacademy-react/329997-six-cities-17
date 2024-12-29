@@ -1,7 +1,7 @@
 import LocationItem from './location-item';
 import { useAppSelector, useAppDispatch } from '../hooks';
 import { MouseEvent } from 'react';
-import { changeCity, changeSortingType, loadOffers } from '../../store/action';
+import { changeCity, changeSortingType } from '../../store/action';
 import { SortType } from '../../const/const';
 
 type LocationListProps = {
@@ -14,9 +14,8 @@ function LocationList(props: LocationListProps): JSX.Element {
   const dispatch = useAppDispatch();
 
   const handleCityChange = (evt: MouseEvent<HTMLAnchorElement>) => {
-    dispatch(changeCity({city: evt.currentTarget.text}));
-    dispatch(loadOffers());
-    dispatch(changeSortingType({sortingType: SortType.POPULAR}));
+    dispatch(changeCity({ city: evt.currentTarget.text }));
+    dispatch(changeSortingType(SortType.POPULAR));
   };
   return (
     <div>
@@ -25,7 +24,7 @@ function LocationList(props: LocationListProps): JSX.Element {
         <section className="locations container">
           <ul className="locations__list tabs__list">
             {locations.map((element) =>
-              (<LocationItem key={element} title={element} selectedCity={currentCity} onCityChange={handleCityChange}/>))}
+              (<LocationItem key={element} title={element} selectedCity={currentCity} onCityChange={handleCityChange} />))}
           </ul>
         </section>
       </div>
