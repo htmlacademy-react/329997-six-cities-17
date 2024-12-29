@@ -15,7 +15,7 @@ function SortingList(): JSX.Element {
   };
 
   const handleSortingTypeClick = (inputSorting: SortType) => {
-    dispatch(changeSortingType({sortingType: inputSorting}));
+    dispatch(changeSortingType(inputSorting));
     dispatch(changeSortingState({ sortingState: false }));
   };
 

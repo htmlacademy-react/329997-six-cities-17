@@ -38,6 +38,14 @@ export enum AppRoute {
   NotFound = '*',
 }
 
+export enum APIRoute {
+  Offers = '/offers',
+  Favorite = '/favorite',
+  Comments = '/comments',
+  Login = '/login',
+  Logout = '/logout',
+}
+
 export enum AuthorizationStatus {
   Auth = 'AUTH',
   NoAuth = 'NO_AUTH',
@@ -65,3 +73,5 @@ export enum SortType {
 export const MAP_MARKER_DEFAULT = '../img/pin.svg';
 
 export const MAP_MARKER_CURRENT = '../img/pin-active.svg';
+
+export const TIMEOUT_SHOW_ERROR = 2000;

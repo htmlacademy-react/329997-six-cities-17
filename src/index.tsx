@@ -1,11 +1,13 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import App from './components/app/app';
-import { mockOffers } from './mocks/offers';
-import { mockUser } from './mocks/user';
-import { mockNearestOffers } from './mocks/nearestOffers';
 import { Provider } from 'react-redux';
 import { store } from './store';
+import ErrorMessage from './components/error-message/error-message';
+import { checkAuthAction, fetchOffersAction } from './store/api-action';
+
+store.dispatch(fetchOffersAction());
+store.dispatch(checkAuthAction());
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
@@ -14,11 +16,8 @@ const root = ReactDOM.createRoot(
 root.render(
   <React.StrictMode>
     <Provider store={store}>
-      <App
-        userInfo={mockUser}
-        offers={mockOffers}
-        nearestOffers={mockNearestOffers}
-      />
+      <ErrorMessage />
+      <App />
     </Provider>
   </React.StrictMode>,
 );

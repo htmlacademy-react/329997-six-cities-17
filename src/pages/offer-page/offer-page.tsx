@@ -1,23 +1,17 @@
 import { Helmet } from 'react-helmet-async';
 import CommentForm from '../../components/comment/comment-form';
 import ReviewList from '../../components/review/review-list';
-import { mockReviews } from '../../mocks/reviews';
-import { Offer } from '../../types/offer-type';
 import Map from '../../components/map/map';
 import { City } from '../../types/city_types/city-type';
 import { OfferPageType } from '../../const/const';
-import { mockOffers } from '../../mocks/offers';
-import { mockNearestOffers } from '../../mocks/nearestOffers';
 import OfferList from '../../components/offer/offer-list';
+import { useAppSelector } from '../../components/hooks';
 
-type OfferPageProps = {
-  offer: Offer;
-  nearestOffers: Offer[];
-}
+function OfferPage(): JSX.Element {
 
-function OfferPage(props: OfferPageProps): JSX.Element {
-  const { offer = mockOffers[0], nearestOffers = mockNearestOffers } = props;
-  const offerCity: City = offer.city;
+  const openedOffer = useAppSelector((state) => state.offers[0]);
+  const offerCity: City = openedOffer.city;
+
 
   return (
     <main className="page__main page__main--offer">
@@ -143,17 +137,17 @@ function OfferPage(props: OfferPageProps): JSX.Element {
               </div>
             </div>
             <section className="offer__reviews reviews">
-              <ReviewList reviews={mockReviews} />
+              <ReviewList reviews={[]} />
               <CommentForm />
             </section>
           </div>
         </div>
-        <Map city={offerCity} offers={nearestOffers} mapType={OfferPageType.NEAR_PLACES} />
+        <Map city={offerCity} offers={[]} mapType={OfferPageType.NEAR_PLACES} />
       </section>
       <div className="container">
         <section className="near-places places">
           <h2 className="near-places__title">Other places in the neighbourhood</h2>
-          <OfferList offers={nearestOffers} pageType={OfferPageType.NEAR_PLACES} />
+          <OfferList offers={[]} pageType={OfferPageType.NEAR_PLACES} />
         </section>
       </div >
     </main >

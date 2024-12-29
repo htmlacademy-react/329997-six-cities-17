@@ -1,14 +1,12 @@
 import { Helmet } from 'react-helmet-async';
 import Footer from '../../components/footer/footer';
-import { Offer } from '../../types/offer-type';
 import FavoriteList from '../../components/favorite/favorite-list';
+import { useAppSelector } from '../../components/hooks';
 
-type FavoritePageProp = {
-  offers: Offer[];
-}
 
-function FavoritePage(props: FavoritePageProp): JSX.Element {
-  const { offers } = props;
+function FavoritePage(): JSX.Element {
+
+  const favoriteOffers = useAppSelector((state) => state.favoriteOffers);
 
   return (
     <main className="page__main page__main--favorites">
@@ -18,7 +16,7 @@ function FavoritePage(props: FavoritePageProp): JSX.Element {
       <div className="page__favorites-container container">
         <section className="favorites">
           <h1 className="favorites__title">Saved listing</h1>
-          <FavoriteList offers={offers} />
+          <FavoriteList offers={favoriteOffers} />
         </section>
       </div>
       <Footer />
