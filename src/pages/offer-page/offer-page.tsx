@@ -3,14 +3,31 @@ import CommentForm from '../../components/comment/comment-form';
 import ReviewList from '../../components/review/review-list';
 import Map from '../../components/map/map';
 import { City } from '../../types/city_types/city-type';
-import { OfferPageType } from '../../const/const';
+import { OfferPageType, NEAR_PACES_COUNT } from '../../const/const';
 import OfferList from '../../components/offer/offer-list';
 import { useAppSelector } from '../../components/hooks';
+import { useParams } from 'react-router-dom';
+import { useEffect } from 'react';
+import { fetchOfferExtendedAction } from '../../store/api-action';
+import { useAppDispatch } from '../../components/hooks';
 
 function OfferPage(): JSX.Element {
 
-  const openedOffer = useAppSelector((state) => state.offers[0]);
-  const offerCity: City = openedOffer.city;
+  const currentOffer = useAppSelector((state) => state.currentOfferExtended);
+
+  const dispatch = useAppDispatch();
+
+  //const offerCity: City = openedOffer.city;
+
+  const { id } = useParams<{
+    id: string;
+  }>();
+
+  useEffect(() => {
+    if (id && currentOffer === null) {
+      dispatch(fetchOfferExtendedAction(id));
+    }
+  }, [id, currentOffer, dispatch]);
 
 
   return (
@@ -19,6 +36,8 @@ function OfferPage(): JSX.Element {
         <title>6 cities. Предложение</title>
       </Helmet>
       <section className="offer">
+
+        #OfferExtendedGallery
         <div className="offer__gallery-container container">
           <div className="offer__gallery">
             <div className="offer__image-wrapper">
@@ -41,8 +60,12 @@ function OfferPage(): JSX.Element {
             </div>
           </div>
         </div>
+
+
         <div className="offer__container container">
           <div className="offer__wrapper">
+
+            #OfferExtendedInfo
             <div className="offer__mark">
               <span>Premium</span>
             </div>
@@ -79,6 +102,8 @@ function OfferPage(): JSX.Element {
               <b className="offer__price-value">&euro;120</b>
               <span className="offer__price-text">&nbsp;night</span>
             </div>
+
+            #OfferExtendedFacilities
             <div className="offer__inside">
               <h2 className="offer__inside-title">What&apos;s inside</h2>
               <ul className="offer__inside-list">
@@ -114,6 +139,8 @@ function OfferPage(): JSX.Element {
                 </li>
               </ul>
             </div>
+
+            #OfferExtendeHost
             <div className="offer__host">
               <h2 className="offer__host-title">Meet the host</h2>
               <div className="offer__host-user user">
@@ -136,13 +163,15 @@ function OfferPage(): JSX.Element {
                 </p>
               </div>
             </div>
+
+            #OfferExtendedReviews
             <section className="offer__reviews reviews">
               <ReviewList reviews={[]} />
               <CommentForm />
             </section>
           </div>
         </div>
-        <Map city={offerCity} offers={[]} mapType={OfferPageType.NEAR_PLACES} />
+        {/*<Map city={offerCity} offers={[]} mapType={OfferPageType.NEAR_PLACES} /> */}
       </section>
       <div className="container">
         <section className="near-places places">

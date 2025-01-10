@@ -24,7 +24,7 @@ function HeaderNav(): JSX.Element {
             className="header__nav-link header__nav-link--profile"
             to={AppRoute.Favorites}
           >
-            <div className="header__avatar-wrapper user__avatar-wrapper" style={{backgroundImage: `url(${user?.avatarUrl})`}}>
+            <div className="header__avatar-wrapper user__avatar-wrapper" style={{backgroundImage: `url(${user?.avatarUrl})`, borderRadius: '10px'}}>
             </div>
 
             {!user && <span className="header__login">Sign in</span>}

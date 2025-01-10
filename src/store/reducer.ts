@@ -1,15 +1,19 @@
 import { createReducer } from '@reduxjs/toolkit';
-import { changeCity, loadOffers, changeSortingState, changeSortingType, requireAuthorization, setError, setLoadingStatus, setUserData } from './action';
+import { changeCity, loadOffers, changeSortingState, changeSortingType, requireAuthorization, setError, setLoadingStatus, setUserData, loadOfferExtended, loadOffersNearby } from './action';
 import { getCurrentLocationOffers, sortOffers } from '../utils/utils';
 import { Offer } from '../types/offer-type';
 import { LOCATIONS, SortType } from '../const/const';
 import { AuthorizationStatus } from '../const/const';
 import { UserData } from '../types/user-data-type';
+import { OfferExtended } from '../types/offer-extended-type';
+import { OfferNearby } from '../types/offer-nearby-type';
 
 
 const initialState: {
   city: string;
   offers: Offer[];
+  currentOfferExtended: OfferExtended | null;
+  currentOffersNearby: OfferNearby[] | null;
   favoriteOffers: Offer[];
   currentOffers: Offer[];
   currentSortingType: string;
@@ -22,6 +26,8 @@ const initialState: {
 {
   city: LOCATIONS[0],
   offers: [],
+  currentOfferExtended: null,
+  currentOffersNearby: null,
   favoriteOffers: [],
   currentOffers: [],
   currentSortingType: SortType.POPULAR,
@@ -43,6 +49,12 @@ const reducer = createReducer(initialState, (builder) => {
     .addCase(loadOffers, (state, action) => {
       state.offers = action.payload;
       state.currentOffers = getCurrentLocationOffers(state.offers, state.city);
+    })
+    .addCase(loadOfferExtended, (state, action) => {
+      state.currentOfferExtended = action.payload;
+    })
+    .addCase(loadOffersNearby, (state, action) => {
+      state.currentOffersNearby = action.payload;
     })
     .addCase(changeSortingState, (state, action) => {
       const { sortingState } = action.payload;
