@@ -1,5 +1,5 @@
 import { createReducer } from '@reduxjs/toolkit';
-import { changeCity, loadOffers, changeSortingState, changeSortingType, requireAuthorization, setError, setLoadingStatus } from './action';
+import { changeCity, loadOffers, changeSortingState, changeSortingType, requireAuthorization, setError, setLoadingStatus, setUserData } from './action';
 import { getCurrentLocationOffers, sortOffers } from '../utils/utils';
 import { Offer } from '../types/offer-type';
 import { LOCATIONS, SortType } from '../const/const';
@@ -15,7 +15,7 @@ const initialState: {
   currentSortingType: string;
   isSortingOpened: boolean;
   authorizationStatus: AuthorizationStatus;
-  error: string | null;
+  error: string;
   isLoading: boolean;
   user: UserData | null;
 } =
@@ -27,7 +27,7 @@ const initialState: {
   currentSortingType: SortType.POPULAR,
   isSortingOpened: false,
   authorizationStatus: AuthorizationStatus.Unknown,
-  error: null,
+  error: '',
   isLoading: false,
   user: null,
 };
@@ -60,6 +60,9 @@ const reducer = createReducer(initialState, (builder) => {
     })
     .addCase(setLoadingStatus, (state, action) => {
       state.isLoading = action.payload;
+    })
+    .addCase(setUserData, (state, action) => {
+      state.user = action.payload;
     });
 });
 

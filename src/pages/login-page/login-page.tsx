@@ -2,6 +2,8 @@ import { Helmet } from 'react-helmet-async';
 import { useRef, FormEvent } from 'react';
 import { useAppDispatch } from '../../components/hooks';
 import { loginAction } from '../../store/api-action';
+import { useNavigate } from 'react-router-dom';
+import { AppRoute } from '../../const/const';
 
 function LoginPage(): JSX.Element {
 
@@ -9,6 +11,7 @@ function LoginPage(): JSX.Element {
   const passwordRef = useRef<HTMLInputElement | null>(null);
 
   const dispatch = useAppDispatch();
+  const navigate = useNavigate();
 
   const handleSubmit = (evt: FormEvent<HTMLFormElement>) => {
     evt.preventDefault();
@@ -17,7 +20,12 @@ function LoginPage(): JSX.Element {
       dispatch(loginAction({
         login: loginRef.current.value,
         password: passwordRef.current.value
-      }));
+      }))
+        .then((response) => {
+          if (response.meta.requestStatus === 'fulfilled') {
+            navigate(AppRoute.Main);
+          }
+        });
     }
   };
 
@@ -53,6 +61,8 @@ function LoginPage(): JSX.Element {
                 type="password"
                 name="password"
                 placeholder="Password"
+                pattern='^.*(?=.*[a-zA-Z])(?=.*\d).*$'
+                title='Пароль должен содержать как минимум одну букву и одну цифру!'
                 required
               />
             </div>

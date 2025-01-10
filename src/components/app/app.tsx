@@ -34,7 +34,7 @@ function App(): JSX.Element {
             <Route
               path={AppRoute.Favorites}
               element={
-                <PrivateRoute>
+                <PrivateRoute navigateTo={AppRoute.Login} authorizationStatus={AuthorizationStatus.Auth}>
                   <FavoritesPage />
                 </PrivateRoute>
               }
@@ -45,7 +45,11 @@ function App(): JSX.Element {
             />
             <Route
               path={AppRoute.Login}
-              element={<LoginPage />}
+              element={
+                <PrivateRoute navigateTo={AppRoute.Main} authorizationStatus={AuthorizationStatus.NoAuth}>
+                  <LoginPage />
+                </PrivateRoute>
+              } //можно ли таким способом использовать PrivateRoute для выполнения требования ТЗ? редирект на главную страницу для авторизованного пользователя
             />
           </Route>
           <Route
