@@ -1,17 +1,40 @@
-import { useState } from 'react';
+import { ChangeEvent, useState } from 'react';
 import { RATING_OPTIONS, CommentOption } from '../../const/const';
 import CommentRatingButton from './comment-rating-button';
 import { checkCommentInRange } from '../../utils/utils';
+import { useAppDispatch } from '../hooks';
+import { submitCommentAction } from '../../store/api-action';
 
-function CommentForm(): JSX.Element {
+type CommentFormProps = {
+  id: string;
+}
+
+function CommentForm(props: CommentFormProps): JSX.Element {
+  const { id } = props;
+  const dispatch = useAppDispatch();
+
   const [formRating, setFormRating] = useState(0);
   const [formComment, setFormComment] = useState('');
 
-  const handleRatingChange = (rating: number): void => setFormRating(rating);
-  const handleCommentChange = (comment: string): void => setFormComment(comment);
+  const comment = formComment;
+  const rating = formRating;
+
+  const handleRatingChange = (value: number): void => setFormRating(value);
+
+  const handleCommentChange = (text: string): void => setFormComment(text);
+
+  const handleFormSubmit = (evt: ChangeEvent<HTMLFormElement>) => {
+    evt.preventDefault();
+    dispatch(submitCommentAction({ comment, rating, id }));
+    setFormRating(0);
+    setFormComment('');
+  };
 
   return (
-    <form className="reviews__form form">
+    <form
+      className="reviews__form form"
+      onSubmit={handleFormSubmit}
+    >
       <label className="reviews__label form__label" htmlFor="review">Your review</label>
       <div className="reviews__rating-form form__rating">
 

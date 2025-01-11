@@ -90,3 +90,40 @@ export enum FetchStatus {
   Loaded = 'loaded',
   Error = 'error',
 }
+
+export const BLANK_OFFER_EXTENDED = {
+  id: '',
+  title: '',
+  description: '',
+  type: '',
+  price: 0,
+  images: [
+    '',
+  ],
+  city: {
+    name: '',
+    location: {
+      latitude: 0,
+      longitude: 0,
+      zoom: 0,
+    }
+  },
+  location: {
+    latitude: 0,
+    longitude: 0,
+    zoom: 0,
+  },
+  goods: [
+    '',
+  ],
+  host: {
+    isPro: false,
+    name: '',
+    avatarUrl: '',
+  },
+  isPremium: false,
+  isFavorite: false,
+  rating: 0,
+  bedrooms: 0,
+  maxAdults: 0,
+};

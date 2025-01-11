@@ -14,7 +14,7 @@ import OfferExtendedInfo from '../../components/offer-extended/offer-extended-in
 import OfferExtendedFacilities from '../../components/offer-extended/offer-extended-facilities';
 import OfferExtendedHost from '../../components/offer-extended/offer-extended-host';
 import { getAuthorizationStatus, getOfferExtended, getOfferExtendedComments, getOfferExtendedState, getOffersNearby } from '../../store/selectors';
-import useScrollToTop from '../../components/hooks/use-sctroll-to-top';
+import useScrollToTop from '../../components/hooks/sctroll-to-top';
 import Loading from '../../components/loading/loading';
 
 function OfferPage(): JSX.Element {
@@ -28,15 +28,15 @@ function OfferPage(): JSX.Element {
 
   const dispatch = useAppDispatch();
 
-  const { id } = useParams<{id: string}>();
+  const { id } = useParams();
 
   useEffect(() => {
-    if (id && (currentOffer === null || currentOffer.id !== id)) {
+    if (id && currentOffer.id !== id) {
       dispatch(fetchOfferExtendedAction(id));
       dispatch(fetchOfferExtendedCommentsAction(id));
       dispatch(fetchOffersNearbyAction(id));
     }
-  }, [id, currentOffer, dispatch]);
+  }, [id, currentOffer.id, dispatch]);
 
   if (currentOfferState === FetchStatus.Loading) {
     return <Loading />;
@@ -52,25 +52,25 @@ function OfferPage(): JSX.Element {
       </Helmet>
       <section className="offer">
 
-        {currentOffer && <OfferExtendedGallery images={currentOffer.images} />} {/* по-моему я как-то не так борюсь с null? */}
+        <OfferExtendedGallery images={currentOffer.images} />
 
         <div className="offer__container container">
           <div className="offer__wrapper">
 
-            {currentOffer && <OfferExtendedInfo offer={currentOffer} />} {/* по-моему я как-то не так борюсь с null? */}
+            <OfferExtendedInfo offer={currentOffer} />
 
-            {currentOffer && <OfferExtendedFacilities goods={currentOffer.goods} />} {/* по-моему я как-то не так борюсь с null? */}
+            <OfferExtendedFacilities goods={currentOffer.goods} />
 
-            {currentOffer && <OfferExtendedHost offer={currentOffer} />} {/* по-моему я как-то не так борюсь с null? */}
+            <OfferExtendedHost offer={currentOffer} />
 
             <section className="offer__reviews reviews">
-              {currentOffer && <ReviewList offerComments={currentOfferComments} />} {/* по-моему я как-то не так борюсь с null? */}
+              <ReviewList offerComments={currentOfferComments} />
               {isAuth &&
-                <CommentForm />}
+                <CommentForm id={id} />} {/*как побороть undefined? */}
             </section>
           </div>
         </div>
-        {currentOffer && <Map city={currentOffer.city} offers={offersNearby} mapType={OfferPageType.NEAR_PLACES} offerExtended={currentOffer} />} {/* по-моему я как-то не так борюсь с null? */}
+        <Map city={currentOffer.city} offers={offersNearby} mapType={OfferPageType.NEAR_PLACES} offerExtended={currentOffer} />
       </section>
       <div className="container">
         <section className="near-places places">

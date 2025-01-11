@@ -2,7 +2,7 @@ import { createReducer } from '@reduxjs/toolkit';
 import { changeCity, changeSortingState, changeSortingType } from './action';
 import { getCurrentLocationOffers, sortOffers } from '../utils/utils';
 import { Offer } from '../types/offer-type';
-import { LOCATIONS, SortType, AuthorizationStatus, FetchStatus } from '../const/const';
+import { LOCATIONS, SortType, AuthorizationStatus, FetchStatus, BLANK_OFFER_EXTENDED } from '../const/const';
 import { UserData } from '../types/user-data-type';
 import { OfferExtended } from '../types/offer-extended-type';
 import { OfferComment } from '../types/offer-comment-type';
@@ -19,13 +19,13 @@ const initialState: {
   offers: Offer[];
   offersState: FetchStatus;
 
-  currentOfferExtended: OfferExtended | null;
+  currentOfferExtended: OfferExtended;
   currentOfferExtendedState: FetchStatus;
 
-  currentOfferExtendedComments: OfferComment[] | null;
+  currentOfferExtendedComments: OfferComment[];
   currentOfferExtendedCommentsState: FetchStatus;
 
-  currentOffersNearby: Offer[] | null;
+  currentOffersNearby: Offer[];
   currentOffersNearbyState: FetchStatus;
 
   favoriteOffers: Offer[];
@@ -45,13 +45,13 @@ const initialState: {
   offers: [],
   offersState: FetchStatus.Unknown,
 
-  currentOfferExtended: null,
+  currentOfferExtended: BLANK_OFFER_EXTENDED,
   currentOfferExtendedState: FetchStatus.Unknown,
 
-  currentOfferExtendedComments: null,
+  currentOfferExtendedComments: [],
   currentOfferExtendedCommentsState: FetchStatus.Unknown,
 
-  currentOffersNearby: null,
+  currentOffersNearby: [],
   currentOffersNearbyState: FetchStatus.Unknown,
 
   authorizationStatus: AuthorizationStatus.Unknown,

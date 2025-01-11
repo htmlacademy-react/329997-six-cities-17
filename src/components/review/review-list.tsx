@@ -5,7 +5,7 @@ import { sortComments } from '../../utils/utils';
 
 
 type ReviewListProps = {
-  offerComments: OfferComment[] | null;
+  offerComments: OfferComment[];
 }
 function ReviewList(props: ReviewListProps): JSX.Element {
   const { offerComments } = props;
@@ -16,7 +16,7 @@ function ReviewList(props: ReviewListProps): JSX.Element {
     <>
       <h2 className="reviews__title">Reviews &middot; <span className="reviews__amount">{offerComments?.length}</span></h2>
       <ul className="reviews__list">
-        {offersCommentsShown && offersCommentsShown.map((element) => (
+        {offersCommentsShown.map((element) => (
           <ReviewItem
             key={element.id}
             offerComment={element}
