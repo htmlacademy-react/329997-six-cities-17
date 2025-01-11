@@ -2,10 +2,10 @@ import { Helmet } from 'react-helmet-async';
 import CommentForm from '../../components/comment/comment-form';
 import ReviewList from '../../components/review/review-list';
 import Map from '../../components/map/map';
-import { OfferPageType, AuthorizationStatus, NEAR_PACES_COUNT } from '../../const/const';
+import { OfferPageType, AuthorizationStatus, NEAR_PACES_COUNT, FetchStatus, AppRoute } from '../../const/const';
 import OfferList from '../../components/offer/offer-list';
 import { useAppSelector } from '../../components/hooks';
-import { useParams } from 'react-router-dom';
+import { Navigate, useParams } from 'react-router-dom';
 import { useEffect } from 'react';
 import { fetchOfferExtendedAction, fetchOfferExtendedCommentsAction, fetchOffersNearbyAction } from '../../store/api-action';
 import { useAppDispatch } from '../../components/hooks';
@@ -13,11 +13,14 @@ import OfferExtendedGallery from '../../components/offer-extended/offer-extended
 import OfferExtendedInfo from '../../components/offer-extended/offer-extended-info';
 import OfferExtendedFacilities from '../../components/offer-extended/offer-extended-facilities';
 import OfferExtendedHost from '../../components/offer-extended/offer-extended-host';
-import { getAuthorizationStatus, getOfferExtended, getOfferExtendedComments, getOffersNearby } from '../../store/selectors';
+import { getAuthorizationStatus, getOfferExtended, getOfferExtendedComments, getOfferExtendedState, getOffersNearby } from '../../store/selectors';
+import useScrollToTop from '../../components/hooks/use-sctroll-to-top';
+import Loading from '../../components/loading/loading';
 
 function OfferPage(): JSX.Element {
-
+  useScrollToTop();
   const currentOffer = useAppSelector(getOfferExtended);
+  const currentOfferState = useAppSelector(getOfferExtendedState);
   const currentOfferComments = useAppSelector(getOfferExtendedComments);
   const currentOfferNearby = useAppSelector(getOffersNearby);
   const offersNearby = currentOfferNearby && currentOfferNearby.slice(0, NEAR_PACES_COUNT);
@@ -25,9 +28,7 @@ function OfferPage(): JSX.Element {
 
   const dispatch = useAppDispatch();
 
-  const { id } = useParams<{
-    id: string;
-  }>();
+  const { id } = useParams<{id: string}>();
 
   useEffect(() => {
     if (id && (currentOffer === null || currentOffer.id !== id)) {
@@ -36,6 +37,13 @@ function OfferPage(): JSX.Element {
       dispatch(fetchOffersNearbyAction(id));
     }
   }, [id, currentOffer, dispatch]);
+
+  if (currentOfferState === FetchStatus.Loading) {
+    return <Loading />;
+  }
+  if (currentOfferState === FetchStatus.Error) {
+    return <Navigate to={AppRoute.NotFound} />;
+  }
 
   return (
     <main className="page__main page__main--offer">

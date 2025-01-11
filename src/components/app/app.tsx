@@ -1,6 +1,6 @@
 import { Route, BrowserRouter, Routes } from 'react-router-dom';
 import { HelmetProvider } from 'react-helmet-async';
-import { AppRoute, AuthorizationStatus } from '../../const/const';
+import { AppRoute, AuthorizationStatus, FetchStatus } from '../../const/const';
 import MainPage from '../../pages/main-page/main-page';
 import FavoritesPage from '../../pages/favorite-page/favorite-page';
 import LoginPage from '../../pages/login-page/login-page';
@@ -16,10 +16,8 @@ function App(): JSX.Element {
   const authorizationStatus = useAppSelector(getAuthorizationStatus);
   const offersLoadingState = useAppSelector(getOffersState);
 
-  if (authorizationStatus === AuthorizationStatus.Unknown || offersLoadingState === 'loading') {
-    return (
-      <Loading />
-    );
+  if (authorizationStatus === AuthorizationStatus.Unknown || offersLoadingState === FetchStatus.Loading) {
+    return <Loading />;
   }
   return (
     <HelmetProvider>

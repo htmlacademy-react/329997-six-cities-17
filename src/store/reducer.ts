@@ -12,37 +12,35 @@ import { toast } from 'react-toastify';
 
 const initialState: {
   city: string;
-  offers: Offer[];
-  offersState: string;
+  currentOffers: Offer[];
   currentSortingType: string;
   isSortingOpened: boolean;
-  error: string;
+
+  offers: Offer[];
+  offersState: FetchStatus;
 
   currentOfferExtended: OfferExtended | null;
-  currentOfferExtendedState: string;
+  currentOfferExtendedState: FetchStatus;
 
   currentOfferExtendedComments: OfferComment[] | null;
-  currentOfferExtendedCommentsState: string;
+  currentOfferExtendedCommentsState: FetchStatus;
 
   currentOffersNearby: Offer[] | null;
-  currentOffersNearbyState: string;
+  currentOffersNearbyState: FetchStatus;
 
   favoriteOffers: Offer[];
-  favoriteOffersState: string;
-
-  currentOffers: Offer[];
+  favoriteOffersState: FetchStatus;
 
   authorizationStatus: AuthorizationStatus;
 
   user: UserData | null;
-  userState: string;
+  userState: FetchStatus;
 } =
 {
   city: LOCATIONS[0],
   currentOffers: [],
   currentSortingType: SortType.POPULAR,
   isSortingOpened: false,
-  error: '',
 
   offers: [],
   offersState: FetchStatus.Unknown,
