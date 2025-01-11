@@ -1,6 +1,7 @@
 import { SortType } from '../const/const';
 import { CityLocation } from '../types/city_types/city-location-type';
 import { City } from '../types/city_types/city-type';
+import { OfferComment } from '../types/offer-comment-type';
 import { Offer } from '../types/offer-type';
 import dayjs from 'dayjs';
 
@@ -54,6 +55,8 @@ const getPriceCompareFunctionHighToLow = (parameterA: Offer, parameterB: Offer) 
 
 const getRatingCompareFunctionHighToLow = (parameterA: Offer, parameterB: Offer) => parameterA.rating > parameterB.rating ? -1 : 1;
 
+const getDateCompareFunctionNewToOld = (parameterA: OfferComment, parameterB: OfferComment) => parameterA.date > parameterB.date ? -1 : 1;
+
 const sortOffers = (offers: Offer[], sortingType: SortType): Offer[] => {
   switch (sortingType) {
     case SortType.POPULAR:
@@ -70,4 +73,6 @@ const sortOffers = (offers: Offer[], sortingType: SortType): Offer[] => {
   }
 };
 
-export { getStarsRating, getFavoriteOffers, capitalizeFirstLetter, checkCommentInRange, getOffersLocations, convertDateToProperty, convertDateToHumanized, getCurrentLocationOffers, sortOffers };
+const sortComments = (commens: OfferComment[]) => [...commens].sort(getDateCompareFunctionNewToOld);
+
+export { getStarsRating, getFavoriteOffers, capitalizeFirstLetter, checkCommentInRange, getOffersLocations, convertDateToProperty, convertDateToHumanized, getCurrentLocationOffers, sortOffers, sortComments };

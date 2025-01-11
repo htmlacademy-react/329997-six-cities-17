@@ -81,3 +81,12 @@ export const REQUEST_TIMEOUT = 5000;
 export const BACKEND_URL = 'https://16.design.htmlacademy.pro/six-cities';
 
 export const NEAR_PACES_COUNT = 3;
+
+export const MAX_COMMENTS_COUNT = 10;
+
+export enum FetchStatus {
+  Unknown = 'unknown',
+  Loading = 'loading',
+  Loaded = 'loaded',
+  Error = 'error',
+}

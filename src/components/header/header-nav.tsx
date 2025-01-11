@@ -3,10 +3,11 @@ import { Link } from 'react-router-dom';
 import { AppRoute } from '../../const/const';
 import { MouseEvent } from 'react';
 import { logoutAction } from '../../store/api-action';
+import { getOffersFavorite, getUserData } from '../../store/selectors';
 
 function HeaderNav(): JSX.Element {
-  const favoriteCount = useAppSelector((state) => state.favoriteOffers.length);
-  const user = useAppSelector((state) => state.user);
+  const favoriteCount = useAppSelector(getOffersFavorite).length;
+  const user = useAppSelector(getUserData);
 
 
   const dispatch = useAppDispatch();

@@ -2,11 +2,12 @@ import { Helmet } from 'react-helmet-async';
 import Footer from '../../components/footer/footer';
 import FavoriteList from '../../components/favorite/favorite-list';
 import { useAppSelector } from '../../components/hooks';
+import { getOffersFavorite } from '../../store/selectors';
 
 
 function FavoritePage(): JSX.Element {
 
-  const favoriteOffers = useAppSelector((state) => state.favoriteOffers);
+  const favoriteOffers = useAppSelector(getOffersFavorite);
 
   return (
     <main className="page__main page__main--favorites">

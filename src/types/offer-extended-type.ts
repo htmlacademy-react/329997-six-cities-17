@@ -21,12 +21,12 @@ export type OfferExtended = {
       rating: number;
         description: string;
   bedrooms: number;
-    goods: string[];
+    goods: string[] | null;
   host: {
     name: string;
     avatarUrl: string;
     isPro: boolean;
   };
-  images: string[];
+  images: string[] | null;
   maxAdults: number;
 }

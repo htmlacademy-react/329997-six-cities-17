@@ -3,10 +3,11 @@ import { useAppSelector, useAppDispatch } from '../hooks';
 import { changeSortingState, changeSortingType } from '../../store/action';
 import SortingItem from './sorting-item';
 import { SortType } from '../../const/const';
+import { getCurrentSortingState, getCurrentSortingType } from '../../store/selectors';
 
 function SortingList(): JSX.Element {
-  const currentSortingState = useAppSelector((state) => state.isSortingOpened);
-  const currentSorting = useAppSelector((state) => state.currentSortingType);
+  const currentSortingState = useAppSelector(getCurrentSortingState);
+  const currentSorting = useAppSelector(getCurrentSortingType);
   const dispatch = useAppDispatch();
   const sortingTypes = Object.values(SortType).map((element) => element);
 

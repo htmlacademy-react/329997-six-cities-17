@@ -7,12 +7,14 @@ import { City } from '../../types/city_types/city-type';
 import { Offer } from '../../types/offer-type';
 import classNames from 'classnames';
 import { OfferPageType } from '../../const/const';
+import { OfferExtended } from '../../types/offer-extended-type';
 
 type MapProps = {
   city: City;
-  offers: Offer[];
+  offers: Offer[] | null;
   selectedOffer?: Offer | null;
   mapType?: OfferPageType;
+  offerExtended?: OfferExtended;
 };
 
 const defaultMapPin = new Icon({
@@ -28,7 +30,7 @@ const currentMapPin = new Icon({
 });
 
 function Map(props: MapProps): JSX.Element {
-  const { city, offers, selectedOffer, mapType = 'cities' } = props;
+  const { city, offers, selectedOffer, offerExtended, mapType = 'cities' } = props;
 
   const mapRef = useRef(null);
   const map = useMap(mapRef, city);
@@ -36,7 +38,7 @@ function Map(props: MapProps): JSX.Element {
   useEffect(() => {
     if (map) {
       const markerLayer = layerGroup().addTo(map);
-      offers.forEach((offer) => {
+      offers?.forEach((offer) => {
         const marker = new Marker({
           lat: offer.location.latitude,
           lng: offer.location.longitude
@@ -49,11 +51,19 @@ function Map(props: MapProps): JSX.Element {
         ).addTo(markerLayer);
       });
 
+      if (offerExtended) {
+        const marker = new Marker({
+          lat: offerExtended.location.latitude,
+          lng: offerExtended.location.longitude
+        });
+        marker.setIcon(currentMapPin).addTo(markerLayer);
+      }
+
       return () => {
         map.removeLayer(markerLayer);
       };
     }
-  }, [map, offers, selectedOffer]);
+  }, [map, offers, selectedOffer, offerExtended]);
 
   return (
     <section className={classNames(

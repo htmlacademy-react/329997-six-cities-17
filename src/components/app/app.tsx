@@ -10,12 +10,13 @@ import PrivateRoute from '../private-route/private-route';
 import Layout from '../layout/layout';
 import Loading from '../loading/loading';
 import { useAppSelector } from '../hooks';
+import { getAuthorizationStatus, getOffersState } from '../../store/selectors';
 
 function App(): JSX.Element {
-  const authorizationStatus = useAppSelector((state) => state.authorizationStatus);
-  const isLoading = useAppSelector((state) => state.isLoading);
+  const authorizationStatus = useAppSelector(getAuthorizationStatus);
+  const offersLoadingState = useAppSelector(getOffersState);
 
-  if (authorizationStatus === AuthorizationStatus.Unknown || isLoading) {
+  if (authorizationStatus === AuthorizationStatus.Unknown || offersLoadingState === 'loading') {
     return (
       <Loading />
     );

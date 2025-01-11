@@ -3,6 +3,7 @@ import { useAppSelector, useAppDispatch } from '../hooks';
 import { MouseEvent } from 'react';
 import { changeCity, changeSortingType } from '../../store/action';
 import { SortType } from '../../const/const';
+import { getCurrentCityTitle } from '../../store/selectors';
 
 type LocationListProps = {
   locations: string[];
@@ -10,7 +11,7 @@ type LocationListProps = {
 
 function LocationList(props: LocationListProps): JSX.Element {
   const { locations } = props;
-  const currentCity = useAppSelector((state) => state.city);
+  const currentCity = useAppSelector(getCurrentCityTitle);
   const dispatch = useAppDispatch();
 
   const handleCityChange = (evt: MouseEvent<HTMLAnchorElement>) => {
