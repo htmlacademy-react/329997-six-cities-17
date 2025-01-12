@@ -1,13 +1,14 @@
+import { OfferComment } from '../../types/offer-comment-type';
 import { getStarsRating, convertDateToProperty, convertDateToHumanized } from '../../utils/utils';
-import { Review } from '../../types/review-type';
+
 
 type ReviewItemProps = {
-  review: Review;
+  offerComment: OfferComment;
 }
 
 function ReviewItem(props: ReviewItemProps): JSX.Element {
-  const { review } = props;
-  const { date, user: { name, avatarUrl }, comment, rating } = review;
+  const { offerComment } = props;
+  const { date, user: { name, avatarUrl }, comment, rating } = offerComment;
   const starsRating = getStarsRating(rating);
 
   return (

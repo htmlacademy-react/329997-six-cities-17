@@ -5,7 +5,7 @@ import { MouseEvent } from 'react';
 import classNames from 'classnames';
 
 type OfferListProps = {
-  offers: Offer[];
+  offers: Offer[] | null;
   pageType: OfferPageType;
   onOfferMouseEnter?: (evt: MouseEvent<HTMLElement>) => void;
   onOfferMouseLeave?: () => void;
@@ -23,7 +23,7 @@ function OfferList(props: OfferListProps): JSX.Element {
       'places__list',
       { 'tabs__content': pageType === OfferPageType.CITIES })}
     >
-      {offers.map((element) => (
+      {offers && offers.map((element) => (
         <OfferItem
           key={element.id}
           offer={element}

@@ -34,7 +34,7 @@ export enum AppRoute {
   Main = '/',
   Login = '/login',
   Favorites = '/favorites',
-  Offer = '/offer/:id',
+  Offer = '/offers/:id',
   NotFound = '*',
 }
 
@@ -75,3 +75,55 @@ export const MAP_MARKER_DEFAULT = '../img/pin.svg';
 export const MAP_MARKER_CURRENT = '../img/pin-active.svg';
 
 export const TIMEOUT_SHOW_ERROR = 2000;
+
+export const REQUEST_TIMEOUT = 5000;
+
+export const BACKEND_URL = 'https://16.design.htmlacademy.pro/six-cities';
+
+export const NEAR_PACES_COUNT = 3;
+
+export const MAX_COMMENTS_COUNT = 10;
+
+export enum FetchStatus {
+  Unknown = 'unknown',
+  Loading = 'loading',
+  Loaded = 'loaded',
+  Error = 'error',
+}
+
+export const BLANK_OFFER_EXTENDED = {
+  id: '',
+  title: '',
+  description: '',
+  type: '',
+  price: 0,
+  images: [
+    '',
+  ],
+  city: {
+    name: '',
+    location: {
+      latitude: 0,
+      longitude: 0,
+      zoom: 0,
+    }
+  },
+  location: {
+    latitude: 0,
+    longitude: 0,
+    zoom: 0,
+  },
+  goods: [
+    '',
+  ],
+  host: {
+    isPro: false,
+    name: '',
+    avatarUrl: '',
+  },
+  isPremium: false,
+  isFavorite: false,
+  rating: 0,
+  bedrooms: 0,
+  maxAdults: 0,
+};

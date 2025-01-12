@@ -1,6 +1,6 @@
 import { Route, BrowserRouter, Routes } from 'react-router-dom';
 import { HelmetProvider } from 'react-helmet-async';
-import { AppRoute, AuthorizationStatus } from '../../const/const';
+import { AppRoute, AuthorizationStatus, FetchStatus } from '../../const/const';
 import MainPage from '../../pages/main-page/main-page';
 import FavoritesPage from '../../pages/favorite-page/favorite-page';
 import LoginPage from '../../pages/login-page/login-page';
@@ -10,15 +10,14 @@ import PrivateRoute from '../private-route/private-route';
 import Layout from '../layout/layout';
 import Loading from '../loading/loading';
 import { useAppSelector } from '../hooks';
+import { getAuthorizationStatus, getOffersState } from '../../store/selectors';
 
 function App(): JSX.Element {
-  const authorizationStatus = useAppSelector((state) => state.authorizationStatus);
-  const isLoading = useAppSelector((state) => state.isLoading);
+  const authorizationStatus = useAppSelector(getAuthorizationStatus);
+  const offersLoadingState = useAppSelector(getOffersState);
 
-  if (authorizationStatus === AuthorizationStatus.Unknown || isLoading) {
-    return (
-      <Loading />
-    );
+  if (authorizationStatus === AuthorizationStatus.Unknown || offersLoadingState === FetchStatus.Loading) {
+    return <Loading />;
   }
   return (
     <HelmetProvider>
@@ -34,7 +33,7 @@ function App(): JSX.Element {
             <Route
               path={AppRoute.Favorites}
               element={
-                <PrivateRoute authorizationStatus={authorizationStatus}>
+                <PrivateRoute navigateTo={AppRoute.Login} authorizationStatus={AuthorizationStatus.Auth}>
                   <FavoritesPage />
                 </PrivateRoute>
               }
@@ -45,7 +44,11 @@ function App(): JSX.Element {
             />
             <Route
               path={AppRoute.Login}
-              element={<LoginPage />}
+              element={
+                <PrivateRoute navigateTo={AppRoute.Main} authorizationStatus={AuthorizationStatus.NoAuth}>
+                  <LoginPage />
+                </PrivateRoute>
+              } //можно ли таким способом использовать PrivateRoute для выполнения требования ТЗ? редирект на главную страницу для авторизованного пользователя
             />
           </Route>
           <Route
