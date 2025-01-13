@@ -5,7 +5,7 @@ import { MouseEvent } from 'react';
 import classNames from 'classnames';
 
 type OfferListProps = {
-  offers: Offer[] | null;
+  offers?: Offer[];
   pageType: OfferPageType;
   onOfferMouseEnter?: (evt: MouseEvent<HTMLElement>) => void;
   onOfferMouseLeave?: () => void;

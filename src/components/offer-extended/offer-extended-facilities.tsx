@@ -1,5 +1,5 @@
 type OfferExtendedFacilitiesProps = {
-  goods: string[] | null;
+  goods?: string[];
 }
 
 function OfferExtendedFacilities(props: OfferExtendedFacilitiesProps): JSX.Element {

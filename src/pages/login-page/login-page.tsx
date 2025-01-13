@@ -1,17 +1,26 @@
 import { Helmet } from 'react-helmet-async';
-import { useRef, FormEvent } from 'react';
-import { useAppDispatch } from '../../components/hooks';
+import { useRef, FormEvent, MouseEvent } from 'react';
+import { useAppDispatch, useAppSelector } from '../../components/hooks';
 import { loginAction } from '../../store/api-action';
-import { useNavigate } from 'react-router-dom';
-import { AppRoute } from '../../const/const';
+import { Link, useNavigate } from 'react-router-dom';
+import { AppRoute, LOCATIONS, SignInState, SortType } from '../../const/const';
+import { getSigningInState } from '../../store/selectors';
+import { getRandomElement } from '../../utils/utils';
+import { changeCity, changeSortingType } from '../../store/action';
 
 function LoginPage(): JSX.Element {
 
   const loginRef = useRef<HTMLInputElement | null>(null);
   const passwordRef = useRef<HTMLInputElement | null>(null);
+  const signingInStatus = useAppSelector(getSigningInState);
 
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
+
+  const handleCityClick = (evt: MouseEvent<HTMLAnchorElement>) => {
+    dispatch(changeCity({ city: evt.currentTarget.text }));
+    dispatch(changeSortingType(SortType.POPULAR));
+  };
 
   const handleSubmit = (evt: FormEvent<HTMLFormElement>) => {
     evt.preventDefault();
@@ -70,15 +79,19 @@ function LoginPage(): JSX.Element {
               className="login__submit form__submit button"
               type="submit"
             >
-              Sign in
+              {signingInStatus === SignInState.SigningIn ? 'Signing in...' : 'Sign in'}
             </button>
           </form>
         </section>
         <section className="locations locations--login locations--current">
           <div className="locations__item">
-            <a className="locations__item-link" href="#">
-              <span>Amsterdam</span>
-            </a>
+            <Link
+              className="locations__item-link"
+              to={AppRoute.Main}
+              onClick={handleCityClick}
+            >
+              <span>{getRandomElement(LOCATIONS)}</span>
+            </Link>
           </div>
         </section>
       </div>

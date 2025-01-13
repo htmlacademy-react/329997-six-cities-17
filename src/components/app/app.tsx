@@ -1,22 +1,22 @@
 import { Route, BrowserRouter, Routes } from 'react-router-dom';
 import { HelmetProvider } from 'react-helmet-async';
-import { AppRoute, AuthorizationStatus, FetchStatus } from '../../const/const';
+import { AppRoute, AuthorizationState, FetchState } from '../../const/const';
 import MainPage from '../../pages/main-page/main-page';
 import FavoritesPage from '../../pages/favorite-page/favorite-page';
 import LoginPage from '../../pages/login-page/login-page';
 import OfferPage from '../../pages/offer-page/offer-page';
 import NotFoundPage from '../../pages/not-found-page/not-found-page';
-import PrivateRoute from '../private-route/private-route';
+import RedirectRoute from '../redirect-route/redirect-route';
 import Layout from '../layout/layout';
 import Loading from '../loading/loading';
 import { useAppSelector } from '../hooks';
-import { getAuthorizationStatus, getOffersState } from '../../store/selectors';
+import { getAuthorizationState, getOffersState } from '../../store/selectors';
 
 function App(): JSX.Element {
-  const authorizationStatus = useAppSelector(getAuthorizationStatus);
+  const authorizationStatus = useAppSelector(getAuthorizationState);
   const offersLoadingState = useAppSelector(getOffersState);
 
-  if (authorizationStatus === AuthorizationStatus.Unknown || offersLoadingState === FetchStatus.Loading) {
+  if (authorizationStatus === AuthorizationState.Unknown || offersLoadingState === FetchState.Loading) {
     return <Loading />;
   }
   return (
@@ -33,9 +33,9 @@ function App(): JSX.Element {
             <Route
               path={AppRoute.Favorites}
               element={
-                <PrivateRoute navigateTo={AppRoute.Login} authorizationStatus={AuthorizationStatus.Auth}>
+                <RedirectRoute navigateTo={AppRoute.Login} authorizationState={AuthorizationState.Auth}>
                   <FavoritesPage />
-                </PrivateRoute>
+                </RedirectRoute>
               }
             />
             <Route
@@ -45,10 +45,10 @@ function App(): JSX.Element {
             <Route
               path={AppRoute.Login}
               element={
-                <PrivateRoute navigateTo={AppRoute.Main} authorizationStatus={AuthorizationStatus.NoAuth}>
+                <RedirectRoute navigateTo={AppRoute.Main} authorizationState={AuthorizationState.NoAuth}>
                   <LoginPage />
-                </PrivateRoute>
-              } //можно ли таким способом использовать PrivateRoute для выполнения требования ТЗ? редирект на главную страницу для авторизованного пользователя
+                </RedirectRoute>
+              }
             />
           </Route>
           <Route

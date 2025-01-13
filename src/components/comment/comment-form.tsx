@@ -1,15 +1,17 @@
 import { ChangeEvent, useState } from 'react';
-import { RATING_OPTIONS, CommentOption } from '../../const/const';
+import { RATING_OPTIONS, CommentOption, SubmitState } from '../../const/const';
 import CommentRatingButton from './comment-rating-button';
 import { checkCommentInRange } from '../../utils/utils';
-import { useAppDispatch } from '../hooks';
+import { useAppDispatch, useAppSelector } from '../hooks';
 import { submitCommentAction } from '../../store/api-action';
+import { getSubmittingState } from '../../store/selectors';
 
 type CommentFormProps = {
   id: string;
 }
 
 function CommentForm(props: CommentFormProps): JSX.Element {
+  const submittingState = useAppSelector(getSubmittingState);
   const { id } = props;
   const dispatch = useAppDispatch();
 
@@ -25,9 +27,11 @@ function CommentForm(props: CommentFormProps): JSX.Element {
 
   const handleFormSubmit = (evt: ChangeEvent<HTMLFormElement>) => {
     evt.preventDefault();
-    dispatch(submitCommentAction({ comment, rating, id }));
-    setFormRating(0);
-    setFormComment('');
+    if (id) {
+      dispatch(submitCommentAction({ comment, rating, id }));
+      setFormRating(0);
+      setFormComment('');
+    }
   };
 
   return (
@@ -64,9 +68,9 @@ function CommentForm(props: CommentFormProps): JSX.Element {
         <button
           className="reviews__submit form__submit button"
           type="submit"
-          disabled={!(formRating && checkCommentInRange(CommentOption.minLength, CommentOption.maxLength, formComment))}
+          disabled={!(formRating && checkCommentInRange(CommentOption.minLength, CommentOption.maxLength, formComment)) || submittingState === SubmitState.Submitting}
         >
-          Submit
+          {submittingState === SubmitState.Submitting ? 'Submitting...' : 'Submit'}
         </button>
       </div>
     </form>

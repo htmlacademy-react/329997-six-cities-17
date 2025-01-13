@@ -34,7 +34,7 @@ export enum AppRoute {
   Main = '/',
   Login = '/login',
   Favorites = '/favorites',
-  Offer = '/offers/:id',
+  Offer = '/offer/:id',
   NotFound = '*',
 }
 
@@ -46,7 +46,7 @@ export enum APIRoute {
   Logout = '/logout',
 }
 
-export enum AuthorizationStatus {
+export enum AuthorizationState {
   Auth = 'AUTH',
   NoAuth = 'NO_AUTH',
   Unknown = 'UNKNOWN',
@@ -84,10 +84,23 @@ export const NEAR_PACES_COUNT = 3;
 
 export const MAX_COMMENTS_COUNT = 10;
 
-export enum FetchStatus {
+export enum FetchState {
   Unknown = 'unknown',
   Loading = 'loading',
   Loaded = 'loaded',
+  Error = 'error',
+}
+
+export enum SubmitState {
+  Unknown = 'unknown',
+  Submitting = 'submitting',
+  Submited = 'submited',
+  Error = 'error',
+}
+export enum SignInState {
+  Unknown = 'unknown',
+  SigningIn= 'signing-in',
+  SignedIn = 'signed-in',
   Error = 'error',
 }
 

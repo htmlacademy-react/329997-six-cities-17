@@ -2,11 +2,11 @@ import { createReducer } from '@reduxjs/toolkit';
 import { changeCity, changeSortingState, changeSortingType } from './action';
 import { getCurrentLocationOffers, sortOffers } from '../utils/utils';
 import { Offer } from '../types/offer-type';
-import { LOCATIONS, SortType, AuthorizationStatus, FetchStatus, BLANK_OFFER_EXTENDED } from '../const/const';
+import { LOCATIONS, SortType, AuthorizationState, FetchState, BLANK_OFFER_EXTENDED, SubmitState, SignInState } from '../const/const';
 import { UserData } from '../types/user-data-type';
 import { OfferExtended } from '../types/offer-extended-type';
 import { OfferComment } from '../types/offer-comment-type';
-import { checkAuthAction, fetchOfferExtendedAction, fetchOfferExtendedCommentsAction, fetchOffersAction, fetchOffersNearbyAction, loginAction, logoutAction } from './api-action';
+import { checkAuthAction, fetchOfferExtendedAction, fetchOfferExtendedCommentsAction, fetchOffersAction, fetchOffersNearbyAction, loginAction, logoutAction, submitCommentAction } from './api-action';
 import { toast } from 'react-toastify';
 
 
@@ -17,24 +17,28 @@ const initialState: {
   isSortingOpened: boolean;
 
   offers: Offer[];
-  offersState: FetchStatus;
+  offersState: FetchState;
 
   currentOfferExtended: OfferExtended;
-  currentOfferExtendedState: FetchStatus;
+  currentOfferExtendedState: FetchState;
 
   currentOfferExtendedComments: OfferComment[];
-  currentOfferExtendedCommentsState: FetchStatus;
+  currentOfferExtendedCommentsState: FetchState;
 
   currentOffersNearby: Offer[];
-  currentOffersNearbyState: FetchStatus;
+  currentOffersNearbyState: FetchState;
 
   favoriteOffers: Offer[];
-  favoriteOffersState: FetchStatus;
+  favoriteOffersState: FetchState;
 
-  authorizationStatus: AuthorizationStatus;
+  authorizationState: AuthorizationState;
+
+  submittingState: SubmitState;
+
+  signingInState: SignInState;
 
   user: UserData | null;
-  userState: FetchStatus;
+  userState: FetchState;
 } =
 {
   city: LOCATIONS[0],
@@ -43,24 +47,28 @@ const initialState: {
   isSortingOpened: false,
 
   offers: [],
-  offersState: FetchStatus.Unknown,
+  offersState: FetchState.Unknown,
 
   currentOfferExtended: BLANK_OFFER_EXTENDED,
-  currentOfferExtendedState: FetchStatus.Unknown,
+  currentOfferExtendedState: FetchState.Unknown,
 
   currentOfferExtendedComments: [],
-  currentOfferExtendedCommentsState: FetchStatus.Unknown,
+  currentOfferExtendedCommentsState: FetchState.Unknown,
 
   currentOffersNearby: [],
-  currentOffersNearbyState: FetchStatus.Unknown,
+  currentOffersNearbyState: FetchState.Unknown,
 
-  authorizationStatus: AuthorizationStatus.Unknown,
+  authorizationState: AuthorizationState.Unknown,
+
+  submittingState: SubmitState.Unknown,
+
+  signingInState: SignInState.Unknown,
 
   favoriteOffers: [],
-  favoriteOffersState: FetchStatus.Unknown,
+  favoriteOffersState: FetchState.Unknown,
 
   user: null,
-  userState: FetchStatus.Unknown,
+  userState: FetchState.Unknown,
 };
 
 const reducer = createReducer(initialState, (builder) => {
@@ -73,66 +81,70 @@ const reducer = createReducer(initialState, (builder) => {
     })
 
     .addCase(fetchOffersAction.pending, (state) => {
-      state.offersState = FetchStatus.Loading;
+      state.offersState = FetchState.Loading;
     })
     .addCase(fetchOffersAction.fulfilled, (state, action) => {
-      state.offersState = FetchStatus.Loaded;
+      state.offersState = FetchState.Loaded;
       state.offers = action.payload;
       state.currentOffers = getCurrentLocationOffers(state.offers, state.city);
     })
     .addCase(fetchOffersAction.rejected, (state) => {
-      state.offersState = FetchStatus.Error;
+      state.offersState = FetchState.Error;
       toast.error('Loading offers error');
     })
 
     .addCase(fetchOfferExtendedAction.pending, (state) => {
-      state.currentOfferExtendedState = FetchStatus.Loading;
+      state.currentOfferExtendedState = FetchState.Loading;
     })
     .addCase(fetchOfferExtendedAction.fulfilled, (state, action) => {
-      state.currentOfferExtendedState = FetchStatus.Loaded;
+      state.currentOfferExtendedState = FetchState.Loaded;
       state.currentOfferExtended = action.payload;
     })
     .addCase(fetchOfferExtendedAction.rejected, (state) => {
-      state.currentOfferExtendedState = FetchStatus.Error;
+      state.currentOfferExtendedState = FetchState.Error;
       toast.error('Loading offer error');
     })
 
     .addCase(fetchOfferExtendedCommentsAction.pending, (state) => {
-      state.currentOfferExtendedCommentsState = FetchStatus.Loading;
+      state.currentOfferExtendedCommentsState = FetchState.Loading;
     })
     .addCase(fetchOfferExtendedCommentsAction.fulfilled, (state, action) => {
-      state.currentOfferExtendedCommentsState = FetchStatus.Loaded;
+      state.currentOfferExtendedCommentsState = FetchState.Loaded;
       state.currentOfferExtendedComments = action.payload;
     })
     .addCase(fetchOfferExtendedCommentsAction.rejected, (state) => {
-      state.currentOfferExtendedCommentsState = FetchStatus.Error;
+      state.currentOfferExtendedCommentsState = FetchState.Error;
       toast.error('Loading offer comments error');
     })
 
     .addCase(fetchOffersNearbyAction.pending, (state) => {
-      state.currentOffersNearbyState = FetchStatus.Loading;
+      state.currentOffersNearbyState = FetchState.Loading;
     })
     .addCase(fetchOffersNearbyAction.fulfilled, (state, action) => {
-      state.currentOffersNearbyState = FetchStatus.Loaded;
+      state.currentOffersNearbyState = FetchState.Loaded;
       state.currentOffersNearby = action.payload;
     })
     .addCase(fetchOffersNearbyAction.rejected, (state) => {
-      state.currentOffersNearbyState = FetchStatus.Error;
+      state.currentOffersNearbyState = FetchState.Error;
       toast.error('Loading nearby offers error');
     })
 
+    .addCase(loginAction.pending, (state) => {
+      state.signingInState = SignInState.SigningIn;
+    })
     .addCase(loginAction.fulfilled, (state, action) => {
-      state.authorizationStatus = AuthorizationStatus.Auth;
+      state.authorizationState = AuthorizationState.Auth;
+      state.signingInState = SignInState.SignedIn;
       state.user = action.payload;
     })
     .addCase(loginAction.rejected, (state) => {
-      state.authorizationStatus = AuthorizationStatus.NoAuth;
+      state.authorizationState = AuthorizationState.NoAuth;
       state.user = null;
       toast.error('Authification error');
     })
 
     .addCase(logoutAction.fulfilled, (state) => {
-      state.authorizationStatus = AuthorizationStatus.NoAuth;
+      state.authorizationState = AuthorizationState.NoAuth;
       state.user = null;
     })
     .addCase(logoutAction.rejected, () => {
@@ -140,12 +152,23 @@ const reducer = createReducer(initialState, (builder) => {
     })
 
     .addCase(checkAuthAction.fulfilled, (state, action) => {
-      state.authorizationStatus = AuthorizationStatus.Auth;
+      state.authorizationState = AuthorizationState.Auth;
       state.user = action.payload;
     })
     .addCase(checkAuthAction.rejected, (state) => {
-      state.authorizationStatus = AuthorizationStatus.NoAuth;
+      state.authorizationState = AuthorizationState.NoAuth;
       state.user = null;
+    })
+
+    .addCase(submitCommentAction.pending, (state) => {
+      state.submittingState = SubmitState.Submitting;
+    })
+    .addCase(submitCommentAction.fulfilled, (state) => {
+      state.submittingState = SubmitState.Submited;
+    })
+    .addCase(submitCommentAction.rejected, (state) => {
+      state.submittingState = SubmitState.Error;
+      toast.error('Submit error!');
     })
 
     .addCase(changeSortingState, (state, action) => {

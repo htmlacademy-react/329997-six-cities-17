@@ -11,11 +11,14 @@ import { OfferPageType } from '../../const/const';
 import { City } from '../../types/city_types/city-type';
 import { MouseEvent } from 'react';
 import { getCurrentCityTitle, getCurrentOffers } from '../../store/selectors';
+import OfferListEmpty from '../../components/offer/offer-list-empty';
 
 function MainPage(): JSX.Element {
   const currentOffers = useAppSelector(getCurrentOffers);
   const currentCityTitle = useAppSelector(getCurrentCityTitle);
   const currentCity: City = currentOffers[0].city;
+
+  const isCurrentOffersEmpty = currentOffers.length === 0;
 
   const [selectedOffer, setSelectedOffer] = useState<Offer | null>(null);
 
@@ -36,19 +39,22 @@ function MainPage(): JSX.Element {
         <title>6 cities. Главная страница</title>
       </Helmet>
       <LocationList locations={LOCATIONS} />
-      <div className="cities">
-        <div className="cities__places-container container">
-          <section className="cities__places places">
-            <h2 className="visually-hidden">Places</h2>
-            <b className="places__found">{currentOffers.length} places to stay {currentCityTitle}</b>
-            <SortingList />
-            <OfferList offers={currentOffers} onOfferMouseEnter={handleOfferMouseEnter} onOfferMouseLeave={handleOfferMouseLeave} pageType={OfferPageType.CITIES} />
-          </section>
-          <div className="cities__right-section">
-            <Map city={currentCity} offers={currentOffers} selectedOffer={selectedOffer} />
+      {isCurrentOffersEmpty && <OfferListEmpty city={currentCityTitle}/>}
+
+      {!isCurrentOffersEmpty &&
+        <div className="cities">
+          <div className="cities__places-container container">
+            <section className="cities__places places">
+              <h2 className="visually-hidden">Places</h2>
+              <b className="places__found">{currentOffers.length} places to stay {currentCityTitle}</b>
+              <SortingList />
+              <OfferList offers={currentOffers} onOfferMouseEnter={handleOfferMouseEnter} onOfferMouseLeave={handleOfferMouseLeave} pageType={OfferPageType.CITIES} />
+            </section>
+            <div className="cities__right-section">
+              <Map city={currentCity} offers={currentOffers} selectedOffer={selectedOffer} />
+            </div>
           </div>
-        </div>
-      </div>
+        </div>}
     </main>
   );
 }
