@@ -1,7 +1,6 @@
 import { OfferExtended } from '../../types/offer-extended-type';
 import classNames from 'classnames';
-import { getStarsRating } from '../../utils/utils';
-import { capitalizeFirstLetter } from '../../utils/utils';
+import { getStarsRating, capitalizeFirstLetter } from '../../utils/utils';
 
 type OfferExtendedInfoProps = {
   offer: OfferExtended;
