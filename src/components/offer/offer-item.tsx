@@ -17,6 +17,7 @@ function OfferItem(props: OfferItemProps): JSX.Element {
   const { id, isPremium, previewImage, price, isFavorite, rating, title, type } = offer;
   const starsRating = getStarsRating(rating);
 
+
   return (
     <article
       className={`${pageType}__card place-card`}

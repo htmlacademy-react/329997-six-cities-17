@@ -62,17 +62,19 @@ const sortOffers = (offers: Offer[], sortingType: SortType): Offer[] => {
     case SortType.POPULAR:
       return offers;
     case SortType.PRICE_LOW_HIGH:
-      return [...offers].sort(getPriceCompareFunctionLowToHigh);
+      return offers.toSorted(getPriceCompareFunctionLowToHigh);
     case SortType.PRICE_HIGH_TO_LOW:
-      return [...offers].sort(getPriceCompareFunctionHighToLow);
+      return offers.toSorted(getPriceCompareFunctionHighToLow);
     case SortType.TOP_RATED:
-      return [...offers].sort(getRatingCompareFunctionHighToLow);
+      return offers.toSorted(getRatingCompareFunctionHighToLow);
 
     default:
       return offers;
   }
 };
 
-const sortComments = (commens: OfferComment[]) => [...commens].sort(getDateCompareFunctionNewToOld);
+const sortComments = (commens: OfferComment[]) => commens.toSorted(getDateCompareFunctionNewToOld);
 
-export { getStarsRating, getFavoriteOffers, capitalizeFirstLetter, checkCommentInRange, getOffersLocations, convertDateToProperty, convertDateToHumanized, getCurrentLocationOffers, sortOffers, sortComments };
+const getRandomElement = <T>(elements: T[]) => elements[Math.floor(Math.random() * elements.length)];
+
+export { getStarsRating, getFavoriteOffers, capitalizeFirstLetter, checkCommentInRange, getOffersLocations, convertDateToProperty, convertDateToHumanized, getCurrentLocationOffers, sortOffers, sortComments, getRandomElement };

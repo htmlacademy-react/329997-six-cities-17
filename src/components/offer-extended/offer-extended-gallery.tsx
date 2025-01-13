@@ -1,5 +1,5 @@
 type OfferExtendedGalleryProps = {
-  images: string[] | null;
+  images?: string[];
 }
 
 function OfferExtendedGallery(props: OfferExtendedGalleryProps): JSX.Element {

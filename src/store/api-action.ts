@@ -7,7 +7,6 @@ import { ApiActionType } from '../types/api-action-type.js';
 import { Offer } from '../types/offer-type.js';
 import { OfferExtended } from '../types/offer-extended-type.js';
 import { OfferComment } from '../types/offer-comment-type.js';
-import { toast } from 'react-toastify';
 import { OfferCommentPost } from '../types/offer-comment-post-type.js';
 
 export const fetchOffersAction = createAsyncThunk<Offer[], undefined, ApiActionType>(
@@ -55,10 +54,6 @@ export const logoutAction = createAsyncThunk<void, undefined, ApiActionType>(
 
 export const submitCommentAction = createAsyncThunk<void, OfferCommentPost, ApiActionType>(
   'offers/submitComment', async ({ comment, rating, id }, { dispatch, extra: api }) => {
-    try {
-      await api.post<OfferCommentPost>(`${APIRoute.Comments}/${id}`, { comment, rating });
-      dispatch(fetchOfferExtendedCommentsAction(id));
-    } catch (error) {
-      toast.error('Post error!');
-    }
+    await api.post<OfferCommentPost>(`${APIRoute.Comments}/${id}`, { comment, rating });
+    dispatch(fetchOfferExtendedCommentsAction(id));
   });

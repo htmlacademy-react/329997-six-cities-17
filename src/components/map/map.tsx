@@ -11,7 +11,7 @@ import { OfferExtended } from '../../types/offer-extended-type';
 
 type MapProps = {
   city: City;
-  offers: Offer[] | null;
+  offers?: Offer[];
   selectedOffer?: Offer | null;
   mapType?: OfferPageType;
   offerExtended?: OfferExtended;

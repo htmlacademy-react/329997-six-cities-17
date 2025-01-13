@@ -8,10 +8,7 @@ function useMap(mapRef: MutableRefObject<HTMLElement | null>, city: City): Map |
 
   useEffect(()=> {
     if (map) {
-      map.panTo({
-        lat: city.location.latitude,
-        lng: city.location.longitude,
-      });
+      map.setView({lat: city.location.latitude, lng: city.location.longitude}, city.location.zoom);
     }
   }, [city, map]);
 
@@ -24,7 +21,6 @@ function useMap(mapRef: MutableRefObject<HTMLElement | null>, city: City): Map |
         },
         zoom: city.location.zoom,
       });
-
       const layer = new TileLayer(
         'https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png',
         {
