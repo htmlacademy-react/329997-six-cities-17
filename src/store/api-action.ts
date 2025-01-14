@@ -33,6 +33,12 @@ export const fetchOffersNearbyAction = createAsyncThunk<Offer[], string, ApiActi
     return data;
   });
 
+export const fetchOffersFavoriteAction = createAsyncThunk<Offer[], undefined, ApiActionType>(
+  'offers/fetchOffersFavorite', async (_arg, { extra: api }) => {
+    const { data } = await api.get<Offer[]>(APIRoute.Favorite);
+    return data;
+  });
+
 export const checkAuthAction = createAsyncThunk<UserData, undefined, ApiActionType>(
   'user/checkAuth', async (_arg, { extra: api }) => {
     const { data } = await api.get<UserData>(APIRoute.Login);

@@ -6,7 +6,7 @@ import { LOCATIONS, SortType, AuthorizationState, FetchState, BLANK_OFFER_EXTEND
 import { UserData } from '../types/user-data-type';
 import { OfferExtended } from '../types/offer-extended-type';
 import { OfferComment } from '../types/offer-comment-type';
-import { checkAuthAction, fetchOfferExtendedAction, fetchOfferExtendedCommentsAction, fetchOffersAction, fetchOffersNearbyAction, loginAction, logoutAction, submitCommentAction } from './api-action';
+import { checkAuthAction, fetchOfferExtendedAction, fetchOfferExtendedCommentsAction, fetchOffersAction, fetchOffersFavoriteAction, fetchOffersNearbyAction, loginAction, logoutAction, submitCommentAction } from './api-action';
 import { toast } from 'react-toastify';
 
 
@@ -58,14 +58,14 @@ const initialState: {
   currentOffersNearby: [],
   currentOffersNearbyState: FetchState.Unknown,
 
+  favoriteOffers: [],
+  favoriteOffersState: FetchState.Unknown,
+
   authorizationState: AuthorizationState.Unknown,
 
   submittingState: SubmitState.Unknown,
 
   signingInState: SignInState.Unknown,
-
-  favoriteOffers: [],
-  favoriteOffersState: FetchState.Unknown,
 
   user: null,
   userState: FetchState.Unknown,
@@ -114,7 +114,7 @@ const reducer = createReducer(initialState, (builder) => {
     })
     .addCase(fetchOfferExtendedCommentsAction.rejected, (state) => {
       state.currentOfferExtendedCommentsState = FetchState.Error;
-      toast.error('Loading offer comments error');
+      toast.error('Loading offer comments error!');
     })
 
     .addCase(fetchOffersNearbyAction.pending, (state) => {
@@ -126,7 +126,19 @@ const reducer = createReducer(initialState, (builder) => {
     })
     .addCase(fetchOffersNearbyAction.rejected, (state) => {
       state.currentOffersNearbyState = FetchState.Error;
-      toast.error('Loading nearby offers error');
+      toast.error('Loading nearby offers error!');
+    })
+
+    .addCase(fetchOffersFavoriteAction.pending, (state) => {
+      state.favoriteOffersState = FetchState.Loading;
+    })
+    .addCase(fetchOffersFavoriteAction.fulfilled, (state, action) => {
+      state.favoriteOffersState = FetchState.Loaded;
+      state.favoriteOffers = action.payload;
+    })
+    .addCase(fetchOffersFavoriteAction.rejected, (state) => {
+      state.favoriteOffersState = FetchState.Error;
+      toast.error('Loading favorite offers error!');
     })
 
     .addCase(loginAction.pending, (state) => {
@@ -140,7 +152,7 @@ const reducer = createReducer(initialState, (builder) => {
     .addCase(loginAction.rejected, (state) => {
       state.authorizationState = AuthorizationState.NoAuth;
       state.user = null;
-      toast.error('Authification error');
+      toast.error('Authification error!');
     })
 
     .addCase(logoutAction.fulfilled, (state) => {
@@ -148,7 +160,7 @@ const reducer = createReducer(initialState, (builder) => {
       state.user = null;
     })
     .addCase(logoutAction.rejected, () => {
-      toast.error('Logout error');
+      toast.error('Logout error!');
     })
 
     .addCase(checkAuthAction.fulfilled, (state, action) => {
