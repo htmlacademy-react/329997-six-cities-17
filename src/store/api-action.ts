@@ -8,6 +8,7 @@ import { Offer } from '../types/offer-type.js';
 import { OfferExtended } from '../types/offer-extended-type.js';
 import { OfferComment } from '../types/offer-comment-type.js';
 import { OfferCommentPost } from '../types/offer-comment-post-type.js';
+import { OfferFavoritePost } from '../types/offer-favorite-post-type.js';
 
 export const fetchOffersAction = createAsyncThunk<Offer[], undefined, ApiActionType>(
   'offers/fetchOffers', async (_arg, { extra: api }) => {
@@ -62,4 +63,10 @@ export const submitCommentAction = createAsyncThunk<void, OfferCommentPost, ApiA
   'offers/submitComment', async ({ comment, rating, id }, { dispatch, extra: api }) => {
     await api.post<OfferCommentPost>(`${APIRoute.Comments}/${id}`, { comment, rating });
     dispatch(fetchOfferExtendedCommentsAction(id));
+  });
+
+export const toggleOfferFavoriteStatusAction = createAsyncThunk<void, OfferFavoritePost, ApiActionType>(
+  'offers/setOfferFavoriteStatus', async ({ id, status }, { dispatch, extra: api }) => {
+    await api.post<OfferCommentPost>(`${APIRoute.Favorite}/${id}/${status}`, { status });
+    dispatch(fetchOffersFavoriteAction());
   });

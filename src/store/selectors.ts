@@ -20,6 +20,9 @@ export const getOffersNearbyState = (state: AppState) => state.currentOffersNear
 export const getOffersFavorite = (state: AppState) => state.favoriteOffers;
 export const getOffersFavoriteState = (state: AppState) => state.favoriteOffersState;
 
+export const getOffersFavoriteStatus = (state: AppState) => state.favoriteOffers;
+export const getOffersFavoriteStatusState = (state: AppState) => state.favoriteOffersState;
+
 export const getAuthorizationState = (state: AppState) => state.authorizationState;
 export const getSubmittingState = (state: AppState) => state.submittingState;
 export const getSigningInState = (state: AppState) => state.signingInState;

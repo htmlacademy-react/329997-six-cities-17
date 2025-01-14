@@ -140,3 +140,8 @@ export const BLANK_OFFER_EXTENDED = {
   bedrooms: 0,
   maxAdults: 0,
 };
+
+export enum FavoriteStatus {
+  SetFavorite = 1,
+  UnsetFavorite = 0,
+}

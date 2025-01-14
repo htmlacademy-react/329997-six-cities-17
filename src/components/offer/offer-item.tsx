@@ -1,9 +1,11 @@
 import classNames from 'classnames';
 import { Link, generatePath } from 'react-router-dom';
-import { AppRoute, OfferPageType } from '../../const/const';
+import { AppRoute, OfferPageType, FavoriteStatus } from '../../const/const';
 import { getStarsRating, capitalizeFirstLetter } from '../../utils/utils';
 import { Offer } from '../../types/offer-type';
 import { MouseEvent } from 'react';
+import { toggleOfferFavoriteStatusAction } from '../../store/api-action';
+import { useAppDispatch } from '../hooks';
 
 type OfferItemProps = {
   offer: Offer;
@@ -16,6 +18,12 @@ function OfferItem(props: OfferItemProps): JSX.Element {
   const { offer, pageType, onPlaceMouseEnter, onPlaceMouseLeave } = props;
   const { id, isPremium, previewImage, price, isFavorite, rating, title, type } = offer;
   const starsRating = getStarsRating(rating);
+  const dispatch = useAppDispatch();
+
+  const handleFavoriteButtonClick = (evt: MouseEvent<HTMLButtonElement>) => {
+    evt.preventDefault();
+    dispatch(toggleOfferFavoriteStatusAction({ id, status: isFavorite ? FavoriteStatus.UnsetFavorite : FavoriteStatus.SetFavorite }));
+  };
 
 
   return (
@@ -46,14 +54,17 @@ function OfferItem(props: OfferItemProps): JSX.Element {
             <b className="place-card__price-value">&euro;{price}</b>
             <span className="place-card__price-text">&#47;&nbsp;night</span>
           </div>
-
-          <button className={classNames('place-card__bookmark-button', { 'place-card__bookmark-button--active': isFavorite }, 'button', 'type="button"')}>
+//вынести в компонент
+          <button
+            className={classNames('place-card__bookmark-button', { 'place-card__bookmark-button--active': isFavorite }, 'button', 'type="button"')}
+            onClick={handleFavoriteButtonClick}
+          >
             <svg className="place-card__bookmark-icon" width={18} height={19}>
               <use xlinkHref="#icon-bookmark"></use>
             </svg>
             <span className="visually-hidden">{isFavorite ? 'In bookmarks' : 'To bookmarks'}</span>
           </button>
-
+//
         </div>
         <div className="place-card__rating rating">
           <div className="place-card__stars rating__stars">
