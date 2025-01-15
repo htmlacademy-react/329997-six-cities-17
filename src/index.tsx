@@ -6,9 +6,10 @@ import { store } from './store';
 import { checkAuthAction, fetchOffersAction, fetchOffersFavoriteAction } from './store/api-action';
 import { ToastContainer } from 'react-toastify';
 
+store.dispatch(checkAuthAction());
 store.dispatch(fetchOffersAction());
 store.dispatch(fetchOffersFavoriteAction());
-store.dispatch(checkAuthAction());
+
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
@@ -17,7 +18,7 @@ const root = ReactDOM.createRoot(
 root.render(
   <React.StrictMode>
     <Provider store={store}>
-      <ToastContainer />
+      <ToastContainer position={'top-center'}/>
       <App />
     </Provider>
   </React.StrictMode>,

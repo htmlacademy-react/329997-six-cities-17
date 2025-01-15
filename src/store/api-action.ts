@@ -65,8 +65,9 @@ export const submitCommentAction = createAsyncThunk<void, OfferCommentPost, ApiA
     dispatch(fetchOfferExtendedCommentsAction(id));
   });
 
-export const toggleOfferFavoriteStatusAction = createAsyncThunk<void, OfferFavoritePost, ApiActionType>(
+export const toggleOfferFavoriteStatusAction = createAsyncThunk<OfferExtended, OfferFavoritePost, ApiActionType>(
   'offers/setOfferFavoriteStatus', async ({ id, status }, { dispatch, extra: api }) => {
-    await api.post<OfferCommentPost>(`${APIRoute.Favorite}/${id}/${status}`, { status });
+    const { data } = await api.post<OfferExtended>(`${APIRoute.Favorite}/${id}/${status}`, { status });
     dispatch(fetchOffersFavoriteAction());
+    return data;
   });

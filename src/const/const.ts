@@ -145,3 +145,8 @@ export enum FavoriteStatus {
   SetFavorite = 1,
   UnsetFavorite = 0,
 }
+
+export enum FavoriteButtonType {
+  OFFER = 'offer',
+  PLACE_CARD = 'place-card',
+}

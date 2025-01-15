@@ -6,7 +6,7 @@ import { LOCATIONS, SortType, AuthorizationState, FetchState, BLANK_OFFER_EXTEND
 import { UserData } from '../types/user-data-type';
 import { OfferExtended } from '../types/offer-extended-type';
 import { OfferComment } from '../types/offer-comment-type';
-import { checkAuthAction, fetchOfferExtendedAction, fetchOfferExtendedCommentsAction, fetchOffersAction, fetchOffersFavoriteAction, fetchOffersNearbyAction, loginAction, logoutAction, submitCommentAction } from './api-action';
+import { checkAuthAction, fetchOfferExtendedAction, fetchOfferExtendedCommentsAction, fetchOffersAction, fetchOffersFavoriteAction, fetchOffersNearbyAction, loginAction, logoutAction, submitCommentAction, toggleOfferFavoriteStatusAction } from './api-action';
 import { toast } from 'react-toastify';
 
 
@@ -30,6 +30,8 @@ const initialState: {
 
   favoriteOffers: Offer[];
   favoriteOffersState: FetchState;
+
+  favoriteOfferStatusState: FetchState;
 
   authorizationState: AuthorizationState;
 
@@ -60,6 +62,8 @@ const initialState: {
 
   favoriteOffers: [],
   favoriteOffersState: FetchState.Unknown,
+
+  favoriteOfferStatusState: FetchState.Unknown,
 
   authorizationState: AuthorizationState.Unknown,
 
@@ -138,7 +142,18 @@ const reducer = createReducer(initialState, (builder) => {
     })
     .addCase(fetchOffersFavoriteAction.rejected, (state) => {
       state.favoriteOffersState = FetchState.Error;
-      toast.error('Loading favorite offers error!');
+    })
+
+    .addCase(toggleOfferFavoriteStatusAction.pending, (state) => {
+      state.favoriteOfferStatusState = FetchState.Loading;
+    })
+    .addCase(toggleOfferFavoriteStatusAction.fulfilled, (state, action) => {
+      state.favoriteOfferStatusState = FetchState.Loaded;
+      state.currentOfferExtended = action.payload;
+    })
+    .addCase(toggleOfferFavoriteStatusAction.rejected, (state) => {
+      state.favoriteOfferStatusState = FetchState.Error;
+      toast.error('Toggle favorite error!');
     })
 
     .addCase(loginAction.pending, (state) => {
