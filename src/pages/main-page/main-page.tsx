@@ -1,5 +1,5 @@
 import { Helmet } from 'react-helmet-async';
-import { useState } from 'react';
+import { useCallback, useState } from 'react';
 import OfferList from '../../components/offer/offer-list';
 import LocationList from '../../components/location/location-list';
 import SortingList from '../../components/sorting/sorting-list';
@@ -9,7 +9,7 @@ import { useAppSelector } from '../../components/hooks';
 import { LOCATIONS } from '../../const/const';
 import { OfferPageType } from '../../const/const';
 import { City } from '../../types/city_types/city-type';
-import { MouseEvent } from 'react';
+import { MouseEvent, memo } from 'react';
 import { getCurrentCityTitle, getCurrentOffers } from '../../store/selectors';
 import OfferListEmpty from '../../components/offer/offer-list-empty';
 
@@ -22,13 +22,14 @@ function MainPage(): JSX.Element {
 
   const [selectedOffer, setSelectedOffer] = useState<Offer | null>(null);
 
-  const handleOfferMouseEnter = (evt: MouseEvent<HTMLElement>) => {
+  const handleOfferMouseEnter = useCallback((evt: MouseEvent<HTMLElement>) => {
     const currentOffer = currentOffers.find((element) => element.id === evt.currentTarget.dataset.id);
     if (!currentOffer) {
       return;
     }
     setSelectedOffer(currentOffer);
-  };
+  },[currentOffers]);
+
   const handleOfferMouseLeave = () => {
     setSelectedOffer(null);
   };
@@ -59,4 +60,4 @@ function MainPage(): JSX.Element {
   );
 }
 
-export default MainPage;
+export default memo(MainPage);

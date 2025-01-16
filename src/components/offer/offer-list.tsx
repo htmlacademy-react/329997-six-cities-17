@@ -1,7 +1,7 @@
 import OfferItem from './offer-item';
 import { Offer } from '../../types/offer-type';
 import { OfferPageType } from '../../const/const';
-import { MouseEvent } from 'react';
+import { MouseEvent, memo } from 'react';
 import classNames from 'classnames';
 
 type OfferListProps = {
@@ -36,4 +36,4 @@ function OfferList(props: OfferListProps): JSX.Element {
   );
 }
 
-export default OfferList;
+export default memo(OfferList);

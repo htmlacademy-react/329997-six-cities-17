@@ -26,3 +26,4 @@ function FavoritePage(): JSX.Element {
 }
 
 export default FavoritePage;
+переделать! вметсе с empty

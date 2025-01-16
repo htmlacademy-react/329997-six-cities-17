@@ -3,6 +3,8 @@ import classNames from 'classnames';
 import { AppRoute } from '../../const/const';
 import HeaderLogo from '../header/header-logo';
 import HeaderNav from '../header/header-nav';
+import { useAppSelector } from '../hooks';
+import { getOffersFavorite } from '../../store/selectors';
 
 function Layout(): JSX.Element {
   const appPath = useLocation().pathname as AppRoute;
@@ -10,7 +12,7 @@ function Layout(): JSX.Element {
   const isPageMain = (appPath === AppRoute.Main);
   const isPageLogin = (appPath === AppRoute.Login);
   const isPageFavorites = (appPath === AppRoute.Favorites);
-  const isFavoritesEmpty: boolean = false; //заготовка
+  const isFavoritesEmpty = useAppSelector(getOffersFavorite).length === 0;
   return (
     <div className={classNames(
       'page',

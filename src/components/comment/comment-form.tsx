@@ -1,4 +1,4 @@
-import { ChangeEvent, useState } from 'react';
+import { ChangeEvent, useState, useCallback, memo } from 'react';
 import { RATING_OPTIONS, CommentOption, SubmitState } from '../../const/const';
 import CommentRatingButton from './comment-rating-button';
 import { checkCommentInRange } from '../../utils/utils';
@@ -21,7 +21,7 @@ function CommentForm(props: CommentFormProps): JSX.Element {
   const comment = formComment;
   const rating = formRating;
 
-  const handleRatingChange = (value: number): void => setFormRating(value);
+  const handleRatingChange = useCallback((value: number): void => setFormRating(value),[]);
 
   const handleCommentChange = (text: string): void => setFormComment(text);
 
@@ -77,4 +77,4 @@ function CommentForm(props: CommentFormProps): JSX.Element {
   );
 }
 
-export default CommentForm;
+export default memo(CommentForm);

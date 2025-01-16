@@ -2,6 +2,7 @@ import { MAX_COMMENTS_COUNT } from '../../const/const';
 import { OfferComment } from '../../types/offer-comment-type';
 import ReviewItem from './review-item';
 import { sortComments } from '../../utils/utils';
+import { memo } from 'react';
 
 
 type ReviewListProps = {
@@ -27,4 +28,4 @@ function ReviewList(props: ReviewListProps): JSX.Element {
   );
 }
 
-export default ReviewList;
+export default memo(ReviewList);

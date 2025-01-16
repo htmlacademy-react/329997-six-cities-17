@@ -1,7 +1,7 @@
 import { useAppSelector, useAppDispatch } from '../hooks';
 import { Link } from 'react-router-dom';
 import { AppRoute } from '../../const/const';
-import { MouseEvent } from 'react';
+import { MouseEvent, memo, useCallback } from 'react';
 import { logoutAction } from '../../store/api-action';
 import { getOffersFavorite, getUserData } from '../../store/selectors';
 
@@ -12,10 +12,10 @@ function HeaderNav(): JSX.Element {
 
   const dispatch = useAppDispatch();
 
-  const handleLogout = (evt: MouseEvent<HTMLSpanElement>) => {
+  const handleLogout = useCallback((evt: MouseEvent<HTMLSpanElement>) => {
     evt.preventDefault();
     dispatch(logoutAction());
-  };
+  },[dispatch]);
 
   return (
     <nav className="header__nav">
@@ -53,4 +53,4 @@ function HeaderNav(): JSX.Element {
   );
 }
 
-export default HeaderNav;
+export default memo(HeaderNav);

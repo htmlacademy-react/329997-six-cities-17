@@ -1,6 +1,6 @@
 import LocationItem from './location-item';
 import { useAppSelector, useAppDispatch } from '../hooks';
-import { MouseEvent } from 'react';
+import { MouseEvent, useCallback, memo } from 'react';
 import { changeCity, changeSortingType } from '../../store/action';
 import { SortType } from '../../const/const';
 import { getCurrentCityTitle } from '../../store/selectors';
@@ -14,10 +14,11 @@ function LocationList(props: LocationListProps): JSX.Element {
   const currentCity = useAppSelector(getCurrentCityTitle);
   const dispatch = useAppDispatch();
 
-  const handleCityChange = (evt: MouseEvent<HTMLAnchorElement>) => {
+  const handleCityChange = useCallback((evt: MouseEvent<HTMLAnchorElement>) => {
     dispatch(changeCity({ city: evt.currentTarget.text }));
     dispatch(changeSortingType(SortType.POPULAR));
-  };
+  }, [dispatch]);
+  
   return (
     <div>
       <h1 className="visually-hidden">Cities</h1>
@@ -33,5 +34,5 @@ function LocationList(props: LocationListProps): JSX.Element {
   );
 }
 
-export default LocationList;
+export default memo(LocationList);
 

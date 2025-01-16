@@ -3,7 +3,7 @@ import { Link, generatePath } from 'react-router-dom';
 import { AppRoute, OfferPageType, FavoriteButtonType } from '../../const/const';
 import { getStarsRating, capitalizeFirstLetter } from '../../utils/utils';
 import { Offer } from '../../types/offer-type';
-import { MouseEvent } from 'react';
+import { MouseEvent, memo } from 'react';
 import FavoriteButton from '../favorite-button/favorite-button';
 
 type OfferItemProps = {
@@ -64,4 +64,4 @@ function OfferItem(props: OfferItemProps): JSX.Element {
   );
 }
 
-export default OfferItem;
+export default memo(OfferItem);

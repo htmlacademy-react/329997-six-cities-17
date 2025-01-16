@@ -1,5 +1,6 @@
 import { OfferComment } from '../../types/offer-comment-type';
 import { getStarsRating, convertDateToProperty, convertDateToHumanized } from '../../utils/utils';
+import { memo } from 'react';
 
 
 type ReviewItemProps = {
@@ -37,4 +38,4 @@ function ReviewItem(props: ReviewItemProps): JSX.Element {
   );
 }
 
-export default ReviewItem;
+export default memo(ReviewItem);
