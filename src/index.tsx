@@ -6,9 +6,13 @@ import { store } from './store';
 import { checkAuthAction, fetchOffersAction, fetchOffersFavoriteAction } from './store/api-action';
 import { ToastContainer } from 'react-toastify';
 
-store.dispatch(checkAuthAction());
+store.dispatch(checkAuthAction())
+  .then((response) => {
+    if (response.meta.requestStatus === 'fulfilled') {
+      store.dispatch(fetchOffersFavoriteAction());
+    }
+  });
 store.dispatch(fetchOffersAction());
-store.dispatch(fetchOffersFavoriteAction());
 
 
 const root = ReactDOM.createRoot(
