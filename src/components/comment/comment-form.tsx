@@ -4,7 +4,7 @@ import CommentRatingButton from './comment-rating-button';
 import { checkCommentInRange } from '../../utils/utils';
 import { useAppDispatch, useAppSelector } from '../hooks';
 import { submitCommentAction } from '../../store/api-action';
-import { getSubmittingState } from '../../store/selectors';
+import { getSubmittingState } from '../../store/offer-extended-process/offer-extended-process.selectors';
 
 type CommentFormProps = {
   id: string;

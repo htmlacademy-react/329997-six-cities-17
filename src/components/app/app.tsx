@@ -10,9 +10,10 @@ import RedirectRoute from '../redirect-route/redirect-route';
 import Layout from '../layout/layout';
 import Loading from '../loading/loading';
 import { useAppSelector } from '../hooks';
-import { getAuthorizationState, getOffersState } from '../../store/selectors';
 import HistoryRouter from '../history-route/history-route';
 import browserHistory from '../../browser-history/browser-history';
+import { getAuthorizationState } from '../../store/auth-process/auth-process.selectors';
+import { getOffersState } from '../../store/offer-process/offer-process.selectors';
 
 function App(): JSX.Element {
   const authorizationStatus = useAppSelector(getAuthorizationState);

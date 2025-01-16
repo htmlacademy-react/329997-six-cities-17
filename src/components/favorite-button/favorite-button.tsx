@@ -1,10 +1,12 @@
-import { AppRoute, AuthorizationState, FavoriteButtonType, FavoriteStatus, FetchState } from '../../const/const';
+import { AppRoute, AuthorizationState, FavoriteButtonType, FetchState } from '../../const/const';
 import classNames from 'classnames';
 import { useAppDispatch, useAppSelector } from '../hooks';
-import { getAuthorizationState, getOfferFavoriteStatusState } from '../../store/selectors';
-import { toggleOfferFavoriteStatusAction } from '../../store/api-action';
+import { addOfferToFavoriteAction, removeOfferFromFavoriteAction } from '../../store/api-action';
 import { redirectToRoute } from '../../store/action';
 import { useCallback } from 'react';
+import { getAuthorizationState } from '../../store/auth-process/auth-process.selectors';
+import { getFavoriteOfferStatusState } from '../../store/favorite-offers-process/favorite-offers-process.selectors';
+
 
 type FavoriteButtonProps = {
   isFavorite: boolean;
@@ -15,11 +17,15 @@ function FavoriteButton(props: FavoriteButtonProps): JSX.Element {
   const { isFavorite, favoriteButtonType, id } = props;
   const dispatch = useAppDispatch();
   const authState = useAppSelector(getAuthorizationState);
-  const favoriteToggleState = useAppSelector(getOfferFavoriteStatusState);
+  const favoriteToggleState = useAppSelector(getFavoriteOfferStatusState);
 
   const handleFavoriteButtonClick = useCallback(() => {
     if (authState === AuthorizationState.Auth) {
-      dispatch(toggleOfferFavoriteStatusAction({ id, status: isFavorite ? FavoriteStatus.UnsetFavorite : FavoriteStatus.SetFavorite }));
+      if (isFavorite) {
+        dispatch(removeOfferFromFavoriteAction(id));
+      } else {
+        dispatch(addOfferToFavoriteAction(id));
+      }
     } else {
       dispatch(redirectToRoute(AppRoute.Login));
     }

@@ -2,14 +2,14 @@ import { Helmet } from 'react-helmet-async';
 import Footer from '../../components/footer/footer';
 import FavoriteList from '../../components/favorite/favorite-list';
 import { useAppSelector } from '../../components/hooks';
-import { getOffersFavorite } from '../../store/selectors';
 import FavoriteEmpty from '../../components/favorite/favorite-empty';
 import classNames from 'classnames';
+import { getFavoriteOffers } from '../../store/favorite-offers-process/favorite-offers-process.selectors';
 
 
 function FavoritePage(): JSX.Element {
 
-  const favoriteOffers = useAppSelector(getOffersFavorite);
+  const favoriteOffers = useAppSelector(getFavoriteOffers);
   const isFavoritesEmpty = favoriteOffers.length === 0;
 
   return (

@@ -10,12 +10,12 @@ import { LOCATIONS } from '../../const/const';
 import { OfferPageType } from '../../const/const';
 import { City } from '../../types/city_types/city-type';
 import { MouseEvent, memo } from 'react';
-import { getCurrentCityTitle, getCurrentOffers } from '../../store/selectors';
 import OfferListEmpty from '../../components/offer/offer-list-empty';
+import { getCurrentOffers, getOffersCityTitle } from '../../store/offer-process/offer-process.selectors';
 
 function MainPage(): JSX.Element {
   const currentOffers = useAppSelector(getCurrentOffers);
-  const currentCityTitle = useAppSelector(getCurrentCityTitle);
+  const currentCityTitle = useAppSelector(getOffersCityTitle);
   const currentCity: City = currentOffers[0].city;
 
   const isCurrentOffersEmpty = currentOffers.length === 0;

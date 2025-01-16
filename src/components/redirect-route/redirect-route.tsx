@@ -1,7 +1,7 @@
 import { Navigate } from 'react-router-dom';
 import { AppRoute, AuthorizationState } from '../../const/const';
 import { useAppSelector } from '../hooks';
-import { getAuthorizationState } from '../../store/selectors';
+import { getAuthorizationState } from '../../store/auth-process/auth-process.selectors';
 
 type RedirectRouteProps = {
   children: JSX.Element;

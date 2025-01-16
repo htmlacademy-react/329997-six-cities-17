@@ -1,9 +1,10 @@
 import classNames from 'classnames';
 import { useAppSelector, useAppDispatch } from '../hooks';
-import { changeSortingState, changeSortingType } from '../../store/action';
 import SortingItem from './sorting-item';
 import { SortType } from '../../const/const';
-import { getCurrentSortingState, getCurrentSortingType } from '../../store/selectors';
+import { getCurrentSortingState, getCurrentSortingType } from '../../store/offer-process/offer-process.selectors';
+import { changeSortingState, changeSortingType } from '../../store/offer-process/offer-process.slice';
+
 
 function SortingList(): JSX.Element {
   const currentSortingState = useAppSelector(getCurrentSortingState);
@@ -12,12 +13,12 @@ function SortingList(): JSX.Element {
   const sortingTypes = Object.values(SortType).map((element) => element);
 
   const handleSortingOpenClick = () => {
-    dispatch(changeSortingState({ sortingState: true }));
+    dispatch(changeSortingState(true));
   };
 
   const handleSortingTypeClick = (inputSorting: SortType) => {
     dispatch(changeSortingType(inputSorting));
-    dispatch(changeSortingState({ sortingState: false }));
+    dispatch(changeSortingState(false));
   };
 
   return (

@@ -4,9 +4,9 @@ import { useAppDispatch, useAppSelector } from '../../components/hooks';
 import { loginAction } from '../../store/api-action';
 import { Link, useNavigate } from 'react-router-dom';
 import { AppRoute, LOCATIONS, SignInState, SortType } from '../../const/const';
-import { getSigningInState } from '../../store/selectors';
 import { getRandomElement } from '../../utils/utils';
-import { changeCity, changeSortingType } from '../../store/action';
+import { getSigningInState } from '../../store/auth-process/auth-process.selectors';
+import { changeCity, changeSortingType } from '../../store/offer-process/offer-process.slice';
 
 function LoginPage(): JSX.Element {
 
@@ -18,7 +18,7 @@ function LoginPage(): JSX.Element {
   const navigate = useNavigate();
 
   const handleCityClick = (evt: MouseEvent<HTMLAnchorElement>) => {
-    dispatch(changeCity({ city: evt.currentTarget.text }));
+    dispatch(changeCity(evt.currentTarget.text));
     dispatch(changeSortingType(SortType.POPULAR));
   };
 
