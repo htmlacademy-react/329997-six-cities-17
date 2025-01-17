@@ -1,4 +1,5 @@
 import { OfferExtended } from '../../types/offer-extended-type';
+import { memo } from 'react';
 
 type OfferExtendedHostProps = {
   offer: OfferExtended;
@@ -32,4 +33,4 @@ function OfferExtendedHost(props: OfferExtendedHostProps): JSX.Element {
   );
 }
 
-export default OfferExtendedHost;
+export default memo(OfferExtendedHost);

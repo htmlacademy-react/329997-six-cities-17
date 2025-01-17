@@ -1,3 +1,5 @@
+import { memo } from 'react';
+
 type OfferExtendedFacilitiesProps = {
   goods?: string[];
 }
@@ -19,4 +21,4 @@ function OfferExtendedFacilities(props: OfferExtendedFacilitiesProps): JSX.Eleme
   );
 }
 
-export default OfferExtendedFacilities;
+export default memo(OfferExtendedFacilities);

@@ -1,5 +1,5 @@
 import classNames from 'classnames';
-import { MouseEvent } from 'react';
+import { MouseEvent, memo } from 'react';
 
 type LocationItemProps = {
   title: string;
@@ -25,4 +25,4 @@ function LocationItem(props: LocationItemProps): JSX.Element {
     </li >
   );
 }
-export default LocationItem;
+export default memo(LocationItem);

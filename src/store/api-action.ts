@@ -16,20 +16,26 @@ export const fetchOffersAction = createAsyncThunk<Offer[], undefined, ApiActionT
   });
 
 export const fetchOfferExtendedAction = createAsyncThunk<OfferExtended, string, ApiActionType>(
-  'offers/fetchOfferExtended', async (id, { extra: api }) => {
+  'offerExtended/fetchOfferExtended', async (id, { extra: api }) => {
     const { data } = await api.get<OfferExtended>(`${APIRoute.Offers}/${id}`);
     return data;
   });
 
 export const fetchOfferExtendedCommentsAction = createAsyncThunk<OfferComment[], string, ApiActionType>(
-  'offers/fetchOfferExtendedComments', async (id, { extra: api }) => {
+  'offerNearby/fetchOfferExtendedComments', async (id, { extra: api }) => {
     const { data } = await api.get<OfferComment[]>(`${APIRoute.Comments}/${id}`);
     return data;
   });
 
 export const fetchOffersNearbyAction = createAsyncThunk<Offer[], string, ApiActionType>(
-  'offers/fetchOffersNearby', async (id, { extra: api }) => {
+  'offersNearby/fetchOffersNearby', async (id, { extra: api }) => {
     const { data } = await api.get<Offer[]>(`${APIRoute.Offers}/${id}/nearby`);
+    return data;
+  });
+
+export const fetchFavoriteOffersAction = createAsyncThunk<Offer[], undefined, ApiActionType>(
+  'offers/fetchOffersFavorite', async (_arg, { extra: api }) => {
+    const { data } = await api.get<Offer[]>(APIRoute.Favorite);
     return data;
   });
 
@@ -40,20 +46,37 @@ export const checkAuthAction = createAsyncThunk<UserData, undefined, ApiActionTy
   });
 
 export const loginAction = createAsyncThunk<UserData, AuthData, ApiActionType>(
-  'user/login', async ({ login: email, password }, { extra: api }) => {
+  'user/login', async ({ login: email, password }, { dispatch, extra: api }) => {
     const { data, data: { token } } = await api.post<UserData>(APIRoute.Login, { email, password });
     saveToken(token);
+    dispatch(fetchOffersAction());
+    dispatch(fetchFavoriteOffersAction());
     return data;
   });
 
 export const logoutAction = createAsyncThunk<void, undefined, ApiActionType>(
-  'user/logout', async (_arg, { extra: api }) => {
+  'user/logout', async (_arg, { dispatch, extra: api }) => {
     await api.delete(APIRoute.Logout);
     dropToken();
+    dispatch(fetchOffersAction());
   });
 
 export const submitCommentAction = createAsyncThunk<void, OfferCommentPost, ApiActionType>(
-  'offers/submitComment', async ({ comment, rating, id }, { dispatch, extra: api }) => {
+  'offerExtended/submitComment', async ({ comment, rating, id }, { dispatch, extra: api }) => {
     await api.post<OfferCommentPost>(`${APIRoute.Comments}/${id}`, { comment, rating });
     dispatch(fetchOfferExtendedCommentsAction(id));
+  });
+
+export const addOfferToFavoriteAction = createAsyncThunk<OfferExtended, string, ApiActionType>(
+  'offers/addOfferToFavorite', async (id, { dispatch, extra: api }) => {
+    const { data } = await api.post<OfferExtended>(`${APIRoute.Favorite}/${id}/1`);
+    dispatch(fetchFavoriteOffersAction());
+    return data;
+  });
+
+export const removeOfferFromFavoriteAction = createAsyncThunk<OfferExtended, string, ApiActionType>(
+  'offers/removeOfferFromFavorite', async (id, { dispatch, extra: api }) => {
+    const { data } = await api.post<OfferExtended>(`${APIRoute.Favorite}/${id}/0`);
+    dispatch(fetchFavoriteOffersAction());
+    return data;
   });

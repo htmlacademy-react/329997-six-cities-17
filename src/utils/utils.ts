@@ -2,6 +2,7 @@ import { SortType } from '../const/const';
 import { CityLocation } from '../types/city_types/city-location-type';
 import { City } from '../types/city_types/city-type';
 import { OfferComment } from '../types/offer-comment-type';
+import { OfferExtended } from '../types/offer-extended-type';
 import { Offer } from '../types/offer-type';
 import dayjs from 'dayjs';
 
@@ -15,7 +16,7 @@ const convertDateToProperty = (dateString: string) => dayjs(dateString).format('
 
 const convertDateToHumanized = (dateString: string) => dayjs(dateString).format('MMMM D');
 
-const getFavoriteOffers = (offers: Offer[]) => {
+const getFavoriteOffersByLocation = (offers: Offer[]) => {
   const favoriteOffers = offers.filter((element) => element.isFavorite);
 
   if (favoriteOffers.length === 0) {
@@ -77,4 +78,6 @@ const sortComments = (commens: OfferComment[]) => commens.toSorted(getDateCompar
 
 const getRandomElement = <T>(elements: T[]) => elements[Math.floor(Math.random() * elements.length)];
 
-export { getStarsRating, getFavoriteOffers, capitalizeFirstLetter, checkCommentInRange, getOffersLocations, convertDateToProperty, convertDateToHumanized, getCurrentLocationOffers, sortOffers, sortComments, getRandomElement };
+const updateOfferFavoriteStatus = (offers: Offer[], response: OfferExtended, isFavorite: boolean) => offers.map((offer) => offer.id === response.id ? { ...offer, isFavorite } : offer);
+
+export { getStarsRating, getFavoriteOffersByLocation, capitalizeFirstLetter, checkCommentInRange, getOffersLocations, convertDateToProperty, convertDateToHumanized, getCurrentLocationOffers, sortOffers, sortComments, getRandomElement, updateOfferFavoriteStatus };

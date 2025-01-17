@@ -1,9 +1,10 @@
 import classNames from 'classnames';
 import { Link, generatePath } from 'react-router-dom';
-import { AppRoute, OfferPageType } from '../../const/const';
+import { AppRoute, OfferPageType, FavoriteButtonType } from '../../const/const';
 import { getStarsRating, capitalizeFirstLetter } from '../../utils/utils';
 import { Offer } from '../../types/offer-type';
-import { MouseEvent } from 'react';
+import { MouseEvent, memo } from 'react';
+import FavoriteButton from '../favorite-button/favorite-button';
 
 type OfferItemProps = {
   offer: Offer;
@@ -16,7 +17,6 @@ function OfferItem(props: OfferItemProps): JSX.Element {
   const { offer, pageType, onPlaceMouseEnter, onPlaceMouseLeave } = props;
   const { id, isPremium, previewImage, price, isFavorite, rating, title, type } = offer;
   const starsRating = getStarsRating(rating);
-
 
   return (
     <article
@@ -46,14 +46,7 @@ function OfferItem(props: OfferItemProps): JSX.Element {
             <b className="place-card__price-value">&euro;{price}</b>
             <span className="place-card__price-text">&#47;&nbsp;night</span>
           </div>
-
-          <button className={classNames('place-card__bookmark-button', { 'place-card__bookmark-button--active': isFavorite }, 'button', 'type="button"')}>
-            <svg className="place-card__bookmark-icon" width={18} height={19}>
-              <use xlinkHref="#icon-bookmark"></use>
-            </svg>
-            <span className="visually-hidden">{isFavorite ? 'In bookmarks' : 'To bookmarks'}</span>
-          </button>
-
+          <FavoriteButton isFavorite={isFavorite} favoriteButtonType={FavoriteButtonType.PLACE_CARD} id={id}/>
         </div>
         <div className="place-card__rating rating">
           <div className="place-card__stars rating__stars">
@@ -71,4 +64,4 @@ function OfferItem(props: OfferItemProps): JSX.Element {
   );
 }
 
-export default OfferItem;
+export default memo(OfferItem);

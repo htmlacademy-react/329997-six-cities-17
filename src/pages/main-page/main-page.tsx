@@ -1,5 +1,5 @@
 import { Helmet } from 'react-helmet-async';
-import { useState } from 'react';
+import { useCallback, useState } from 'react';
 import OfferList from '../../components/offer/offer-list';
 import LocationList from '../../components/location/location-list';
 import SortingList from '../../components/sorting/sorting-list';
@@ -9,26 +9,27 @@ import { useAppSelector } from '../../components/hooks';
 import { LOCATIONS } from '../../const/const';
 import { OfferPageType } from '../../const/const';
 import { City } from '../../types/city_types/city-type';
-import { MouseEvent } from 'react';
-import { getCurrentCityTitle, getCurrentOffers } from '../../store/selectors';
+import { MouseEvent, memo } from 'react';
 import OfferListEmpty from '../../components/offer/offer-list-empty';
+import { getCurrentOffers, getOffersCityTitle } from '../../store/offer-process/offer-process.selectors';
 
 function MainPage(): JSX.Element {
   const currentOffers = useAppSelector(getCurrentOffers);
-  const currentCityTitle = useAppSelector(getCurrentCityTitle);
+  const currentCityTitle = useAppSelector(getOffersCityTitle);
   const currentCity: City = currentOffers[0].city;
 
   const isCurrentOffersEmpty = currentOffers.length === 0;
 
   const [selectedOffer, setSelectedOffer] = useState<Offer | null>(null);
 
-  const handleOfferMouseEnter = (evt: MouseEvent<HTMLElement>) => {
+  const handleOfferMouseEnter = useCallback((evt: MouseEvent<HTMLElement>) => {
     const currentOffer = currentOffers.find((element) => element.id === evt.currentTarget.dataset.id);
     if (!currentOffer) {
       return;
     }
     setSelectedOffer(currentOffer);
-  };
+  },[currentOffers]);
+
   const handleOfferMouseLeave = () => {
     setSelectedOffer(null);
   };
@@ -59,4 +60,4 @@ function MainPage(): JSX.Element {
   );
 }
 
-export default MainPage;
+export default memo(MainPage);

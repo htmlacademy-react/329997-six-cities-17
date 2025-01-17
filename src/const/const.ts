@@ -140,3 +140,16 @@ export const BLANK_OFFER_EXTENDED = {
   bedrooms: 0,
   maxAdults: 0,
 };
+
+export enum FavoriteButtonType {
+  OFFER = 'offer',
+  PLACE_CARD = 'place-card',
+}
+
+export enum NameSpace {
+  Auth = 'AUTH',
+  Offers = 'OFFERS',
+  OfferExtended = 'OFFER_EXTENDED',
+  FavoriteOffers = 'FAVORITE_OFFERS',
+  OffersNearby = 'OFFERS_NEARBY',
+}

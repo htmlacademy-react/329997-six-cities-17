@@ -1,3 +1,5 @@
+import { memo } from 'react';
+
 type OfferExtendedGalleryProps = {
   images?: string[];
 }
@@ -17,4 +19,4 @@ function OfferExtendedGallery(props: OfferExtendedGalleryProps): JSX.Element {
   );
 }
 
-export default OfferExtendedGallery;
+export default memo(OfferExtendedGallery);

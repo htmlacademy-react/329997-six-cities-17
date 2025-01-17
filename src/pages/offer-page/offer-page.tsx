@@ -6,16 +6,17 @@ import { OfferPageType, AuthorizationState, NEAR_PACES_COUNT, FetchState, AppRou
 import OfferList from '../../components/offer/offer-list';
 import { useAppSelector } from '../../components/hooks';
 import { Navigate, useParams } from 'react-router-dom';
-import { useEffect } from 'react';
+import { useEffect, memo } from 'react';
 import { fetchOfferExtendedAction, fetchOfferExtendedCommentsAction, fetchOffersNearbyAction } from '../../store/api-action';
 import { useAppDispatch } from '../../components/hooks';
 import OfferExtendedGallery from '../../components/offer-extended/offer-extended-gallery';
 import OfferExtendedInfo from '../../components/offer-extended/offer-extended-info';
 import OfferExtendedFacilities from '../../components/offer-extended/offer-extended-facilities';
 import OfferExtendedHost from '../../components/offer-extended/offer-extended-host';
-import { getAuthorizationState, getOfferExtended, getOfferExtendedComments, getOfferExtendedState, getOffersNearby } from '../../store/selectors';
 import useScrollToTop from '../../components/hooks/sctroll-to-top';
 import Loading from '../../components/loading/loading';
+import { getOfferExtended, getOfferExtendedComments, getOfferExtendedState, getOffersNearby } from '../../store/offer-extended-process/offer-extended-process.selectors';
+import { getAuthorizationState } from '../../store/auth-process/auth-process.selectors';
 
 function OfferPage(): JSX.Element {
   useScrollToTop();
@@ -71,7 +72,7 @@ function OfferPage(): JSX.Element {
             </section>
           </div>
         </div>
-        <Map city={currentOffer.city} offers={offersNearby} mapType={OfferPageType.NEAR_PLACES} offerExtended={currentOffer} />
+        {offersNearby && <Map city={currentOffer.city} offers={offersNearby} mapType={OfferPageType.NEAR_PLACES} offerExtended={currentOffer} />}
       </section>
       <div className="container">
         <section className="near-places places">
@@ -83,4 +84,4 @@ function OfferPage(): JSX.Element {
   );
 }
 
-export default OfferPage;
+export default memo(OfferPage);
