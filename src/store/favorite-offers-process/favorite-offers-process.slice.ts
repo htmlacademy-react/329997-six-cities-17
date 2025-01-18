@@ -1,7 +1,8 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { FetchState, NameSpace } from '../../const/const';
-import { fetchFavoriteOffersAction } from '../api-action';
+import { addOfferToFavoriteAction, fetchFavoriteOffersAction, removeOfferFromFavoriteAction } from '../api-action';
 import { Offer } from '../../types/offer-type';
+import { toast } from 'react-toastify';
 
 const initialState: {
   favoriteOffers: Offer[];
@@ -29,6 +30,19 @@ export const favoriteOffersProcess = createSlice({
       })
       .addCase(fetchFavoriteOffersAction.rejected, (state) => {
         state.favoriteOffersState = FetchState.Error;
+      })
+      .addCase(addOfferToFavoriteAction.fulfilled, (state, action) => {
+        state.favoriteOffers.push(action.payload);
+      })
+      .addCase(addOfferToFavoriteAction.rejected, () => {
+        toast.error('Add to favorite error!');
+      })
+      .addCase(removeOfferFromFavoriteAction.fulfilled, (state, action) => {
+        const favoriteOfferId = state.favoriteOffers.findIndex((offer) => offer.id === action.payload.id);
+        state.favoriteOffers.splice(favoriteOfferId, 1);
+      })
+      .addCase(removeOfferFromFavoriteAction.rejected, () => {
+        toast.error('Remove from favorite error!');
       });
   }
 });

@@ -21,16 +21,20 @@ function CommentForm(props: CommentFormProps): JSX.Element {
   const comment = formComment;
   const rating = formRating;
 
-  const handleRatingChange = useCallback((value: number): void => setFormRating(value),[]);
+  const handleRatingChange = useCallback((value: number): void => setFormRating(value), []);
 
   const handleCommentChange = (text: string): void => setFormComment(text);
 
   const handleFormSubmit = (evt: ChangeEvent<HTMLFormElement>) => {
     evt.preventDefault();
     if (id) {
-      dispatch(submitCommentAction({ comment, rating, id }));
-      setFormRating(0);
-      setFormComment('');
+      dispatch(submitCommentAction({ comment, rating, id }))
+        .then((response) => {
+          if (response.meta.requestStatus === 'fulfilled') {
+            setFormRating(0);
+            setFormComment('');
+          }
+        });
     }
   };
 
@@ -49,6 +53,7 @@ function CommentForm(props: CommentFormProps): JSX.Element {
             title={title}
             onCommentRatingButtonChange={handleRatingChange}
             checked={formRating === value}
+            disabled={submittingState === SubmitState.Submitting}
           />))}
 
       </div>
@@ -59,6 +64,7 @@ function CommentForm(props: CommentFormProps): JSX.Element {
         name="review"
         placeholder="Tell how was your stay, what you like and what can be improved"
         onChange={(evt) => handleCommentChange(evt.target.value)}
+        disabled={submittingState === SubmitState.Submitting}
       >
       </textarea>
       <div className="reviews__button-wrapper">

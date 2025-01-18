@@ -2,17 +2,14 @@ import { createSlice } from '@reduxjs/toolkit';
 import { BLANK_OFFER_EXTENDED, FetchState, NameSpace, SubmitState } from '../../const/const';
 import { toast } from 'react-toastify';
 import { OfferExtended } from '../../types/offer-extended-type';
-import { addOfferToFavoriteAction, fetchOfferExtendedAction, fetchOfferExtendedCommentsAction, fetchOffersNearbyAction, removeOfferFromFavoriteAction, submitCommentAction } from '../api-action';
+import { addOfferToFavoriteAction, fetchOfferExtendedAction, fetchOfferExtendedCommentsAction, removeOfferFromFavoriteAction, submitCommentAction } from '../api-action';
 import { OfferComment } from '../../types/offer-comment-type';
-import { Offer } from '../../types/offer-type';
 
 const initialState: {
   currentOfferExtended: OfferExtended;
   currentOfferExtendedState: FetchState;
   currentOfferExtendedComments: OfferComment[];
   currentOfferExtendedCommentsState: FetchState;
-  currentOffersNearby: Offer[];
-  currentOffersNearbyState: FetchState;
   submittingState: SubmitState;
 } =
 {
@@ -20,8 +17,6 @@ const initialState: {
   currentOfferExtendedState: FetchState.Unknown,
   currentOfferExtendedComments: [],
   currentOfferExtendedCommentsState: FetchState.Unknown,
-  currentOffersNearby: [],
-  currentOffersNearbyState: FetchState.Unknown,
   submittingState: SubmitState.Unknown,
 };
 
@@ -53,22 +48,12 @@ export const offerExtendedProcess = createSlice({
         state.currentOfferExtendedCommentsState = FetchState.Error;
         toast.error('Loading offer comments error!');
       })
-      .addCase(fetchOffersNearbyAction.pending, (state) => {
-        state.currentOffersNearbyState = FetchState.Loading;
-      })
-      .addCase(fetchOffersNearbyAction.fulfilled, (state, action) => {
-        state.currentOffersNearbyState = FetchState.Loaded;
-        state.currentOffersNearby = action.payload;
-      })
-      .addCase(fetchOffersNearbyAction.rejected, (state) => {
-        state.currentOffersNearbyState = FetchState.Error;
-        toast.error('Loading nearby offers error!');
-      })
       .addCase(submitCommentAction.pending, (state) => {
         state.submittingState = SubmitState.Submitting;
       })
-      .addCase(submitCommentAction.fulfilled, (state) => {
+      .addCase(submitCommentAction.fulfilled, (state, action) => {
         state.submittingState = SubmitState.Submited;
+        state.currentOfferExtendedComments.push(action.payload);
       })
       .addCase(submitCommentAction.rejected, (state) => {
         state.submittingState = SubmitState.Error;

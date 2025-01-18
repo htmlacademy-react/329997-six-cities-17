@@ -10,14 +10,13 @@ type ReviewListProps = {
 }
 function ReviewList(props: ReviewListProps): JSX.Element {
   const { offerComments } = props;
-  let offersCommentsShown = offerComments?.slice(0, MAX_COMMENTS_COUNT);
-  offersCommentsShown = offersCommentsShown && sortComments(offersCommentsShown);
+  const offerCommentsShown = sortComments(offerComments)?.slice(0, MAX_COMMENTS_COUNT);
 
   return (
     <>
       <h2 className="reviews__title">Reviews &middot; <span className="reviews__amount">{offerComments?.length}</span></h2>
       <ul className="reviews__list">
-        {offersCommentsShown.map((element) => (
+        {offerCommentsShown.map((element) => (
           <ReviewItem
             key={element.id}
             offerComment={element}

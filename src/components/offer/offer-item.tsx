@@ -46,7 +46,7 @@ function OfferItem(props: OfferItemProps): JSX.Element {
             <b className="place-card__price-value">&euro;{price}</b>
             <span className="place-card__price-text">&#47;&nbsp;night</span>
           </div>
-          <FavoriteButton isFavorite={isFavorite} favoriteButtonType={FavoriteButtonType.PLACE_CARD} id={id}/>
+          <FavoriteButton isFavorite={isFavorite} favoriteButtonType={FavoriteButtonType.PLACE_CARD} id={id} />
         </div>
         <div className="place-card__rating rating">
           <div className="place-card__stars rating__stars">
@@ -55,7 +55,9 @@ function OfferItem(props: OfferItemProps): JSX.Element {
           </div>
         </div>
         <h2 className="place-card__name">
-          <a href="#">{title}</a>
+          <Link to={generatePath(AppRoute.Offer, { id })}>
+            {title}
+          </Link>
         </h2>
         <p className="place-card__type">{capitalizeFirstLetter(type)}</p>
       </div>
