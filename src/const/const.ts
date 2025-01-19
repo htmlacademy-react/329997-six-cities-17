@@ -84,6 +84,8 @@ export const NEAR_PACES_COUNT = 3;
 
 export const MAX_COMMENTS_COUNT = 10;
 
+export const MAX_PHOTOS_COUNT = 6;
+
 export enum FetchState {
   Unknown = 'unknown',
   Loading = 'loading',
@@ -99,7 +101,7 @@ export enum SubmitState {
 }
 export enum SignInState {
   Unknown = 'unknown',
-  SigningIn= 'signing-in',
+  SigningIn = 'signing-in',
   SignedIn = 'signed-in',
   Error = 'error',
 }
@@ -141,6 +143,15 @@ export const BLANK_OFFER_EXTENDED = {
   maxAdults: 0,
 };
 
+export const BLANK_CITY = {
+  name: '',
+  location: {
+    latitude: 0,
+    longitude: 0,
+    zoom: 0,
+  }
+};
+
 export enum FavoriteButtonType {
   OFFER = 'offer',
   PLACE_CARD = 'place-card',
@@ -151,5 +162,5 @@ export enum NameSpace {
   Offers = 'OFFERS',
   OfferExtended = 'OFFER_EXTENDED',
   FavoriteOffers = 'FAVORITE_OFFERS',
-  OffersNearby = 'OFFERS_NEARBY',
+  OfferExtendedNearby = 'OFFER_EXTENDED_NEARBY',
 }

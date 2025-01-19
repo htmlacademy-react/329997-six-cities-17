@@ -37,7 +37,7 @@ function FavoriteButton(props: FavoriteButtonProps): JSX.Element {
         `${favoriteButtonType}__bookmark-button`,
         { 'place-card__bookmark-button--active': isFavorite && favoriteButtonType === FavoriteButtonType.PLACE_CARD },
         { 'offer__bookmark-button--active': isFavorite && favoriteButtonType === FavoriteButtonType.OFFER },
-        'button', 'type="button"'
+        'button'
       )}
       onClick={handleFavoriteButtonClick}
       disabled={favoriteToggleState === FetchState.Loading}

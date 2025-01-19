@@ -5,10 +5,11 @@ type CommentRatingButtonProps = {
   title: string;
   onCommentRatingButtonChange: (value: number) => void;
   checked: boolean;
+  disabled: boolean;
 };
 
 function CommentRatingButton(props: CommentRatingButtonProps): JSX.Element {
-  const { value, checked, title, onCommentRatingButtonChange } = props;
+  const { value, checked, disabled, title, onCommentRatingButtonChange } = props;
   return (
     <>
       <input className="form__rating-input visually-hidden"
@@ -17,6 +18,7 @@ function CommentRatingButton(props: CommentRatingButtonProps): JSX.Element {
         id={`${value}-stars`}
         type="radio"
         checked={checked}
+        disabled={disabled}
         onChange={(evt) => onCommentRatingButtonChange(Number(evt.target.value))}
       />
       <label htmlFor={`${value}-stars`}

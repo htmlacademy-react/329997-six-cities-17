@@ -14,7 +14,6 @@ type OfferListProps = {
 function OfferList(props: OfferListProps): JSX.Element {
   const { offers, pageType, onOfferMouseEnter, onOfferMouseLeave } = props;
 
-
   return (
     <div className={classNames(
       { 'cities__places-list': pageType === OfferPageType.CITIES },

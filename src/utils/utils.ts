@@ -1,20 +1,17 @@
 import { SortType } from '../const/const';
-import { CityLocation } from '../types/city_types/city-location-type';
-import { City } from '../types/city_types/city-type';
 import { OfferComment } from '../types/offer-comment-type';
-import { OfferExtended } from '../types/offer-extended-type';
 import { Offer } from '../types/offer-type';
 import dayjs from 'dayjs';
 
 const capitalizeFirstLetter = (inputString: string): string => inputString.charAt(0).toUpperCase() + inputString.slice(1);
 
-const getStarsRating = (rating: number) => `${20 * rating}%`;
+const getStarsRating = (rating: number) => `${20 * Math.round(rating)}%`;
 
 const checkCommentInRange = (min: number, max: number, value: string) => (value.length >= min) && (value.length <= max);
 
 const convertDateToProperty = (dateString: string) => dayjs(dateString).format('YYYY-MM-DD');
 
-const convertDateToHumanized = (dateString: string) => dayjs(dateString).format('MMMM D');
+const convertDateToHumanized = (dateString: string) => dayjs(dateString).format('MMMM YYYY');
 
 const getFavoriteOffersByLocation = (offers: Offer[]) => {
   const favoriteOffers = offers.filter((element) => element.isFavorite);
@@ -38,14 +35,6 @@ const getFavoriteOffersByLocation = (offers: Offer[]) => {
   }
   );
   return Array.from(favoritesOffersByLocation).map(([name, places]) => ({ name, places }));
-};
-
-const getOffersLocations = (offers: Offer[]) => {
-  const cities = new Map<string, CityLocation>();
-  offers.forEach((offer) => {
-    cities.set(offer.city.name, offer.city.location);
-  });
-  return Array.from(cities).map(([name, location]): City => ({ name, location }));
 };
 
 const getCurrentLocationOffers = (offers: Offer[], location: string) => offers.filter((offer) => offer.city.name === location);
@@ -78,6 +67,6 @@ const sortComments = (commens: OfferComment[]) => commens.toSorted(getDateCompar
 
 const getRandomElement = <T>(elements: T[]) => elements[Math.floor(Math.random() * elements.length)];
 
-const updateOfferFavoriteStatus = (offers: Offer[], response: OfferExtended, isFavorite: boolean) => offers.map((offer) => offer.id === response.id ? { ...offer, isFavorite } : offer);
+const updateOfferFavoriteStatus = (offers: Offer[], response: Offer, isFavorite: boolean) => offers.map((offer) => offer.id === response.id ? { ...offer, isFavorite } : offer);
 
-export { getStarsRating, getFavoriteOffersByLocation, capitalizeFirstLetter, checkCommentInRange, getOffersLocations, convertDateToProperty, convertDateToHumanized, getCurrentLocationOffers, sortOffers, sortComments, getRandomElement, updateOfferFavoriteStatus };
+export { getStarsRating, getFavoriteOffersByLocation, capitalizeFirstLetter, checkCommentInRange, convertDateToProperty, convertDateToHumanized, getCurrentLocationOffers, sortOffers, sortComments, getRandomElement, updateOfferFavoriteStatus };

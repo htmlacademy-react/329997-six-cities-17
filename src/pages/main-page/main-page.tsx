@@ -6,19 +6,20 @@ import SortingList from '../../components/sorting/sorting-list';
 import { Offer } from '../../types/offer-type';
 import Map from '../../components/map/map';
 import { useAppSelector } from '../../components/hooks';
-import { LOCATIONS } from '../../const/const';
+import { BLANK_CITY, LOCATIONS } from '../../const/const';
 import { OfferPageType } from '../../const/const';
 import { City } from '../../types/city_types/city-type';
 import { MouseEvent, memo } from 'react';
 import OfferListEmpty from '../../components/offer/offer-list-empty';
 import { getCurrentOffers, getOffersCityTitle } from '../../store/offer-process/offer-process.selectors';
+import classNames from 'classnames';
 
 function MainPage(): JSX.Element {
   const currentOffers = useAppSelector(getCurrentOffers);
   const currentCityTitle = useAppSelector(getOffersCityTitle);
-  const currentCity: City = currentOffers[0].city;
-
   const isCurrentOffersEmpty = currentOffers.length === 0;
+
+  const currentCity: City = isCurrentOffersEmpty ? BLANK_CITY : currentOffers[0].city;
 
   const [selectedOffer, setSelectedOffer] = useState<Offer | null>(null);
 
@@ -28,26 +29,30 @@ function MainPage(): JSX.Element {
       return;
     }
     setSelectedOffer(currentOffer);
-  },[currentOffers]);
+  }, [currentOffers]);
 
   const handleOfferMouseLeave = () => {
     setSelectedOffer(null);
   };
 
   return (
-    <main className="page__main page__main--index">
+    <main className={classNames(
+      'page__main',
+      'page__main--index',
+      { 'page__main--index-empty': isCurrentOffersEmpty })}
+    >
       <Helmet>
         <title>6 cities. Главная страница</title>
       </Helmet>
       <LocationList locations={LOCATIONS} />
-      {isCurrentOffersEmpty && <OfferListEmpty city={currentCityTitle}/>}
+      {isCurrentOffersEmpty && <OfferListEmpty city={currentCityTitle} />}
 
       {!isCurrentOffersEmpty &&
         <div className="cities">
           <div className="cities__places-container container">
             <section className="cities__places places">
               <h2 className="visually-hidden">Places</h2>
-              <b className="places__found">{currentOffers.length} places to stay {currentCityTitle}</b>
+              <b className="places__found">{currentOffers.length} {currentOffers.length < 2 ? 'place' : 'places'} to stay in {currentCityTitle}</b>
               <SortingList />
               <OfferList offers={currentOffers} onOfferMouseEnter={handleOfferMouseEnter} onOfferMouseLeave={handleOfferMouseLeave} pageType={OfferPageType.CITIES} />
             </section>

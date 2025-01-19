@@ -27,8 +27,8 @@ export const fetchOfferExtendedCommentsAction = createAsyncThunk<OfferComment[],
     return data;
   });
 
-export const fetchOffersNearbyAction = createAsyncThunk<Offer[], string, ApiActionType>(
-  'offersNearby/fetchOffersNearby', async (id, { extra: api }) => {
+export const fetchOfferExtendedNearbyAction = createAsyncThunk<Offer[], string, ApiActionType>(
+  'offersNearby/fetchOfferExtendedNearby', async (id, { extra: api }) => {
     const { data } = await api.get<Offer[]>(`${APIRoute.Offers}/${id}/nearby`);
     return data;
   });
@@ -61,22 +61,20 @@ export const logoutAction = createAsyncThunk<void, undefined, ApiActionType>(
     dispatch(fetchOffersAction());
   });
 
-export const submitCommentAction = createAsyncThunk<void, OfferCommentPost, ApiActionType>(
-  'offerExtended/submitComment', async ({ comment, rating, id }, { dispatch, extra: api }) => {
-    await api.post<OfferCommentPost>(`${APIRoute.Comments}/${id}`, { comment, rating });
-    dispatch(fetchOfferExtendedCommentsAction(id));
-  });
-
-export const addOfferToFavoriteAction = createAsyncThunk<OfferExtended, string, ApiActionType>(
-  'offers/addOfferToFavorite', async (id, { dispatch, extra: api }) => {
-    const { data } = await api.post<OfferExtended>(`${APIRoute.Favorite}/${id}/1`);
-    dispatch(fetchFavoriteOffersAction());
+export const submitCommentAction = createAsyncThunk<OfferComment, OfferCommentPost, ApiActionType>(
+  'offerExtended/submitComment', async ({ comment, rating, id }, { extra: api }) => {
+    const { data } = await api.post<OfferComment>(`${APIRoute.Comments}/${id}`, { comment, rating });
     return data;
   });
 
-export const removeOfferFromFavoriteAction = createAsyncThunk<OfferExtended, string, ApiActionType>(
-  'offers/removeOfferFromFavorite', async (id, { dispatch, extra: api }) => {
-    const { data } = await api.post<OfferExtended>(`${APIRoute.Favorite}/${id}/0`);
-    dispatch(fetchFavoriteOffersAction());
+export const addOfferToFavoriteAction = createAsyncThunk<Offer, string, ApiActionType>(
+  'offers/addOfferToFavorite', async (id, { extra: api }) => {
+    const { data } = await api.post<Offer>(`${APIRoute.Favorite}/${id}/1`);
+    return data;
+  });
+
+export const removeOfferFromFavoriteAction = createAsyncThunk<Offer, string, ApiActionType>(
+  'offers/removeOfferFromFavorite', async (id, { extra: api }) => {
+    const { data } = await api.post<Offer>(`${APIRoute.Favorite}/${id}/0`);
     return data;
   });

@@ -13,15 +13,15 @@ export type OfferExtended = {
   };
   location: {
     latitude: number;
-      longitude: number;
-        zoom: number;
+    longitude: number;
+    zoom: number;
   };
   isFavorite: boolean;
-    isPremium: boolean;
-      rating: number;
-        description: string;
+  isPremium: boolean;
+  rating: number;
+  description: string;
   bedrooms: number;
-    goods: string[];
+  goods: string[];
   host: {
     name: string;
     avatarUrl: string;

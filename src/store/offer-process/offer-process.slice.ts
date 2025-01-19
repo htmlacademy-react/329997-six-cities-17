@@ -54,10 +54,13 @@ export const offersProcess = createSlice({
         toast.error('Loading offers error');
       })
       .addCase(addOfferToFavoriteAction.fulfilled, (state, action) => {
-        state.currentOffers = updateOfferFavoriteStatus(state.currentOffers, action.payload, true);
+        state.offers = updateOfferFavoriteStatus(state.offers, action.payload, true);
+        state.currentOffers = getCurrentLocationOffers(state.offers, state.city);
+
       })
       .addCase(removeOfferFromFavoriteAction.fulfilled, (state, action) => {
-        state.currentOffers = updateOfferFavoriteStatus(state.currentOffers, action.payload, false);
+        state.offers = updateOfferFavoriteStatus(state.offers, action.payload, false);
+        state.currentOffers = getCurrentLocationOffers(state.offers, state.city);
       });
   }
 });
