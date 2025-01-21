@@ -1,8 +1,8 @@
+import { memo } from 'react';
 import { OfferExtended } from '../../types/offer-extended-type';
 import { getStarsRating, capitalizeFirstLetter } from '../../utils/utils';
 import FavoriteButton from '../favorite-button/favorite-button';
 import { FavoriteButtonType } from '../../const/const';
-import { memo } from 'react';
 
 type OfferExtendedInfoProps = {
   offer: OfferExtended;

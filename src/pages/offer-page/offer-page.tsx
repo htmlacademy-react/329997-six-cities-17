@@ -1,12 +1,12 @@
 import { Helmet } from 'react-helmet-async';
+import { useEffect, memo } from 'react';
+import { Navigate, useParams } from 'react-router-dom';
 import CommentForm from '../../components/comment/comment-form';
 import ReviewList from '../../components/review/review-list';
 import Map from '../../components/map/map';
 import { OfferPageType, AuthorizationState, NEAR_PACES_COUNT, FetchState, AppRoute } from '../../const/const';
 import OfferList from '../../components/offer/offer-list';
 import { useAppSelector } from '../../components/hooks';
-import { Navigate, useParams } from 'react-router-dom';
-import { useEffect, memo } from 'react';
 import { fetchOfferExtendedAction, fetchOfferExtendedCommentsAction, fetchOfferExtendedNearbyAction } from '../../store/api-action';
 import { useAppDispatch } from '../../components/hooks';
 import OfferExtendedGallery from '../../components/offer-extended/offer-extended-gallery';

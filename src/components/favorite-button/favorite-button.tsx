@@ -1,12 +1,11 @@
-import { AppRoute, AuthorizationState, FavoriteButtonType, FetchState } from '../../const/const';
+import { useCallback } from 'react';
 import classNames from 'classnames';
 import { useAppDispatch, useAppSelector } from '../hooks';
+import { AppRoute, AuthorizationState, FavoriteButtonType, FetchState } from '../../const/const';
 import { addOfferToFavoriteAction, removeOfferFromFavoriteAction } from '../../store/api-action';
 import { redirectToRoute } from '../../store/action';
-import { useCallback } from 'react';
 import { getAuthorizationState } from '../../store/auth-process/auth-process.selectors';
 import { getFavoriteOfferStatusState } from '../../store/favorite-offers-process/favorite-offers-process.selectors';
-
 
 type FavoriteButtonProps = {
   isFavorite: boolean;

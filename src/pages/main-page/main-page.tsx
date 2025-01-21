@@ -1,5 +1,6 @@
 import { Helmet } from 'react-helmet-async';
-import { useCallback, useState } from 'react';
+import { useCallback, useState, MouseEvent, memo } from 'react';
+import classNames from 'classnames';
 import OfferList from '../../components/offer/offer-list';
 import LocationList from '../../components/location/location-list';
 import SortingList from '../../components/sorting/sorting-list';
@@ -9,10 +10,8 @@ import { useAppSelector } from '../../components/hooks';
 import { BLANK_CITY, LOCATIONS } from '../../const/const';
 import { OfferPageType } from '../../const/const';
 import { City } from '../../types/city_types/city-type';
-import { MouseEvent, memo } from 'react';
 import OfferListEmpty from '../../components/offer/offer-list-empty';
 import { getCurrentOffers, getOffersCityTitle } from '../../store/offer-process/offer-process.selectors';
-import classNames from 'classnames';
 
 function MainPage(): JSX.Element {
   const currentOffers = useAppSelector(getCurrentOffers);

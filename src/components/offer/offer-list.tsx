@@ -1,8 +1,8 @@
+import { MouseEvent, memo } from 'react';
+import classNames from 'classnames';
 import OfferItem from './offer-item';
 import { Offer } from '../../types/offer-type';
 import { OfferPageType } from '../../const/const';
-import { MouseEvent, memo } from 'react';
-import classNames from 'classnames';
 
 type OfferListProps = {
   offers?: Offer[];

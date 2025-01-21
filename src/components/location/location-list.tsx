@@ -1,10 +1,9 @@
-import LocationItem from './location-item';
-import { useAppSelector, useAppDispatch } from '../hooks';
 import { MouseEvent, useCallback, memo } from 'react';
+import { useAppSelector, useAppDispatch } from '../hooks';
+import LocationItem from './location-item';
 import { SortType } from '../../const/const';
 import { getOffersCityTitle } from '../../store/offer-process/offer-process.selectors';
 import { changeCity, changeSortingType } from '../../store/offer-process/offer-process.slice';
-
 
 type LocationListProps = {
   locations: string[];

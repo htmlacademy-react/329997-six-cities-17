@@ -6,9 +6,9 @@ function useMap(mapRef: MutableRefObject<HTMLElement | null>, city: City): Map |
   const [map, setMap] = useState<Map | null>(null);
   const isRendered = useRef<boolean>(false);
 
-  useEffect(()=> {
+  useEffect(() => {
     if (map) {
-      map.setView({lat: city.location.latitude, lng: city.location.longitude}, city.location.zoom);
+      map.setView({ lat: city.location.latitude, lng: city.location.longitude }, city.location.zoom);
     }
   }, [city, map]);
 
