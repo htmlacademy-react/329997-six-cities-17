@@ -1,11 +1,10 @@
+import classNames from 'classnames';
 import { Helmet } from 'react-helmet-async';
 import Footer from '../../components/footer/footer';
 import FavoriteList from '../../components/favorite/favorite-list';
 import { useAppSelector } from '../../components/hooks';
 import FavoriteEmpty from '../../components/favorite/favorite-empty';
-import classNames from 'classnames';
 import { getFavoriteOffers } from '../../store/favorite-offers-process/favorite-offers-process.selectors';
-
 
 function FavoritePage(): JSX.Element {
 
@@ -29,10 +28,10 @@ function FavoritePage(): JSX.Element {
           >
             {isFavoritesEmpty && <FavoriteEmpty />}
             {!isFavoritesEmpty &&
-            <>
-              <h1 className="favorites__title">Saved listing</h1>
-              <FavoriteList offers={favoriteOffers} />
-            </>}
+              <>
+                <h1 className="favorites__title">Saved listing</h1>
+                <FavoriteList offers={favoriteOffers} />
+              </>}
           </section>
         </div>
       </main>

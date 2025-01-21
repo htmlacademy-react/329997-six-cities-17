@@ -1,8 +1,8 @@
 import { ChangeEvent, useState, useCallback, memo } from 'react';
+import { useAppDispatch, useAppSelector } from '../hooks';
 import { RATING_OPTIONS, CommentOption, SubmitState } from '../../const/const';
 import CommentRatingButton from './comment-rating-button';
 import { checkCommentInRange } from '../../utils/utils';
-import { useAppDispatch, useAppSelector } from '../hooks';
 import { submitCommentAction } from '../../store/api-action';
 import { getSubmittingState } from '../../store/offer-extended-process/offer-extended-process.selectors';
 

@@ -1,8 +1,8 @@
 import { Helmet } from 'react-helmet-async';
+import { Link, useNavigate } from 'react-router-dom';
 import { useRef, FormEvent, MouseEvent } from 'react';
 import { useAppDispatch, useAppSelector } from '../../components/hooks';
 import { loginAction } from '../../store/api-action';
-import { Link, useNavigate } from 'react-router-dom';
 import { AppRoute, LOCATIONS, SignInState, SortType } from '../../const/const';
 import { getRandomElement } from '../../utils/utils';
 import { getSigningInState } from '../../store/auth-process/auth-process.selectors';

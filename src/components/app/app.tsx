@@ -1,5 +1,7 @@
 import { Route, Routes } from 'react-router-dom';
 import { HelmetProvider } from 'react-helmet-async';
+import { useAppSelector } from '../hooks';
+import HistoryRouter from '../history-route/history-route';
 import { AppRoute, AuthorizationState, FetchState } from '../../const/const';
 import MainPage from '../../pages/main-page/main-page';
 import FavoritesPage from '../../pages/favorite-page/favorite-page';
@@ -9,8 +11,6 @@ import NotFoundPage from '../../pages/not-found-page/not-found-page';
 import RedirectRoute from '../redirect-route/redirect-route';
 import Layout from '../layout/layout';
 import Loading from '../loading/loading';
-import { useAppSelector } from '../hooks';
-import HistoryRouter from '../history-route/history-route';
 import browserHistory from '../../browser-history/browser-history';
 import { getAuthorizationState } from '../../store/auth-process/auth-process.selectors';
 import { getOffersState } from '../../store/offer-process/offer-process.selectors';
