@@ -6,13 +6,9 @@ import { addOfferToFavoriteAction, removeOfferFromFavoriteAction } from '../../s
 import { redirectToRoute } from '../../store/action';
 import { getAuthorizationState } from '../../store/auth-process/auth-process.selectors';
 import { getFavoriteOfferStatusState } from '../../store/favorite-offers-process/favorite-offers-process.selectors';
+import type { FavoriteButton } from './types';
 
-type FavoriteButtonProps = {
-  isFavorite: boolean;
-  favoriteButtonType: FavoriteButtonType;
-  id: string;
-}
-function FavoriteButton(props: FavoriteButtonProps): JSX.Element {
+function FavoriteButton(props: FavoriteButton): JSX.Element {
   const { isFavorite, favoriteButtonType, id } = props;
   const dispatch = useAppDispatch();
   const authState = useAppSelector(getAuthorizationState);
