@@ -1,8 +1,8 @@
 import { Outlet, useLocation } from 'react-router-dom';
 import classNames from 'classnames';
 import { AppRoute } from '../../const/const';
-import HeaderLogo from '../header/header-logo';
-import HeaderNav from '../header/header-nav';
+import HeaderLogo from '../header-logo/header-logo';
+import HeaderNav from '../header-nav/header-nav';
 import { useAppSelector } from '../hooks';
 import { getFavoriteOffers } from '../../store/favorite-offers-process/favorite-offers-process.selectors';
 

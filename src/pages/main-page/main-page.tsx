@@ -1,16 +1,16 @@
 import { Helmet } from 'react-helmet-async';
 import { useCallback, useState, MouseEvent, memo } from 'react';
 import classNames from 'classnames';
-import OfferList from '../../components/offer/offer-list';
-import LocationList from '../../components/location/location-list';
-import SortingList from '../../components/sorting/sorting-list';
+import OfferList from '../../components/offer-list/offer-list';
+import LocationList from '../../components/location-list/location-list';
+import SortingList from '../../components/sorting-list/sorting-list';
 import { Offer } from '../../types/offer-type';
 import Map from '../../components/map/map';
 import { useAppSelector } from '../../components/hooks';
 import { BLANK_CITY, LOCATIONS } from '../../const/const';
 import { OfferPageType } from '../../const/const';
-import { City } from '../../types/city_types/city-type';
-import OfferListEmpty from '../../components/offer/offer-list-empty';
+import { City } from '../../types/city-type';
+import OfferListEmpty from '../../components/offer-list-empty/offer-list-empty';
 import { getCurrentOffers, getOffersCityTitle } from '../../store/offer-process/offer-process.selectors';
 
 function MainPage(): JSX.Element {
